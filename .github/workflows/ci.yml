@@ -1,0 +1,65 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  javascript:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [20, 22]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - run: node --test
+      - name: Examples
+        run: |
+          node examples/quickstart.mjs
+          node examples/building-blocks.mjs
+          node examples/decision.mjs
+
+  php:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: ["8.1", "8.4"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+      - run: php php/tests/run.php
+      - name: Examples
+        run: |
+          php examples/quickstart.php
+          php examples/building-blocks.php
+          php examples/fpm-cache.php
+
+  redis-examples:
+    runs-on: ubuntu-latest
+    services:
+      redis:
+        image: redis:7
+        ports:
+          - 6379:6379
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.4"
+          extensions: redis
+          coverage: none
+      - run: npm install --no-save redis@6.3.0
+      - run: node examples/redis-store.mjs
+      - run: php examples/redis-store.php
