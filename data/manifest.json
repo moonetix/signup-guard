@@ -1,0 +1,68 @@
+{
+  "disposable": {
+    "repository": "https://github.com/disposable-email-domains/disposable-email-domains",
+    "file": "disposable_email_blocklist.conf",
+    "license": "CC0-1.0",
+    "commit": "ba992a0b4c867db3ff39605696bb7de9fbb2e11f",
+    "updatedAt": "2026-11-11T20:09:47Z",
+    "domains": 10181
+  },
+  "ipRanges": {
+    "repository": "https://github.com/moonetix/datacenter-ip-ranges",
+    "license": "MIT for the repository; feed terms per provider in ip/providers.json",
+    "commit": "6d97169436579ce3361d2f2bda317f21bbadaa6d",
+    "updatedAt": "2026-11-11T20:09:47Z",
+    "ipv4": 12056,
+    "ipv6": 15743,
+    "providers": {
+      "aws": {
+        "ipv4": 1755,
+        "ipv6": 2364
+      },
+      "google-cloud": {
+        "ipv4": 467,
+        "ipv6": 28
+      },
+      "google-services": {
+        "ipv4": 297,
+        "ipv6": 98
+      },
+      "oracle-cloud": {
+        "ipv4": 809,
+        "ipv6": 0
+      },
+      "digitalocean": {
+        "ipv4": 187,
+        "ipv6": 54
+      },
+      "linode": {
+        "ipv4": 240,
+        "ipv6": 39
+      },
+      "vultr": {
+        "ipv4": 121,
+        "ipv6": 21
+      },
+      "cloudflare": {
+        "ipv4": 15,
+        "ipv6": 7
+      },
+      "fastly": {
+        "ipv4": 21,
+        "ipv6": 3
+      },
+      "github": {
+        "ipv4": 4013,
+        "ipv6": 2547
+      },
+      "icloud-private-relay": {
+        "ipv4": 3438,
+        "ipv6": 10582
+      },
+      "tor": {
+        "ipv4": 693,
+        "ipv6": 0
+      }
+    }
+  }
+}

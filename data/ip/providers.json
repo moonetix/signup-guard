@@ -1,0 +1,98 @@
+[
+  {
+    "id": "aws",
+    "name": "Amazon Web Services",
+    "category": "cloud",
+    "url": "https://ip-ranges.amazonaws.com/ip-ranges.json",
+    "docs": "https://docs.aws.amazon.com/vpc/latest/userguide/aws-ip-ranges.html",
+    "terms": "Published by AWS for allow lists and filtering. No license is stated."
+  },
+  {
+    "id": "google-cloud",
+    "name": "Google Cloud",
+    "category": "cloud",
+    "url": "https://www.gstatic.com/ipranges/cloud.json",
+    "docs": "https://support.google.com/a/answer/10026322",
+    "terms": "Published by Google for allow lists and filtering. No license is stated."
+  },
+  {
+    "id": "google-services",
+    "name": "Google services (excluding Google Cloud)",
+    "category": "services",
+    "url": "https://www.gstatic.com/ipranges/goog.json",
+    "docs": "https://support.google.com/a/answer/10026322",
+    "terms": "Published by Google for allow lists and filtering. No license is stated."
+  },
+  {
+    "id": "oracle-cloud",
+    "name": "Oracle Cloud Infrastructure",
+    "category": "cloud",
+    "url": "https://docs.oracle.com/en-us/iaas/tools/public_ip_ranges.json",
+    "docs": "https://docs.oracle.com/en-us/iaas/Content/General/Concepts/addressranges.htm",
+    "terms": "Published by Oracle in its public documentation. No license is stated."
+  },
+  {
+    "id": "digitalocean",
+    "name": "DigitalOcean",
+    "category": "cloud",
+    "url": "https://www.digitalocean.com/geo/google.csv",
+    "docs": "https://docs.digitalocean.com/platform/",
+    "terms": "Self-published RFC 8805 geofeed, linked from the DigitalOcean docs. No license is stated."
+  },
+  {
+    "id": "linode",
+    "name": "Akamai Cloud (Linode)",
+    "category": "cloud",
+    "url": "https://ipgeo.akamai.com/linode-geofeed.csv",
+    "docs": "https://rdap.arin.net/registry/ip/172.104.0.1",
+    "terms": "Self-published RFC 8805 geofeed, referenced in the Linode network records at ARIN. No license is stated."
+  },
+  {
+    "id": "vultr",
+    "name": "Vultr",
+    "category": "cloud",
+    "url": "https://geofeed.constant.com/",
+    "docs": "https://rdap.arin.net/registry/ip/45.32.0.1",
+    "terms": "Self-published RFC 8805 geofeed of AS20473, referenced in the Vultr network records at ARIN. No license is stated."
+  },
+  {
+    "id": "cloudflare",
+    "name": "Cloudflare",
+    "category": "cdn",
+    "url": "https://www.cloudflare.com/ips-v4",
+    "docs": "https://www.cloudflare.com/ips/",
+    "terms": "Published by Cloudflare for allow lists. No license is stated."
+  },
+  {
+    "id": "fastly",
+    "name": "Fastly",
+    "category": "cdn",
+    "url": "https://api.fastly.com/public-ip-list",
+    "docs": "https://www.fastly.com/documentation/reference/api/utils/public-ip-list/",
+    "terms": "Public, unauthenticated Fastly API endpoint. No license is stated."
+  },
+  {
+    "id": "github",
+    "name": "GitHub (incl. Actions runners)",
+    "category": "services",
+    "url": "https://api.github.com/meta",
+    "docs": "https://docs.github.com/en/rest/meta/meta",
+    "terms": "GitHub REST API, covered by the GitHub Terms of Service (API Terms)."
+  },
+  {
+    "id": "icloud-private-relay",
+    "name": "iCloud Private Relay egress",
+    "category": "privacy-relay",
+    "url": "https://mask-api.icloud.com/egress-ip-ranges.csv",
+    "docs": "https://developer.apple.com/support/prepare-your-network-for-icloud-private-relay/",
+    "terms": "Published by Apple for geolocation and server operators. No license is stated."
+  },
+  {
+    "id": "tor",
+    "name": "Tor exit nodes",
+    "category": "tor",
+    "url": "https://check.torproject.org/torbulkexitlist",
+    "docs": "https://metrics.torproject.org/about.html",
+    "terms": "Tor Project data, CC0 1.0 (no copyright)."
+  }
+]
