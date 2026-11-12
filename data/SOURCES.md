@@ -20,9 +20,9 @@ Entries are registrable domains (or the third level under a public suffix). A li
 | --- | --- |
 | Source | [moonetix/datacenter-ip-ranges](https://github.com/moonetix/datacenter-ip-ranges), `data/providers/*.txt` |
 | License | MIT for the repository; feed terms per provider in ip/providers.json |
-| Commit | [`6d9716943657`](https://github.com/moonetix/datacenter-ip-ranges/commit/6d97169436579ce3361d2f2bda317f21bbadaa6d) |
-| Updated | 2026-11-11T20:09:47Z |
-| Ranges | 12056 IPv4, 15743 IPv6 |
+| Commit | [`35c2997f0d8d`](https://github.com/moonetix/datacenter-ip-ranges/commit/35c2997f0d8d027786da98dbd3c438f784756a93) |
+| Updated | 2026-11-12T20:53:46Z |
+| Ranges | 12067 IPv4, 15743 IPv6 |
 
 | Provider | File | Category | IPv4 | IPv6 | Terms |
 | --- | --- | --- | ---: | ---: | --- |
@@ -35,6 +35,6 @@ Entries are registrable domains (or the third level under a public suffix). A li
 | Vultr | `vultr` | cloud | 121 | 21 | Self-published RFC 8805 geofeed of AS20473, referenced in the Vultr network records at ARIN. No license is stated. |
 | Cloudflare | `cloudflare` | cdn | 15 | 7 | Published by Cloudflare for allow lists. No license is stated. |
 | Fastly | `fastly` | cdn | 21 | 3 | Public, unauthenticated Fastly API endpoint. No license is stated. |
-| GitHub (incl. Actions runners) | `github` | services | 4013 | 2547 | GitHub REST API, covered by the GitHub Terms of Service (API Terms). |
+| GitHub (incl. Actions runners) | `github` | services | 4022 | 2547 | GitHub REST API, covered by the GitHub Terms of Service (API Terms). |
 | iCloud Private Relay egress | `icloud-private-relay` | privacy-relay | 3438 | 10582 | Published by Apple for geolocation and server operators. No license is stated. |
-| Tor exit nodes | `tor` | tor | 693 | 0 | Tor Project data, CC0 1.0 (no copyright). |
+| Tor exit nodes | `tor` | tor | 695 | 0 | Tor Project data, CC0 1.0 (no copyright). |
