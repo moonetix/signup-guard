@@ -1,0 +1,18 @@
+{
+    "name": "moonetix/signup-guard",
+    "description": "Explainable sign-up risk checks: email normalization, disposable domains, datacenter and Tor IPs, velocity limits.",
+    "type": "library",
+    "license": "MIT",
+    "homepage": "https://moonetix.com/academy/traffic-quality/stop-fake-signups-rewards-site",
+    "require": {
+        "php": ">=8.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Moonetix\\SignupGuard\\": "php/src/"
+        }
+    },
+    "scripts": {
+        "test": "php php/tests/run.php"
+    }
+}
