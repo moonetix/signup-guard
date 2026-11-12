@@ -1,0 +1,51 @@
+name: Update data
+
+on:
+  schedule:
+    - cron: '17 6 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-data
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.4"
+          coverage: none
+
+      # Exits non-zero without touching data/ if a download fails or a list shrinks by more than half.
+      - name: Refresh the snapshot
+        run: node scripts/update-data.mjs
+
+      - name: Show changes
+        run: git diff --stat -- data
+
+      # Pushes made with GITHUB_TOKEN do not trigger ci.yml, so the suites run here.
+      - name: Test
+        run: |
+          node --test
+          php php/tests/run.php
+
+      - name: Commit if the data changed
+        run: |
+          if git diff --quiet -- data && [ -z "$(git ls-files --others --exclude-standard -- data)" ]; then
+            echo "Upstream data unchanged."
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data
+          git commit -m "Update data ($(date -u +%Y-%m-%d))"
+          git push
