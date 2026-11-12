@@ -1,0 +1,4015 @@
+{
+ "description": "Shared test vectors for signup-guard. Both the JavaScript and the PHP suites run every case against the fixture data below, never against the bundled snapshot, so weekly data updates cannot break them. \"throws\" holds the error code.",
+ "version": 1,
+ "fixture": {
+  "disposableDomains": [
+   "mailinator.com",
+   "guerrillamail.com",
+   "throwaway.dynv6.net",
+   "SpamBox.Example"
+  ],
+  "ipRanges": [
+   {
+    "cidr": "3.208.0.0/12",
+    "provider": "aws",
+    "providerName": "Amazon Web Services",
+    "category": "cloud"
+   },
+   {
+    "cidr": "3.219.87.128/32",
+    "provider": "github",
+    "providerName": "GitHub",
+    "category": "services"
+   },
+   {
+    "cidr": "3.210.1.1/32",
+    "provider": "tor",
+    "providerName": "Tor exit nodes",
+    "category": "tor"
+   },
+   {
+    "cidr": "52.0.0.0/11",
+    "provider": "aws",
+    "providerName": "Amazon Web Services",
+    "category": "cloud"
+   },
+   {
+    "cidr": "52.1.0.0/16",
+    "provider": "oracle-cloud",
+    "providerName": "Oracle Cloud Infrastructure",
+    "category": "cloud"
+   },
+   {
+    "cidr": "34.64.5.7/16",
+    "provider": "google-cloud",
+    "providerName": "Google Cloud",
+    "category": "cloud"
+   },
+   {
+    "cidr": "2600:1f18::/33",
+    "provider": "aws",
+    "providerName": "Amazon Web Services",
+    "category": "cloud"
+   },
+   {
+    "cidr": "104.16.0.0/13",
+    "provider": "cloudflare",
+    "providerName": "Cloudflare",
+    "category": "cdn"
+   },
+   {
+    "cidr": "2606:4700::/32",
+    "provider": "cloudflare",
+    "providerName": "Cloudflare",
+    "category": "cdn"
+   },
+   {
+    "cidr": "185.220.101.4/32",
+    "provider": "tor",
+    "providerName": "Tor exit nodes",
+    "category": "tor"
+   },
+   {
+    "cidr": "172.224.226.0/26",
+    "provider": "icloud-private-relay",
+    "providerName": "iCloud Private Relay egress",
+    "category": "privacy-relay"
+   },
+   {
+    "cidr": "2a02:26f7:b3c0:4000::/64",
+    "provider": "icloud-private-relay",
+    "providerName": "iCloud Private Relay egress",
+    "category": "privacy-relay"
+   },
+   {
+    "cidr": "3.208.0.0/12",
+    "provider": "aws",
+    "providerName": "Amazon Web Services",
+    "category": "cloud"
+   }
+  ]
+ },
+ "providers": [
+  {
+   "out": [
+    {
+     "id": "gmail",
+     "name": "Gmail",
+     "domains": [
+      "gmail.com",
+      "googlemail.com"
+     ],
+     "canonicalDomain": "gmail.com",
+     "plusTags": true,
+     "ignoreDots": true,
+     "subdomainTags": false,
+     "sources": [
+      "https://support.google.com/mail/answer/7436150",
+      "https://support.google.com/mail/answer/12096",
+      "https://support.google.com/mail/answer/10313"
+     ],
+     "note": "Dots do not matter and +tags reach the same inbox. googlemail.com delivers to the same account. Google Workspace domains are not covered: dots matter there."
+    },
+    {
+     "id": "proton",
+     "name": "Proton Mail",
+     "domains": [
+      "proton.me",
+      "protonmail.com",
+      "protonmail.ch",
+      "pm.me"
+     ],
+     "canonicalDomain": null,
+     "plusTags": true,
+     "ignoreDots": false,
+     "subdomainTags": false,
+     "sources": [
+      "https://proton.me/support/addresses-and-aliases"
+     ],
+     "note": "Plus aliases arrive in the regular inbox. The four domains are not merged: Proton does not document that one name owns all of them."
+    },
+    {
+     "id": "fastmail",
+     "name": "Fastmail",
+     "domains": [
+      "fastmail.com",
+      "fastmail.fm"
+     ],
+     "canonicalDomain": null,
+     "plusTags": true,
+     "ignoreDots": false,
+     "subdomainTags": true,
+     "sources": [
+      "https://www.fastmail.help/hc/en-us/articles/360060591053"
+     ],
+     "note": "Plus addressing and subdomain addressing (anything@user.fastmail.com) work by default. Only these two of the many Fastmail domains are covered."
+    },
+    {
+     "id": "yandex",
+     "name": "Yandex Mail",
+     "domains": [
+      "yandex.com",
+      "yandex.ru"
+     ],
+     "canonicalDomain": null,
+     "plusTags": true,
+     "ignoreDots": false,
+     "subdomainTags": false,
+     "sources": [
+      "https://yandex.com/support/mail/reg.html",
+      "https://yandex.ru/support/mail/reg.html"
+     ],
+     "note": "Yandex suggests adding + and a word to the login when registering on websites. Other Yandex domain aliases are not listed by Yandex, so they are not covered."
+    },
+    {
+     "id": "outlook",
+     "name": "Outlook.com",
+     "domains": [
+      "outlook.com",
+      "hotmail.com",
+      "live.com",
+      "msn.com"
+     ],
+     "canonicalDomain": null,
+     "plusTags": false,
+     "ignoreDots": false,
+     "subdomainTags": false,
+     "sources": [
+      "https://learn.microsoft.com/en-us/exchange/recipients-in-exchange-online/plus-addressing-in-exchange-online"
+     ],
+     "note": "Not applied. Microsoft documents plus addressing for Exchange Online organizations, not for consumer Outlook.com. Opt in with plusTagDomains if you accept that."
+    },
+    {
+     "id": "icloud",
+     "name": "iCloud Mail",
+     "domains": [
+      "icloud.com",
+      "me.com",
+      "mac.com"
+     ],
+     "canonicalDomain": null,
+     "plusTags": false,
+     "ignoreDots": false,
+     "subdomainTags": false,
+     "sources": [
+      "https://support.apple.com/en-us/118230"
+     ],
+     "note": "Not applied. Apple documents neither plus addressing nor that name@me.com and name@icloud.com always belong to the same account."
+    },
+    {
+     "id": "yahoo",
+     "name": "Yahoo Mail",
+     "domains": [
+      "yahoo.com",
+      "ymail.com",
+      "rocketmail.com"
+     ],
+     "canonicalDomain": null,
+     "plusTags": false,
+     "ignoreDots": false,
+     "subdomainTags": false,
+     "sources": [
+      "https://help.yahoo.com/kb/SLN28815.html"
+     ],
+     "note": "Not applied. Yahoo disposable addresses are basename-keyword, but the basename is chosen separately from the account name, so removing the keyword does not recover the real address."
+    }
+   ]
+  }
+ ],
+ "normalizeEmail": [
+  {
+   "in": "john.smith@gmail.com",
+   "out": {
+    "valid": true,
+    "problem": null,
+    "address": "john.smith@gmail.com",
+    "normalized": "johnsmith@gmail.com",
+    "local": "johnsmith",
+    "domain": "gmail.com",
+    "provider": "gmail",
+    "changes": [
+     "dots-removed"
+    ]
+   }
+  },
+  {
+   "in": "J.O.H.N+promo@GoogleMail.com",
+   "out": {
+    "valid": true,
+    "problem": null,
+    "address": "J.O.H.N+promo@GoogleMail.com",
+    "normalized": "john@gmail.com",
+    "local": "john",
+    "domain": "gmail.com",
+    "provider": "gmail",
+    "changes": [
+     "lowercased",
+     "domain-alias",
+     "tag-removed",
+     "dots-removed"
+    ]
+   }
+  },
+  {
+   "in": "  jane.doe+news@gmail.com  ",
+   "out": {
+    "valid": true,
+    "problem": null,
+    "address": "jane.doe+news@gmail.com",
+    "normalized": "janedoe@gmail.com",
+    "local": "janedoe",
+    "domain": "gmail.com",
+    "provider": "gmail",
+    "changes": [
+     "tag-removed",
+     "dots-removed"
+    ]
+   }
+  },
+  {
+   "in": "user@gmail.com.",
+   "out": {
+    "valid": true,
+    "problem": null,
+    "address": "user@gmail.com.",
+    "normalized": "user@gmail.com",
+    "local": "user",
+    "domain": "gmail.com",
+    "provider": "gmail",
+    "changes": [
+     "trailing-dot-removed"
+    ]
+   }
+  },
+  {
+   "in": ".john@gmail.com",
+   "out": {
+    "valid": false,
+    "problem": "local-invalid",
+    "address": ".john@gmail.com",
+    "normalized": null,
+    "local": null,
+    "domain": null,
+    "provider": null,
+    "changes": []
+   }
+  },
+  {
+   "in": "john..smith@gmail.com",
+   "out": {
+    "valid": false,
+    "problem": "local-invalid",
+    "address": "john..smith@gmail.com",
+    "normalized": null,
+    "local": null,
+    "domain": null,
+    "provider": null,
+    "changes": []
+   }
+  },
+  {
+   "in": "+tag@gmail.com",
+   "out": {
+    "valid": true,
+    "problem": null,
+    "address": "+tag@gmail.com",
+    "normalized": "+tag@gmail.com",
+    "local": "+tag",
+    "domain": "gmail.com",
+    "provider": "gmail",
+    "changes": []
+   }
+  },
+  {
+   "in": "...@gmail.com",
+   "out": {
+    "valid": false,
+    "problem": "local-invalid",
+    "address": "...@gmail.com",
+    "normalized": null,
+    "local": null,
+    "domain": null,
+    "provider": null,
+    "changes": []
+   }
+  },
+  {
+   "in": "a.b@googlemail.com",
+   "out": {
+    "valid": true,
+    "problem": null,
+    "address": "a.b@googlemail.com",
+    "normalized": "ab@gmail.com",
+    "local": "ab",
+    "domain": "gmail.com",
+    "provider": "gmail",
+    "changes": [
+     "domain-alias",
+     "dots-removed"
+    ]
+   }
+  },
+  {
+   "in": "Alice+bills@Proton.me",
+   "out": {
+    "valid": true,
+    "problem": null,
+    "address": "Alice+bills@Proton.me",
+    "normalized": "alice@proton.me",
+    "local": "alice",
+    "domain": "proton.me",
+    "provider": "proton",
+    "changes": [
+     "lowercased",
+     "tag-removed"
+    ]
+   }
+  },
+  {
+   "in": "alice.smith+x@protonmail.com",
+   "out": {
+    "valid": true,
+    "problem": null,
+    "address": "alice.smith+x@protonmail.com",
+    "normalized": "alice.smith@protonmail.com",
+    "local": "alice.smith",
+    "domain": "protonmail.com",
+    "provider": "proton",
+    "changes": [
+     "tag-removed"
+    ]
+   }
+  },
+  {
+   "in": "bob+news@pm.me",
+   "out": {
+    "valid": true,
+    "problem": null,
+    "address": "bob+news@pm.me",
+    "normalized": "bob@pm.me",
+    "local": "bob",
+    "domain": "pm.me",
+    "provider": "proton",
+    "changes": [
+     "tag-removed"
+    ]
+   }
+  },
+  {
+   "in": "carol+shop@fastmail.com",
+   "out": {
+    "valid": true,
+    "problem": null,
+    "address": "carol+shop@fastmail.com",
+    "normalized": "carol@fastmail.com",
+    "local": "carol",
+    "domain": "fastmail.com",
+    "provider": "fastmail",
+    "changes": [
+     "tag-removed"
+    ]
+   }
+  },
+  {
+   "in": "shop@carol.fastmail.com",
+   "out": {
+    "valid": true,
+    "problem": null,
+    "address": "shop@carol.fastmail.com",
+    "normalized": "carol@fastmail.com",
+    "local": "carol",
+    "domain": "fastmail.com",
+    "provider": "fastmail",
+    "changes": [
+     "subdomain-tag-removed"
+    ]
+   }
+  },
+  {
+   "in": "shop@carol.fastmail.fm",
+   "out": {
+    "valid": true,
+    "problem": null,
+    "address": "shop@carol.fastmail.fm",
+    "normalized": "carol@fastmail.fm",
+    "local": "carol",
+    "domain": "fastmail.fm",
+    "provider": "fastmail",
+    "changes": [
+     "subdomain-tag-removed"
+    ]
+   }
+  },
+  {
+   "in": "a@b.c.fastmail.com",
+   "out": {
+    "valid": true,
+    "problem": null,
+    "address": "a@b.c.fastmail.com",
+    "normalized": "a@b.c.fastmail.com",
+    "local": "a",
+    "domain": "b.c.fastmail.com",
+    "provider": null,
+    "changes": []
+   }
+  },
+  {
+   "in": "dave+site@yandex.ru",
+   "out": {
+    "valid": true,
+    "problem": null,
+    "address": "dave+site@yandex.ru",
+    "normalized": "dave@yandex.ru",
+    "local": "dave",
+    "domain": "yandex.ru",
+    "provider": "yandex",
+    "changes": [
+     "tag-removed"
+    ]
+   }
+  },
+  {
+   "in": "dave.x+site@yandex.com",
+   "out": {
+    "valid": true,
+    "problem": null,
+    "address": "dave.x+site@yandex.com",
+    "normalized": "dave.x@yandex.com",
+    "local": "dave.x",
+    "domain": "yandex.com",
+    "provider": "yandex",
+    "changes": [
+     "tag-removed"
+    ]
+   }
+  },
+  {
+   "in": "erin+tag@outlook.com",
+   "out": {
+    "valid": true,
+    "problem": null,
+    "address": "erin+tag@outlook.com",
+    "normalized": "erin+tag@outlook.com",
+    "local": "erin+tag",
+    "domain": "outlook.com",
+    "provider": "outlook",
+    "changes": []
+   }
+  },
+  {
+   "in": "erin+tag@outlook.com",
+   "options": {
+    "plusTagDomains": [
+     "Outlook.com"
+    ]
+   },
+   "out": {
+    "valid": true,
+    "problem": null,
+    "address": "erin+tag@outlook.com",
+    "normalized": "erin@outlook.com",
+    "local": "erin",
+    "domain": "outlook.com",
+    "provider": "outlook",
+    "changes": [
+     "tag-removed"
+    ]
+   }
+  },
+  {
+   "in": "Erin.Smith@Hotmail.com",
+   "out": {
+    "valid": true,
+    "problem": null,
+    "address": "Erin.Smith@Hotmail.com",
+    "normalized": "erin.smith@hotmail.com",
+    "local": "erin.smith",
+    "domain": "hotmail.com",
+    "provider": "outlook",
+    "changes": [
+     "lowercased"
+    ]
+   }
+  },
+  {
+   "in": "frank+tag@icloud.com",
+   "out": {
+    "valid": true,
+    "problem": null,
+    "address": "frank+tag@icloud.com",
+    "normalized": "frank+tag@icloud.com",
+    "local": "frank+tag",
+    "domain": "icloud.com",
+    "provider": "icloud",
+    "changes": []
+   }
+  },
+  {
+   "in": "grace-shopping@yahoo.com",
+   "out": {
+    "valid": true,
+    "problem": null,
+    "address": "grace-shopping@yahoo.com",
+    "normalized": "grace-shopping@yahoo.com",
+    "local": "grace-shopping",
+    "domain": "yahoo.com",
+    "provider": "yahoo",
+    "changes": []
+   }
+  },
+  {
+   "in": "John.Smith+promo@Example.COM",
+   "out": {
+    "valid": true,
+    "problem": null,
+    "address": "John.Smith+promo@Example.COM",
+    "normalized": "john.smith+promo@example.com",
+    "local": "john.smith+promo",
+    "domain": "example.com",
+    "provider": null,
+    "changes": [
+     "lowercased"
+    ]
+   }
+  },
+  {
+   "in": "John.Smith@Example.com",
+   "options": {
+    "lowercaseLocal": false
+   },
+   "out": {
+    "valid": true,
+    "problem": null,
+    "address": "John.Smith@Example.com",
+    "normalized": "John.Smith@example.com",
+    "local": "John.Smith",
+    "domain": "example.com",
+    "provider": null,
+    "changes": [
+     "lowercased"
+    ]
+   }
+  },
+  {
+   "in": "john+x@example.com",
+   "options": {
+    "plusTagDomains": [
+     "example.com"
+    ]
+   },
+   "out": {
+    "valid": true,
+    "problem": null,
+    "address": "john+x@example.com",
+    "normalized": "john@example.com",
+    "local": "john",
+    "domain": "example.com",
+    "provider": null,
+    "changes": [
+     "tag-removed"
+    ]
+   }
+  },
+  {
+   "in": "first.last@company.co.uk",
+   "out": {
+    "valid": true,
+    "problem": null,
+    "address": "first.last@company.co.uk",
+    "normalized": "first.last@company.co.uk",
+    "local": "first.last",
+    "domain": "company.co.uk",
+    "provider": null,
+    "changes": []
+   }
+  },
+  {
+   "in": "o'brien+x@example.org",
+   "out": {
+    "valid": true,
+    "problem": null,
+    "address": "o'brien+x@example.org",
+    "normalized": "o'brien+x@example.org",
+    "local": "o'brien+x",
+    "domain": "example.org",
+    "provider": null,
+    "changes": []
+   }
+  },
+  {
+   "in": "user@sub.mail.example.com",
+   "out": {
+    "valid": true,
+    "problem": null,
+    "address": "user@sub.mail.example.com",
+    "normalized": "user@sub.mail.example.com",
+    "local": "user",
+    "domain": "sub.mail.example.com",
+    "provider": null,
+    "changes": []
+   }
+  },
+  {
+   "in": "",
+   "out": {
+    "valid": false,
+    "problem": "empty",
+    "address": "",
+    "normalized": null,
+    "local": null,
+    "domain": null,
+    "provider": null,
+    "changes": []
+   }
+  },
+  {
+   "in": "   ",
+   "out": {
+    "valid": false,
+    "problem": "empty",
+    "address": "",
+    "normalized": null,
+    "local": null,
+    "domain": null,
+    "provider": null,
+    "changes": []
+   }
+  },
+  {
+   "in": "no-at-sign.example.com",
+   "out": {
+    "valid": false,
+    "problem": "missing-at",
+    "address": "no-at-sign.example.com",
+    "normalized": null,
+    "local": null,
+    "domain": null,
+    "provider": null,
+    "changes": []
+   }
+  },
+  {
+   "in": "a@b@example.com",
+   "out": {
+    "valid": false,
+    "problem": "multiple-at",
+    "address": "a@b@example.com",
+    "normalized": null,
+    "local": null,
+    "domain": null,
+    "provider": null,
+    "changes": []
+   }
+  },
+  {
+   "in": "a b@example.com",
+   "out": {
+    "valid": false,
+    "problem": "non-ascii",
+    "address": "a b@example.com",
+    "normalized": null,
+    "local": null,
+    "domain": null,
+    "provider": null,
+    "changes": []
+   }
+  },
+  {
+   "in": "josé@example.com",
+   "out": {
+    "valid": false,
+    "problem": "non-ascii",
+    "address": "josé@example.com",
+    "normalized": null,
+    "local": null,
+    "domain": null,
+    "provider": null,
+    "changes": []
+   }
+  },
+  {
+   "in": "user@exaño.com",
+   "out": {
+    "valid": false,
+    "problem": "non-ascii",
+    "address": "user@exaño.com",
+    "normalized": null,
+    "local": null,
+    "domain": null,
+    "provider": null,
+    "changes": []
+   }
+  },
+  {
+   "in": "user@localhost",
+   "out": {
+    "valid": false,
+    "problem": "domain-invalid",
+    "address": "user@localhost",
+    "normalized": null,
+    "local": null,
+    "domain": null,
+    "provider": null,
+    "changes": []
+   }
+  },
+  {
+   "in": "user@example.123",
+   "out": {
+    "valid": false,
+    "problem": "domain-invalid",
+    "address": "user@example.123",
+    "normalized": null,
+    "local": null,
+    "domain": null,
+    "provider": null,
+    "changes": []
+   }
+  },
+  {
+   "in": "user@[192.0.2.1]",
+   "out": {
+    "valid": false,
+    "problem": "domain-literal",
+    "address": "user@[192.0.2.1]",
+    "normalized": null,
+    "local": null,
+    "domain": null,
+    "provider": null,
+    "changes": []
+   }
+  },
+  {
+   "in": "user@-bad.com",
+   "out": {
+    "valid": false,
+    "problem": "domain-invalid",
+    "address": "user@-bad.com",
+    "normalized": null,
+    "local": null,
+    "domain": null,
+    "provider": null,
+    "changes": []
+   }
+  },
+  {
+   "in": "user@bad-.com",
+   "out": {
+    "valid": false,
+    "problem": "domain-invalid",
+    "address": "user@bad-.com",
+    "normalized": null,
+    "local": null,
+    "domain": null,
+    "provider": null,
+    "changes": []
+   }
+  },
+  {
+   "in": "user@ex_ample.com",
+   "out": {
+    "valid": false,
+    "problem": "domain-invalid",
+    "address": "user@ex_ample.com",
+    "normalized": null,
+    "local": null,
+    "domain": null,
+    "provider": null,
+    "changes": []
+   }
+  },
+  {
+   "in": "user@example..com",
+   "out": {
+    "valid": false,
+    "problem": "domain-invalid",
+    "address": "user@example..com",
+    "normalized": null,
+    "local": null,
+    "domain": null,
+    "provider": null,
+    "changes": []
+   }
+  },
+  {
+   "in": "user@.example.com",
+   "out": {
+    "valid": false,
+    "problem": "domain-invalid",
+    "address": "user@.example.com",
+    "normalized": null,
+    "local": null,
+    "domain": null,
+    "provider": null,
+    "changes": []
+   }
+  },
+  {
+   "in": "user@example.com..",
+   "out": {
+    "valid": false,
+    "problem": "domain-invalid",
+    "address": "user@example.com..",
+    "normalized": null,
+    "local": null,
+    "domain": null,
+    "provider": null,
+    "changes": []
+   }
+  },
+  {
+   "in": "\"quoted\"@example.com",
+   "out": {
+    "valid": false,
+    "problem": "local-invalid",
+    "address": "\"quoted\"@example.com",
+    "normalized": null,
+    "local": null,
+    "domain": null,
+    "provider": null,
+    "changes": []
+   }
+  },
+  {
+   "in": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@example.com",
+   "out": {
+    "valid": true,
+    "problem": null,
+    "address": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@example.com",
+    "normalized": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@example.com",
+    "local": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "domain": "example.com",
+    "provider": null,
+    "changes": []
+   }
+  },
+  {
+   "in": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@example.com",
+   "out": {
+    "valid": false,
+    "problem": "local-too-long",
+    "address": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@example.com",
+    "normalized": null,
+    "local": null,
+    "domain": null,
+    "provider": null,
+    "changes": []
+   }
+  },
+  {
+   "in": "a@bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb.com",
+   "out": {
+    "valid": true,
+    "problem": null,
+    "address": "a@bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb.com",
+    "normalized": "a@bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb.com",
+    "local": "a",
+    "domain": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb.com",
+    "provider": null,
+    "changes": []
+   }
+  },
+  {
+   "in": "a@bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb.com",
+   "out": {
+    "valid": false,
+    "problem": "domain-invalid",
+    "address": "a@bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb.com",
+    "normalized": null,
+    "local": null,
+    "domain": null,
+    "provider": null,
+    "changes": []
+   }
+  },
+  {
+   "in": "x@abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.com",
+   "out": {
+    "valid": false,
+    "problem": "too-long",
+    "address": "x@abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.com",
+    "normalized": null,
+    "local": null,
+    "domain": null,
+    "provider": null,
+    "changes": []
+   }
+  },
+  {
+   "in": "user@xn--exaple-wxa.com",
+   "out": {
+    "valid": true,
+    "problem": null,
+    "address": "user@xn--exaple-wxa.com",
+    "normalized": "user@xn--exaple-wxa.com",
+    "local": "user",
+    "domain": "xn--exaple-wxa.com",
+    "provider": null,
+    "changes": []
+   }
+  },
+  {
+   "in": "tab\t@example.com",
+   "out": {
+    "valid": false,
+    "problem": "non-ascii",
+    "address": "tab\t@example.com",
+    "normalized": null,
+    "local": null,
+    "domain": null,
+    "provider": null,
+    "changes": []
+   }
+  },
+  {
+   "in": "a@b.com",
+   "options": {
+    "lowercaseLocal": "yes"
+   },
+   "throws": "invalid_option"
+  },
+  {
+   "in": "a@b.com",
+   "options": {
+    "plusTagDomains": "outlook.com"
+   },
+   "throws": "invalid_option"
+  }
+ ],
+ "normalizeIp": [
+  {
+   "in": "192.0.2.1",
+   "out": "192.0.2.1"
+  },
+  {
+   "in": "0.0.0.0",
+   "out": "0.0.0.0"
+  },
+  {
+   "in": "255.255.255.255",
+   "out": "255.255.255.255"
+  },
+  {
+   "in": "01.2.3.4",
+   "out": null
+  },
+  {
+   "in": "1.2.3",
+   "out": null
+  },
+  {
+   "in": "1.2.3.4.5",
+   "out": null
+  },
+  {
+   "in": "256.1.1.1",
+   "out": null
+  },
+  {
+   "in": "1.2.3.4 ",
+   "out": null
+  },
+  {
+   "in": " 1.2.3.4",
+   "out": null
+  },
+  {
+   "in": "1.2.3.-4",
+   "out": null
+  },
+  {
+   "in": "2001:DB8::1",
+   "out": "2001:db8::1"
+  },
+  {
+   "in": "2001:0db8:0000:0000:0000:0000:0000:0001",
+   "out": "2001:db8::1"
+  },
+  {
+   "in": "2001:db8:0:0:1:0:0:1",
+   "out": "2001:db8::1:0:0:1"
+  },
+  {
+   "in": "2001:db8::1:0:0:1",
+   "out": "2001:db8::1:0:0:1"
+  },
+  {
+   "in": "2001:db8:0:1:1:1:1:1",
+   "out": "2001:db8:0:1:1:1:1:1"
+  },
+  {
+   "in": "::",
+   "out": "::"
+  },
+  {
+   "in": "::1",
+   "out": "::1"
+  },
+  {
+   "in": "1::",
+   "out": "1::"
+  },
+  {
+   "in": "fe80::1%eth0",
+   "out": null
+  },
+  {
+   "in": "::ffff:192.0.2.1",
+   "out": "192.0.2.1"
+  },
+  {
+   "in": "::FFFF:c000:0201",
+   "out": "192.0.2.1"
+  },
+  {
+   "in": "::ffff:1.2.3",
+   "out": null
+  },
+  {
+   "in": "::192.0.2.1",
+   "out": "::c000:201"
+  },
+  {
+   "in": "64:ff9b::192.0.2.1",
+   "out": "64:ff9b::c000:201"
+  },
+  {
+   "in": "1:2:3:4:5:6:192.0.2.1",
+   "out": "1:2:3:4:5:6:c000:201"
+  },
+  {
+   "in": "1:2:3:4:5:6:7:192.0.2.1",
+   "out": null
+  },
+  {
+   "in": "1:2:3:4:5:6:7:8",
+   "out": "1:2:3:4:5:6:7:8"
+  },
+  {
+   "in": "1:2:3:4:5:6:7:8:9",
+   "out": null
+  },
+  {
+   "in": "1::2::3",
+   "out": null
+  },
+  {
+   "in": ":::",
+   "out": null
+  },
+  {
+   "in": "1:::2",
+   "out": null
+  },
+  {
+   "in": "12345::1",
+   "out": null
+  },
+  {
+   "in": "g::1",
+   "out": null
+  },
+  {
+   "in": "::ffff:0:0",
+   "out": "0.0.0.0"
+  },
+  {
+   "in": "::fffe:1.2.3.4",
+   "out": "::fffe:102:304"
+  },
+  {
+   "in": "",
+   "out": null
+  },
+  {
+   "in": "localhost",
+   "out": null
+  }
+ ],
+ "ipNetwork": [
+  {
+   "in": "203.0.113.77",
+   "out": "203.0.113.0/24"
+  },
+  {
+   "in": "2001:db8:abcd:12:ff::1",
+   "out": "2001:db8:abcd:12::/64"
+  },
+  {
+   "in": "::ffff:198.51.100.200",
+   "out": "198.51.100.0/24"
+  },
+  {
+   "in": "10.0.0.1",
+   "out": "10.0.0.0/24"
+  },
+  {
+   "in": "::1",
+   "out": "::/64"
+  },
+  {
+   "in": "nope",
+   "out": null
+  }
+ ],
+ "parseCidr": [
+  {
+   "in": "10.1.2.3/8",
+   "out": "10.0.0.0/8"
+  },
+  {
+   "in": "192.0.2.0/24",
+   "out": "192.0.2.0/24"
+  },
+  {
+   "in": "192.0.2.1",
+   "out": "192.0.2.1/32"
+  },
+  {
+   "in": "2001:db8::1/32",
+   "out": "2001:db8::/32"
+  },
+  {
+   "in": "2001:db8::/129",
+   "throws": "invalid_cidr"
+  },
+  {
+   "in": "1.2.3.4/33",
+   "throws": "invalid_cidr"
+  },
+  {
+   "in": "1.2.3.4/08",
+   "throws": "invalid_cidr"
+  },
+  {
+   "in": "1.2.3.4/",
+   "throws": "invalid_cidr"
+  },
+  {
+   "in": "0.0.0.0/0",
+   "out": "0.0.0.0/0"
+  },
+  {
+   "in": "::/0",
+   "out": "::/0"
+  },
+  {
+   "in": "::ffff:1.2.3.4/120",
+   "throws": "invalid_cidr"
+  },
+  {
+   "in": "x/8",
+   "throws": "invalid_cidr"
+  }
+ ],
+ "lookupIp": [
+  {
+   "in": "3.208.0.0",
+   "out": {
+    "valid": true,
+    "ip": "3.208.0.0",
+    "version": 4,
+    "public": true,
+    "special": null,
+    "matches": [
+     {
+      "cidr": "3.208.0.0/12",
+      "provider": "aws",
+      "providerName": "Amazon Web Services",
+      "category": "cloud"
+     }
+    ],
+    "categories": [
+     "cloud"
+    ]
+   }
+  },
+  {
+   "in": "3.207.255.255",
+   "out": {
+    "valid": true,
+    "ip": "3.207.255.255",
+    "version": 4,
+    "public": true,
+    "special": null,
+    "matches": [],
+    "categories": []
+   }
+  },
+  {
+   "in": "3.223.255.255",
+   "out": {
+    "valid": true,
+    "ip": "3.223.255.255",
+    "version": 4,
+    "public": true,
+    "special": null,
+    "matches": [
+     {
+      "cidr": "3.208.0.0/12",
+      "provider": "aws",
+      "providerName": "Amazon Web Services",
+      "category": "cloud"
+     }
+    ],
+    "categories": [
+     "cloud"
+    ]
+   }
+  },
+  {
+   "in": "3.224.0.0",
+   "out": {
+    "valid": true,
+    "ip": "3.224.0.0",
+    "version": 4,
+    "public": true,
+    "special": null,
+    "matches": [],
+    "categories": []
+   }
+  },
+  {
+   "in": "3.219.87.128",
+   "out": {
+    "valid": true,
+    "ip": "3.219.87.128",
+    "version": 4,
+    "public": true,
+    "special": null,
+    "matches": [
+     {
+      "cidr": "3.219.87.128/32",
+      "provider": "github",
+      "providerName": "GitHub",
+      "category": "services"
+     },
+     {
+      "cidr": "3.208.0.0/12",
+      "provider": "aws",
+      "providerName": "Amazon Web Services",
+      "category": "cloud"
+     }
+    ],
+    "categories": [
+     "cloud",
+     "services"
+    ]
+   }
+  },
+  {
+   "in": "3.219.87.129",
+   "out": {
+    "valid": true,
+    "ip": "3.219.87.129",
+    "version": 4,
+    "public": true,
+    "special": null,
+    "matches": [
+     {
+      "cidr": "3.208.0.0/12",
+      "provider": "aws",
+      "providerName": "Amazon Web Services",
+      "category": "cloud"
+     }
+    ],
+    "categories": [
+     "cloud"
+    ]
+   }
+  },
+  {
+   "in": "3.210.1.1",
+   "out": {
+    "valid": true,
+    "ip": "3.210.1.1",
+    "version": 4,
+    "public": true,
+    "special": null,
+    "matches": [
+     {
+      "cidr": "3.210.1.1/32",
+      "provider": "tor",
+      "providerName": "Tor exit nodes",
+      "category": "tor"
+     },
+     {
+      "cidr": "3.208.0.0/12",
+      "provider": "aws",
+      "providerName": "Amazon Web Services",
+      "category": "cloud"
+     }
+    ],
+    "categories": [
+     "cloud",
+     "tor"
+    ]
+   }
+  },
+  {
+   "in": "52.20.0.1",
+   "out": {
+    "valid": true,
+    "ip": "52.20.0.1",
+    "version": 4,
+    "public": true,
+    "special": null,
+    "matches": [
+     {
+      "cidr": "52.0.0.0/11",
+      "provider": "aws",
+      "providerName": "Amazon Web Services",
+      "category": "cloud"
+     }
+    ],
+    "categories": [
+     "cloud"
+    ]
+   }
+  },
+  {
+   "in": "52.1.255.255",
+   "out": {
+    "valid": true,
+    "ip": "52.1.255.255",
+    "version": 4,
+    "public": true,
+    "special": null,
+    "matches": [
+     {
+      "cidr": "52.1.0.0/16",
+      "provider": "oracle-cloud",
+      "providerName": "Oracle Cloud Infrastructure",
+      "category": "cloud"
+     },
+     {
+      "cidr": "52.0.0.0/11",
+      "provider": "aws",
+      "providerName": "Amazon Web Services",
+      "category": "cloud"
+     }
+    ],
+    "categories": [
+     "cloud"
+    ]
+   }
+  },
+  {
+   "in": "52.31.255.255",
+   "out": {
+    "valid": true,
+    "ip": "52.31.255.255",
+    "version": 4,
+    "public": true,
+    "special": null,
+    "matches": [
+     {
+      "cidr": "52.0.0.0/11",
+      "provider": "aws",
+      "providerName": "Amazon Web Services",
+      "category": "cloud"
+     }
+    ],
+    "categories": [
+     "cloud"
+    ]
+   }
+  },
+  {
+   "in": "34.64.200.1",
+   "out": {
+    "valid": true,
+    "ip": "34.64.200.1",
+    "version": 4,
+    "public": true,
+    "special": null,
+    "matches": [
+     {
+      "cidr": "34.64.0.0/16",
+      "provider": "google-cloud",
+      "providerName": "Google Cloud",
+      "category": "cloud"
+     }
+    ],
+    "categories": [
+     "cloud"
+    ]
+   }
+  },
+  {
+   "in": "::ffff:3.208.0.1",
+   "out": {
+    "valid": true,
+    "ip": "3.208.0.1",
+    "version": 4,
+    "public": true,
+    "special": null,
+    "matches": [
+     {
+      "cidr": "3.208.0.0/12",
+      "provider": "aws",
+      "providerName": "Amazon Web Services",
+      "category": "cloud"
+     }
+    ],
+    "categories": [
+     "cloud"
+    ]
+   }
+  },
+  {
+   "in": "2600:1f18::",
+   "out": {
+    "valid": true,
+    "ip": "2600:1f18::",
+    "version": 6,
+    "public": true,
+    "special": null,
+    "matches": [
+     {
+      "cidr": "2600:1f18::/33",
+      "provider": "aws",
+      "providerName": "Amazon Web Services",
+      "category": "cloud"
+     }
+    ],
+    "categories": [
+     "cloud"
+    ]
+   }
+  },
+  {
+   "in": "2600:1f18:7fff:ffff:ffff:ffff:ffff:ffff",
+   "out": {
+    "valid": true,
+    "ip": "2600:1f18:7fff:ffff:ffff:ffff:ffff:ffff",
+    "version": 6,
+    "public": true,
+    "special": null,
+    "matches": [
+     {
+      "cidr": "2600:1f18::/33",
+      "provider": "aws",
+      "providerName": "Amazon Web Services",
+      "category": "cloud"
+     }
+    ],
+    "categories": [
+     "cloud"
+    ]
+   }
+  },
+  {
+   "in": "2600:1f18:8000::",
+   "out": {
+    "valid": true,
+    "ip": "2600:1f18:8000::",
+    "version": 6,
+    "public": true,
+    "special": null,
+    "matches": [],
+    "categories": []
+   }
+  },
+  {
+   "in": "104.23.255.255",
+   "out": {
+    "valid": true,
+    "ip": "104.23.255.255",
+    "version": 4,
+    "public": true,
+    "special": null,
+    "matches": [
+     {
+      "cidr": "104.16.0.0/13",
+      "provider": "cloudflare",
+      "providerName": "Cloudflare",
+      "category": "cdn"
+     }
+    ],
+    "categories": [
+     "cdn"
+    ]
+   }
+  },
+  {
+   "in": "2606:4700:4700::1111",
+   "out": {
+    "valid": true,
+    "ip": "2606:4700:4700::1111",
+    "version": 6,
+    "public": true,
+    "special": null,
+    "matches": [
+     {
+      "cidr": "2606:4700::/32",
+      "provider": "cloudflare",
+      "providerName": "Cloudflare",
+      "category": "cdn"
+     }
+    ],
+    "categories": [
+     "cdn"
+    ]
+   }
+  },
+  {
+   "in": "185.220.101.4",
+   "out": {
+    "valid": true,
+    "ip": "185.220.101.4",
+    "version": 4,
+    "public": true,
+    "special": null,
+    "matches": [
+     {
+      "cidr": "185.220.101.4/32",
+      "provider": "tor",
+      "providerName": "Tor exit nodes",
+      "category": "tor"
+     }
+    ],
+    "categories": [
+     "tor"
+    ]
+   }
+  },
+  {
+   "in": "172.224.226.63",
+   "out": {
+    "valid": true,
+    "ip": "172.224.226.63",
+    "version": 4,
+    "public": true,
+    "special": null,
+    "matches": [
+     {
+      "cidr": "172.224.226.0/26",
+      "provider": "icloud-private-relay",
+      "providerName": "iCloud Private Relay egress",
+      "category": "privacy-relay"
+     }
+    ],
+    "categories": [
+     "privacy-relay"
+    ]
+   }
+  },
+  {
+   "in": "172.224.226.64",
+   "out": {
+    "valid": true,
+    "ip": "172.224.226.64",
+    "version": 4,
+    "public": true,
+    "special": null,
+    "matches": [],
+    "categories": []
+   }
+  },
+  {
+   "in": "2a02:26f7:b3c0:4000:1:2:3:4",
+   "out": {
+    "valid": true,
+    "ip": "2a02:26f7:b3c0:4000:1:2:3:4",
+    "version": 6,
+    "public": true,
+    "special": null,
+    "matches": [
+     {
+      "cidr": "2a02:26f7:b3c0:4000::/64",
+      "provider": "icloud-private-relay",
+      "providerName": "iCloud Private Relay egress",
+      "category": "privacy-relay"
+     }
+    ],
+    "categories": [
+     "privacy-relay"
+    ]
+   }
+  },
+  {
+   "in": "100.64.0.1",
+   "out": {
+    "valid": true,
+    "ip": "100.64.0.1",
+    "version": 4,
+    "public": false,
+    "special": {
+     "cidr": "100.64.0.0/10",
+     "kind": "cgnat",
+     "description": "a carrier-grade NAT address"
+    },
+    "matches": [],
+    "categories": []
+   }
+  },
+  {
+   "in": "10.1.1.1",
+   "out": {
+    "valid": true,
+    "ip": "10.1.1.1",
+    "version": 4,
+    "public": false,
+    "special": {
+     "cidr": "10.0.0.0/8",
+     "kind": "private",
+     "description": "a private network address"
+    },
+    "matches": [],
+    "categories": []
+   }
+  },
+  {
+   "in": "127.0.0.1",
+   "out": {
+    "valid": true,
+    "ip": "127.0.0.1",
+    "version": 4,
+    "public": false,
+    "special": {
+     "cidr": "127.0.0.0/8",
+     "kind": "loopback",
+     "description": "a loopback address"
+    },
+    "matches": [],
+    "categories": []
+   }
+  },
+  {
+   "in": "169.254.1.1",
+   "out": {
+    "valid": true,
+    "ip": "169.254.1.1",
+    "version": 4,
+    "public": false,
+    "special": {
+     "cidr": "169.254.0.0/16",
+     "kind": "link-local",
+     "description": "a link-local address"
+    },
+    "matches": [],
+    "categories": []
+   }
+  },
+  {
+   "in": "192.168.1.10",
+   "out": {
+    "valid": true,
+    "ip": "192.168.1.10",
+    "version": 4,
+    "public": false,
+    "special": {
+     "cidr": "192.168.0.0/16",
+     "kind": "private",
+     "description": "a private network address"
+    },
+    "matches": [],
+    "categories": []
+   }
+  },
+  {
+   "in": "198.18.0.1",
+   "out": {
+    "valid": true,
+    "ip": "198.18.0.1",
+    "version": 4,
+    "public": false,
+    "special": {
+     "cidr": "198.18.0.0/15",
+     "kind": "benchmarking",
+     "description": "a benchmarking address"
+    },
+    "matches": [],
+    "categories": []
+   }
+  },
+  {
+   "in": "224.0.0.1",
+   "out": {
+    "valid": true,
+    "ip": "224.0.0.1",
+    "version": 4,
+    "public": false,
+    "special": {
+     "cidr": "224.0.0.0/4",
+     "kind": "multicast",
+     "description": "a multicast address"
+    },
+    "matches": [],
+    "categories": []
+   }
+  },
+  {
+   "in": "fd00::1",
+   "out": {
+    "valid": true,
+    "ip": "fd00::1",
+    "version": 6,
+    "public": false,
+    "special": {
+     "cidr": "fc00::/7",
+     "kind": "unique-local",
+     "description": "a unique local (private) address"
+    },
+    "matches": [],
+    "categories": []
+   }
+  },
+  {
+   "in": "fe80::1",
+   "out": {
+    "valid": true,
+    "ip": "fe80::1",
+    "version": 6,
+    "public": false,
+    "special": {
+     "cidr": "fe80::/10",
+     "kind": "link-local",
+     "description": "a link-local address"
+    },
+    "matches": [],
+    "categories": []
+   }
+  },
+  {
+   "in": "::1",
+   "out": {
+    "valid": true,
+    "ip": "::1",
+    "version": 6,
+    "public": false,
+    "special": {
+     "cidr": "::1/128",
+     "kind": "loopback",
+     "description": "a loopback address"
+    },
+    "matches": [],
+    "categories": []
+   }
+  },
+  {
+   "in": "::",
+   "out": {
+    "valid": true,
+    "ip": "::",
+    "version": 6,
+    "public": false,
+    "special": {
+     "cidr": "::/128",
+     "kind": "unspecified",
+     "description": "the unspecified address"
+    },
+    "matches": [],
+    "categories": []
+   }
+  },
+  {
+   "in": "2001:db8::5",
+   "out": {
+    "valid": true,
+    "ip": "2001:db8::5",
+    "version": 6,
+    "public": false,
+    "special": {
+     "cidr": "2001:db8::/32",
+     "kind": "documentation",
+     "description": "a documentation address"
+    },
+    "matches": [],
+    "categories": []
+   }
+  },
+  {
+   "in": "8.8.8.8",
+   "out": {
+    "valid": true,
+    "ip": "8.8.8.8",
+    "version": 4,
+    "public": true,
+    "special": null,
+    "matches": [],
+    "categories": []
+   }
+  },
+  {
+   "in": "not-an-ip",
+   "out": {
+    "valid": false,
+    "ip": "not-an-ip",
+    "version": null,
+    "public": false,
+    "special": null,
+    "matches": [],
+    "categories": []
+   }
+  }
+ ],
+ "checkDisposable": [
+  {
+   "in": "mailinator.com",
+   "out": {
+    "domain": "mailinator.com",
+    "disposable": true,
+    "matchedDomain": "mailinator.com",
+    "source": "list",
+    "allowedBy": null
+   }
+  },
+  {
+   "in": "user@mailinator.com",
+   "out": {
+    "domain": "mailinator.com",
+    "disposable": true,
+    "matchedDomain": "mailinator.com",
+    "source": "list",
+    "allowedBy": null
+   }
+  },
+  {
+   "in": "user@Sub.Mailinator.COM.",
+   "out": {
+    "domain": "sub.mailinator.com",
+    "disposable": true,
+    "matchedDomain": "mailinator.com",
+    "source": "list",
+    "allowedBy": null
+   }
+  },
+  {
+   "in": "notmailinator.com",
+   "out": {
+    "domain": "notmailinator.com",
+    "disposable": false,
+    "matchedDomain": null,
+    "source": null,
+    "allowedBy": null
+   }
+  },
+  {
+   "in": "mailinator.com.evil.org",
+   "out": {
+    "domain": "mailinator.com.evil.org",
+    "disposable": false,
+    "matchedDomain": null,
+    "source": null,
+    "allowedBy": null
+   }
+  },
+  {
+   "in": "spambox.example",
+   "out": {
+    "domain": "spambox.example",
+    "disposable": true,
+    "matchedDomain": "spambox.example",
+    "source": "list",
+    "allowedBy": null
+   }
+  },
+  {
+   "in": "x@throwaway.dynv6.net",
+   "out": {
+    "domain": "throwaway.dynv6.net",
+    "disposable": true,
+    "matchedDomain": "throwaway.dynv6.net",
+    "source": "list",
+    "allowedBy": null
+   }
+  },
+  {
+   "in": "x@other.dynv6.net",
+   "out": {
+    "domain": "other.dynv6.net",
+    "disposable": false,
+    "matchedDomain": null,
+    "source": null,
+    "allowedBy": null
+   }
+  },
+  {
+   "in": "x@gmail.com",
+   "out": {
+    "domain": "gmail.com",
+    "disposable": false,
+    "matchedDomain": null,
+    "source": null,
+    "allowedBy": null
+   }
+  },
+  {
+   "in": "x@mailinator.com",
+   "options": {
+    "allowDomains": [
+     "mailinator.com"
+    ]
+   },
+   "out": {
+    "domain": "mailinator.com",
+    "disposable": false,
+    "matchedDomain": null,
+    "source": null,
+    "allowedBy": "mailinator.com"
+   }
+  },
+  {
+   "in": "x@a.mailinator.com",
+   "options": {
+    "allowDomains": [
+     "a.mailinator.com"
+    ]
+   },
+   "out": {
+    "domain": "a.mailinator.com",
+    "disposable": false,
+    "matchedDomain": null,
+    "source": null,
+    "allowedBy": "a.mailinator.com"
+   }
+  },
+  {
+   "in": "x@corp-temp.io",
+   "options": {
+    "blockDomains": [
+     "Corp-Temp.io"
+    ]
+   },
+   "out": {
+    "domain": "corp-temp.io",
+    "disposable": true,
+    "matchedDomain": "corp-temp.io",
+    "source": "blockDomains",
+    "allowedBy": null
+   }
+  },
+  {
+   "in": "x@eu.corp-temp.io",
+   "options": {
+    "blockDomains": [
+     "corp-temp.io"
+    ]
+   },
+   "out": {
+    "domain": "eu.corp-temp.io",
+    "disposable": true,
+    "matchedDomain": "corp-temp.io",
+    "source": "blockDomains",
+    "allowedBy": null
+   }
+  },
+  {
+   "in": "x@corp-temp.io",
+   "options": {
+    "blockDomains": [
+     "corp-temp.io"
+    ],
+    "allowDomains": [
+     "corp-temp.io"
+    ]
+   },
+   "out": {
+    "domain": "corp-temp.io",
+    "disposable": false,
+    "matchedDomain": null,
+    "source": null,
+    "allowedBy": "corp-temp.io"
+   }
+  },
+  {
+   "in": "com",
+   "out": {
+    "domain": "com",
+    "disposable": false,
+    "matchedDomain": null,
+    "source": null,
+    "allowedBy": null
+   }
+  },
+  {
+   "in": "x@mailinator.com",
+   "options": {
+    "allowDomains": "mailinator.com"
+   },
+   "throws": "invalid_option"
+  }
+ ],
+ "velocity": [
+  {
+   "name": "default rules, burst from one IP",
+   "steps": [
+    {
+     "input": {
+      "now": 1767225601,
+      "ip": "203.0.113.9",
+      "email": "user1@example.com"
+     },
+     "out": {
+      "limited": false,
+      "exceeded": [],
+      "results": [
+       {
+        "rule": "ip-hour",
+        "key": "ip",
+        "value": "203.0.113.9",
+        "count": 1,
+        "limit": 5,
+        "windowSeconds": 3600,
+        "resetAt": 1767229200,
+        "exceeded": false
+       },
+       {
+        "rule": "ip-day",
+        "key": "ip",
+        "value": "203.0.113.9",
+        "count": 1,
+        "limit": 20,
+        "windowSeconds": 86400,
+        "resetAt": 1767312000,
+        "exceeded": false
+       },
+       {
+        "rule": "network-day",
+        "key": "network",
+        "value": "203.0.113.0/24",
+        "count": 1,
+        "limit": 50,
+        "windowSeconds": 86400,
+        "resetAt": 1767312000,
+        "exceeded": false
+       },
+       {
+        "rule": "email-day",
+        "key": "email",
+        "value": "user1@example.com",
+        "count": 1,
+        "limit": 5,
+        "windowSeconds": 86400,
+        "resetAt": 1767312000,
+        "exceeded": false
+       }
+      ]
+     }
+    },
+    {
+     "input": {
+      "now": 1767225602,
+      "ip": "203.0.113.9",
+      "email": "user2@example.com"
+     },
+     "out": {
+      "limited": false,
+      "exceeded": [],
+      "results": [
+       {
+        "rule": "ip-hour",
+        "key": "ip",
+        "value": "203.0.113.9",
+        "count": 2,
+        "limit": 5,
+        "windowSeconds": 3600,
+        "resetAt": 1767229200,
+        "exceeded": false
+       },
+       {
+        "rule": "ip-day",
+        "key": "ip",
+        "value": "203.0.113.9",
+        "count": 2,
+        "limit": 20,
+        "windowSeconds": 86400,
+        "resetAt": 1767312000,
+        "exceeded": false
+       },
+       {
+        "rule": "network-day",
+        "key": "network",
+        "value": "203.0.113.0/24",
+        "count": 2,
+        "limit": 50,
+        "windowSeconds": 86400,
+        "resetAt": 1767312000,
+        "exceeded": false
+       },
+       {
+        "rule": "email-day",
+        "key": "email",
+        "value": "user2@example.com",
+        "count": 1,
+        "limit": 5,
+        "windowSeconds": 86400,
+        "resetAt": 1767312000,
+        "exceeded": false
+       }
+      ]
+     }
+    },
+    {
+     "input": {
+      "now": 1767225603,
+      "ip": "203.0.113.9",
+      "email": "user3@example.com"
+     },
+     "out": {
+      "limited": false,
+      "exceeded": [],
+      "results": [
+       {
+        "rule": "ip-hour",
+        "key": "ip",
+        "value": "203.0.113.9",
+        "count": 3,
+        "limit": 5,
+        "windowSeconds": 3600,
+        "resetAt": 1767229200,
+        "exceeded": false
+       },
+       {
+        "rule": "ip-day",
+        "key": "ip",
+        "value": "203.0.113.9",
+        "count": 3,
+        "limit": 20,
+        "windowSeconds": 86400,
+        "resetAt": 1767312000,
+        "exceeded": false
+       },
+       {
+        "rule": "network-day",
+        "key": "network",
+        "value": "203.0.113.0/24",
+        "count": 3,
+        "limit": 50,
+        "windowSeconds": 86400,
+        "resetAt": 1767312000,
+        "exceeded": false
+       },
+       {
+        "rule": "email-day",
+        "key": "email",
+        "value": "user3@example.com",
+        "count": 1,
+        "limit": 5,
+        "windowSeconds": 86400,
+        "resetAt": 1767312000,
+        "exceeded": false
+       }
+      ]
+     }
+    },
+    {
+     "input": {
+      "now": 1767225604,
+      "ip": "203.0.113.9",
+      "email": "user4@example.com"
+     },
+     "out": {
+      "limited": false,
+      "exceeded": [],
+      "results": [
+       {
+        "rule": "ip-hour",
+        "key": "ip",
+        "value": "203.0.113.9",
+        "count": 4,
+        "limit": 5,
+        "windowSeconds": 3600,
+        "resetAt": 1767229200,
+        "exceeded": false
+       },
+       {
+        "rule": "ip-day",
+        "key": "ip",
+        "value": "203.0.113.9",
+        "count": 4,
+        "limit": 20,
+        "windowSeconds": 86400,
+        "resetAt": 1767312000,
+        "exceeded": false
+       },
+       {
+        "rule": "network-day",
+        "key": "network",
+        "value": "203.0.113.0/24",
+        "count": 4,
+        "limit": 50,
+        "windowSeconds": 86400,
+        "resetAt": 1767312000,
+        "exceeded": false
+       },
+       {
+        "rule": "email-day",
+        "key": "email",
+        "value": "user4@example.com",
+        "count": 1,
+        "limit": 5,
+        "windowSeconds": 86400,
+        "resetAt": 1767312000,
+        "exceeded": false
+       }
+      ]
+     }
+    },
+    {
+     "input": {
+      "now": 1767225605,
+      "ip": "203.0.113.9",
+      "email": "user5@example.com"
+     },
+     "out": {
+      "limited": false,
+      "exceeded": [],
+      "results": [
+       {
+        "rule": "ip-hour",
+        "key": "ip",
+        "value": "203.0.113.9",
+        "count": 5,
+        "limit": 5,
+        "windowSeconds": 3600,
+        "resetAt": 1767229200,
+        "exceeded": false
+       },
+       {
+        "rule": "ip-day",
+        "key": "ip",
+        "value": "203.0.113.9",
+        "count": 5,
+        "limit": 20,
+        "windowSeconds": 86400,
+        "resetAt": 1767312000,
+        "exceeded": false
+       },
+       {
+        "rule": "network-day",
+        "key": "network",
+        "value": "203.0.113.0/24",
+        "count": 5,
+        "limit": 50,
+        "windowSeconds": 86400,
+        "resetAt": 1767312000,
+        "exceeded": false
+       },
+       {
+        "rule": "email-day",
+        "key": "email",
+        "value": "user5@example.com",
+        "count": 1,
+        "limit": 5,
+        "windowSeconds": 86400,
+        "resetAt": 1767312000,
+        "exceeded": false
+       }
+      ]
+     }
+    },
+    {
+     "input": {
+      "now": 1767225606,
+      "ip": "203.0.113.9",
+      "email": "user6@example.com"
+     },
+     "out": {
+      "limited": true,
+      "exceeded": [
+       "ip-hour"
+      ],
+      "results": [
+       {
+        "rule": "ip-hour",
+        "key": "ip",
+        "value": "203.0.113.9",
+        "count": 6,
+        "limit": 5,
+        "windowSeconds": 3600,
+        "resetAt": 1767229200,
+        "exceeded": true
+       },
+       {
+        "rule": "ip-day",
+        "key": "ip",
+        "value": "203.0.113.9",
+        "count": 6,
+        "limit": 20,
+        "windowSeconds": 86400,
+        "resetAt": 1767312000,
+        "exceeded": false
+       },
+       {
+        "rule": "network-day",
+        "key": "network",
+        "value": "203.0.113.0/24",
+        "count": 6,
+        "limit": 50,
+        "windowSeconds": 86400,
+        "resetAt": 1767312000,
+        "exceeded": false
+       },
+       {
+        "rule": "email-day",
+        "key": "email",
+        "value": "user6@example.com",
+        "count": 1,
+        "limit": 5,
+        "windowSeconds": 86400,
+        "resetAt": 1767312000,
+        "exceeded": false
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "name": "window resets at the boundary",
+   "rules": [
+    {
+     "name": "ip-minute",
+     "key": "ip",
+     "limit": 2,
+     "windowSeconds": 60
+    }
+   ],
+   "steps": [
+    {
+     "input": {
+      "now": 1767225658,
+      "ip": "198.51.100.1"
+     },
+     "out": {
+      "limited": false,
+      "exceeded": [],
+      "results": [
+       {
+        "rule": "ip-minute",
+        "key": "ip",
+        "value": "198.51.100.1",
+        "count": 1,
+        "limit": 2,
+        "windowSeconds": 60,
+        "resetAt": 1767225660,
+        "exceeded": false
+       }
+      ]
+     }
+    },
+    {
+     "input": {
+      "now": 1767225659,
+      "ip": "198.51.100.1"
+     },
+     "out": {
+      "limited": false,
+      "exceeded": [],
+      "results": [
+       {
+        "rule": "ip-minute",
+        "key": "ip",
+        "value": "198.51.100.1",
+        "count": 2,
+        "limit": 2,
+        "windowSeconds": 60,
+        "resetAt": 1767225660,
+        "exceeded": false
+       }
+      ]
+     }
+    },
+    {
+     "input": {
+      "now": 1767225659,
+      "ip": "198.51.100.1"
+     },
+     "out": {
+      "limited": true,
+      "exceeded": [
+       "ip-minute"
+      ],
+      "results": [
+       {
+        "rule": "ip-minute",
+        "key": "ip",
+        "value": "198.51.100.1",
+        "count": 3,
+        "limit": 2,
+        "windowSeconds": 60,
+        "resetAt": 1767225660,
+        "exceeded": true
+       }
+      ]
+     }
+    },
+    {
+     "input": {
+      "now": 1767225660,
+      "ip": "198.51.100.1"
+     },
+     "out": {
+      "limited": false,
+      "exceeded": [],
+      "results": [
+       {
+        "rule": "ip-minute",
+        "key": "ip",
+        "value": "198.51.100.1",
+        "count": 1,
+        "limit": 2,
+        "windowSeconds": 60,
+        "resetAt": 1767225720,
+        "exceeded": false
+       }
+      ]
+     }
+    },
+    {
+     "input": {
+      "now": 1767225661,
+      "ip": "198.51.100.1"
+     },
+     "out": {
+      "limited": false,
+      "exceeded": [],
+      "results": [
+       {
+        "rule": "ip-minute",
+        "key": "ip",
+        "value": "198.51.100.1",
+        "count": 2,
+        "limit": 2,
+        "windowSeconds": 60,
+        "resetAt": 1767225720,
+        "exceeded": false
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "name": "network and email keys",
+   "rules": [
+    {
+     "name": "net",
+     "key": "network",
+     "limit": 2,
+     "windowSeconds": 3600
+    },
+    {
+     "name": "mail",
+     "key": "email",
+     "limit": 1,
+     "windowSeconds": 86400
+    }
+   ],
+   "steps": [
+    {
+     "input": {
+      "now": 1767225600,
+      "ip": "198.51.100.1",
+      "email": "J.Doe+a@gmail.com"
+     },
+     "out": {
+      "limited": false,
+      "exceeded": [],
+      "results": [
+       {
+        "rule": "net",
+        "key": "network",
+        "value": "198.51.100.0/24",
+        "count": 1,
+        "limit": 2,
+        "windowSeconds": 3600,
+        "resetAt": 1767229200,
+        "exceeded": false
+       },
+       {
+        "rule": "mail",
+        "key": "email",
+        "value": "jdoe@gmail.com",
+        "count": 1,
+        "limit": 1,
+        "windowSeconds": 86400,
+        "resetAt": 1767312000,
+        "exceeded": false
+       }
+      ]
+     }
+    },
+    {
+     "input": {
+      "now": 1767225605,
+      "ip": "198.51.100.2",
+      "email": "jdoe@googlemail.com"
+     },
+     "out": {
+      "limited": true,
+      "exceeded": [
+       "mail"
+      ],
+      "results": [
+       {
+        "rule": "net",
+        "key": "network",
+        "value": "198.51.100.0/24",
+        "count": 2,
+        "limit": 2,
+        "windowSeconds": 3600,
+        "resetAt": 1767229200,
+        "exceeded": false
+       },
+       {
+        "rule": "mail",
+        "key": "email",
+        "value": "jdoe@gmail.com",
+        "count": 2,
+        "limit": 1,
+        "windowSeconds": 86400,
+        "resetAt": 1767312000,
+        "exceeded": true
+       }
+      ]
+     }
+    },
+    {
+     "input": {
+      "now": 1767225609,
+      "ip": "2001:db8::1",
+      "email": "jdoe@gmail.com"
+     },
+     "out": {
+      "limited": true,
+      "exceeded": [
+       "mail"
+      ],
+      "results": [
+       {
+        "rule": "net",
+        "key": "network",
+        "value": "2001:db8::/64",
+        "count": 1,
+        "limit": 2,
+        "windowSeconds": 3600,
+        "resetAt": 1767229200,
+        "exceeded": false
+       },
+       {
+        "rule": "mail",
+        "key": "email",
+        "value": "jdoe@gmail.com",
+        "count": 3,
+        "limit": 1,
+        "windowSeconds": 86400,
+        "resetAt": 1767312000,
+        "exceeded": true
+       }
+      ]
+     }
+    },
+    {
+     "input": {
+      "now": 1767225610,
+      "ip": "198.51.100.250",
+      "email": "not an email"
+     },
+     "out": {
+      "limited": true,
+      "exceeded": [
+       "net"
+      ],
+      "results": [
+       {
+        "rule": "net",
+        "key": "network",
+        "value": "198.51.100.0/24",
+        "count": 3,
+        "limit": 2,
+        "windowSeconds": 3600,
+        "resetAt": 1767229200,
+        "exceeded": true
+       }
+      ]
+     }
+    },
+    {
+     "input": {
+      "now": 1767225611,
+      "ip": "garbage"
+     },
+     "out": {
+      "limited": false,
+      "exceeded": [],
+      "results": []
+     }
+    }
+   ]
+  },
+  {
+   "name": "custom key",
+   "rules": [
+    {
+     "name": "phone-day",
+     "key": "phone",
+     "limit": 1,
+     "windowSeconds": 86400
+    }
+   ],
+   "steps": [
+    {
+     "input": {
+      "now": 1767225600,
+      "phone": "+15551230000"
+     },
+     "out": {
+      "limited": false,
+      "exceeded": [],
+      "results": [
+       {
+        "rule": "phone-day",
+        "key": "phone",
+        "value": "+15551230000",
+        "count": 1,
+        "limit": 1,
+        "windowSeconds": 86400,
+        "resetAt": 1767312000,
+        "exceeded": false
+       }
+      ]
+     }
+    },
+    {
+     "input": {
+      "now": 1767225601,
+      "phone": "+15551230000"
+     },
+     "out": {
+      "limited": true,
+      "exceeded": [
+       "phone-day"
+      ],
+      "results": [
+       {
+        "rule": "phone-day",
+        "key": "phone",
+        "value": "+15551230000",
+        "count": 2,
+        "limit": 1,
+        "windowSeconds": 86400,
+        "resetAt": 1767312000,
+        "exceeded": true
+       }
+      ]
+     }
+    },
+    {
+     "input": {
+      "now": 1767225602,
+      "phone": ""
+     },
+     "out": {
+      "limited": false,
+      "exceeded": [],
+      "results": []
+     }
+    },
+    {
+     "input": {
+      "now": 1767225603
+     },
+     "out": {
+      "limited": false,
+      "exceeded": [],
+      "results": []
+     }
+    }
+   ]
+  },
+  {
+   "name": "bad input",
+   "rules": [
+    {
+     "name": "ip",
+     "key": "ip",
+     "limit": 1,
+     "windowSeconds": 60
+    }
+   ],
+   "steps": [
+    {
+     "input": {
+      "ip": "1.2.3.4"
+     },
+     "throws": "invalid_argument"
+    },
+    {
+     "input": {
+      "now": -1,
+      "ip": "1.2.3.4"
+     },
+     "throws": "invalid_argument"
+    },
+    {
+     "input": {
+      "now": 1.5,
+      "ip": "1.2.3.4"
+     },
+     "throws": "invalid_argument"
+    }
+   ]
+  },
+  {
+   "name": "invalid rule: zero limit",
+   "rules": [
+    {
+     "name": "x",
+     "key": "ip",
+     "limit": 0,
+     "windowSeconds": 60
+    }
+   ],
+   "throws": "invalid_rule"
+  },
+  {
+   "name": "invalid rule: duplicate names",
+   "rules": [
+    {
+     "name": "x",
+     "key": "ip",
+     "limit": 1,
+     "windowSeconds": 60
+    },
+    {
+     "name": "x",
+     "key": "email",
+     "limit": 1,
+     "windowSeconds": 60
+    }
+   ],
+   "throws": "invalid_rule"
+  },
+  {
+   "name": "invalid rule: key now",
+   "rules": [
+    {
+     "name": "x",
+     "key": "now",
+     "limit": 1,
+     "windowSeconds": 60
+    }
+   ],
+   "throws": "invalid_rule"
+  },
+  {
+   "name": "invalid rule: window too long",
+   "rules": [
+    {
+     "name": "x",
+     "key": "ip",
+     "limit": 1,
+     "windowSeconds": 40000000
+    }
+   ],
+   "throws": "invalid_rule"
+  },
+  {
+   "name": "invalid rule: bad name",
+   "rules": [
+    {
+     "name": "has space",
+     "key": "ip",
+     "limit": 1,
+     "windowSeconds": 60
+    }
+   ],
+   "throws": "invalid_rule"
+  },
+  {
+   "name": "invalid rule: empty list",
+   "rules": [],
+   "throws": "invalid_rule"
+  }
+ ],
+ "assessSignup": [
+  {
+   "name": "clean sign-up",
+   "input": {
+    "email": "maria.lopez@example.org",
+    "ip": "81.2.69.142"
+   },
+   "out": {
+    "score": 0,
+    "decision": "allow",
+    "reasons": [],
+    "email": {
+     "valid": true,
+     "problem": null,
+     "address": "maria.lopez@example.org",
+     "normalized": "maria.lopez@example.org",
+     "local": "maria.lopez",
+     "domain": "example.org",
+     "provider": null,
+     "changes": []
+    },
+    "disposable": {
+     "domain": "example.org",
+     "disposable": false,
+     "matchedDomain": null,
+     "source": null,
+     "allowedBy": null
+    },
+    "ip": {
+     "valid": true,
+     "ip": "81.2.69.142",
+     "version": 4,
+     "public": true,
+     "special": null,
+     "matches": [],
+     "categories": []
+    }
+   }
+  },
+  {
+   "name": "public IP outside every listed range",
+   "input": {
+    "email": "maria@example.org",
+    "ip": "8.8.8.8"
+   },
+   "out": {
+    "score": 0,
+    "decision": "allow",
+    "reasons": [],
+    "email": {
+     "valid": true,
+     "problem": null,
+     "address": "maria@example.org",
+     "normalized": "maria@example.org",
+     "local": "maria",
+     "domain": "example.org",
+     "provider": null,
+     "changes": []
+    },
+    "disposable": {
+     "domain": "example.org",
+     "disposable": false,
+     "matchedDomain": null,
+     "source": null,
+     "allowedBy": null
+    },
+    "ip": {
+     "valid": true,
+     "ip": "8.8.8.8",
+     "version": 4,
+     "public": true,
+     "special": null,
+     "matches": [],
+     "categories": []
+    }
+   }
+  },
+  {
+   "name": "disposable email",
+   "input": {
+    "email": "temp123@mailinator.com",
+    "ip": "8.8.8.8"
+   },
+   "out": {
+    "score": 70,
+    "decision": "block",
+    "reasons": [
+     {
+      "code": "email_disposable",
+      "points": 70,
+      "message": "mailinator.com is on the disposable domain list (matched mailinator.com).",
+      "hint": "Please use a permanent email address."
+     }
+    ],
+    "email": {
+     "valid": true,
+     "problem": null,
+     "address": "temp123@mailinator.com",
+     "normalized": "temp123@mailinator.com",
+     "local": "temp123",
+     "domain": "mailinator.com",
+     "provider": null,
+     "changes": []
+    },
+    "disposable": {
+     "domain": "mailinator.com",
+     "disposable": true,
+     "matchedDomain": "mailinator.com",
+     "source": "list",
+     "allowedBy": null
+    },
+    "ip": {
+     "valid": true,
+     "ip": "8.8.8.8",
+     "version": 4,
+     "public": true,
+     "special": null,
+     "matches": [],
+     "categories": []
+    }
+   }
+  },
+  {
+   "name": "disposable subdomain on a datacenter IP",
+   "input": {
+    "email": "x@inbox.guerrillamail.com",
+    "ip": "3.208.10.10"
+   },
+   "out": {
+    "score": 110,
+    "decision": "block",
+    "reasons": [
+     {
+      "code": "email_disposable",
+      "points": 70,
+      "message": "inbox.guerrillamail.com is on the disposable domain list (matched guerrillamail.com).",
+      "hint": "Please use a permanent email address."
+     },
+     {
+      "code": "ip_datacenter",
+      "points": 40,
+      "message": "3.208.10.10 is in a datacenter range: Amazon Web Services (cloud, 3.208.0.0/12).",
+      "hint": "Turn off your VPN or proxy, or switch to your home or mobile connection, and try again."
+     }
+    ],
+    "email": {
+     "valid": true,
+     "problem": null,
+     "address": "x@inbox.guerrillamail.com",
+     "normalized": "x@inbox.guerrillamail.com",
+     "local": "x",
+     "domain": "inbox.guerrillamail.com",
+     "provider": null,
+     "changes": []
+    },
+    "disposable": {
+     "domain": "inbox.guerrillamail.com",
+     "disposable": true,
+     "matchedDomain": "guerrillamail.com",
+     "source": "list",
+     "allowedBy": null
+    },
+    "ip": {
+     "valid": true,
+     "ip": "3.208.10.10",
+     "version": 4,
+     "public": true,
+     "special": null,
+     "matches": [
+      {
+       "cidr": "3.208.0.0/12",
+       "provider": "aws",
+       "providerName": "Amazon Web Services",
+       "category": "cloud"
+      }
+     ],
+     "categories": [
+      "cloud"
+     ]
+    }
+   }
+  },
+  {
+   "name": "GitHub runner inside AWS",
+   "input": {
+    "email": "ci@example.org",
+    "ip": "3.219.87.128"
+   },
+   "out": {
+    "score": 40,
+    "decision": "review",
+    "reasons": [
+     {
+      "code": "ip_datacenter",
+      "points": 40,
+      "message": "3.219.87.128 is in a datacenter range: GitHub (services, 3.219.87.128/32); Amazon Web Services (cloud, 3.208.0.0/12).",
+      "hint": "Turn off your VPN or proxy, or switch to your home or mobile connection, and try again."
+     }
+    ],
+    "email": {
+     "valid": true,
+     "problem": null,
+     "address": "ci@example.org",
+     "normalized": "ci@example.org",
+     "local": "ci",
+     "domain": "example.org",
+     "provider": null,
+     "changes": []
+    },
+    "disposable": {
+     "domain": "example.org",
+     "disposable": false,
+     "matchedDomain": null,
+     "source": null,
+     "allowedBy": null
+    },
+    "ip": {
+     "valid": true,
+     "ip": "3.219.87.128",
+     "version": 4,
+     "public": true,
+     "special": null,
+     "matches": [
+      {
+       "cidr": "3.219.87.128/32",
+       "provider": "github",
+       "providerName": "GitHub",
+       "category": "services"
+      },
+      {
+       "cidr": "3.208.0.0/12",
+       "provider": "aws",
+       "providerName": "Amazon Web Services",
+       "category": "cloud"
+      }
+     ],
+     "categories": [
+      "cloud",
+      "services"
+     ]
+    }
+   }
+  },
+  {
+   "name": "Tor exit on a cloud range",
+   "input": {
+    "ip": "3.210.1.1"
+   },
+   "out": {
+    "score": 80,
+    "decision": "block",
+    "reasons": [
+     {
+      "code": "ip_datacenter",
+      "points": 40,
+      "message": "3.210.1.1 is in a datacenter range: Amazon Web Services (cloud, 3.208.0.0/12).",
+      "hint": "Turn off your VPN or proxy, or switch to your home or mobile connection, and try again."
+     },
+     {
+      "code": "ip_tor",
+      "points": 40,
+      "message": "3.210.1.1 is in the Tor exit list: Tor exit nodes (tor, 3.210.1.1/32).",
+      "hint": "Please sign up without Tor."
+     }
+    ],
+    "email": null,
+    "disposable": null,
+    "ip": {
+     "valid": true,
+     "ip": "3.210.1.1",
+     "version": 4,
+     "public": true,
+     "special": null,
+     "matches": [
+      {
+       "cidr": "3.210.1.1/32",
+       "provider": "tor",
+       "providerName": "Tor exit nodes",
+       "category": "tor"
+      },
+      {
+       "cidr": "3.208.0.0/12",
+       "provider": "aws",
+       "providerName": "Amazon Web Services",
+       "category": "cloud"
+      }
+     ],
+     "categories": [
+      "cloud",
+      "tor"
+     ]
+    }
+   }
+  },
+  {
+   "name": "Tor exit",
+   "input": {
+    "email": "a@example.org",
+    "ip": "185.220.101.4"
+   },
+   "out": {
+    "score": 40,
+    "decision": "review",
+    "reasons": [
+     {
+      "code": "ip_tor",
+      "points": 40,
+      "message": "185.220.101.4 is in the Tor exit list: Tor exit nodes (tor, 185.220.101.4/32).",
+      "hint": "Please sign up without Tor."
+     }
+    ],
+    "email": {
+     "valid": true,
+     "problem": null,
+     "address": "a@example.org",
+     "normalized": "a@example.org",
+     "local": "a",
+     "domain": "example.org",
+     "provider": null,
+     "changes": []
+    },
+    "disposable": {
+     "domain": "example.org",
+     "disposable": false,
+     "matchedDomain": null,
+     "source": null,
+     "allowedBy": null
+    },
+    "ip": {
+     "valid": true,
+     "ip": "185.220.101.4",
+     "version": 4,
+     "public": true,
+     "special": null,
+     "matches": [
+      {
+       "cidr": "185.220.101.4/32",
+       "provider": "tor",
+       "providerName": "Tor exit nodes",
+       "category": "tor"
+      }
+     ],
+     "categories": [
+      "tor"
+     ]
+    }
+   }
+  },
+  {
+   "name": "Cloudflare edge address",
+   "input": {
+    "email": "a@example.org",
+    "ip": "2606:4700:110:8a36::1"
+   },
+   "out": {
+    "score": 15,
+    "decision": "allow",
+    "reasons": [
+     {
+      "code": "ip_cdn",
+      "points": 15,
+      "message": "2606:4700:110:8a36::1 is in a CDN range: Cloudflare (cdn, 2606:4700::/32). People rarely browse from CDN edge addresses, but some privacy and VPN products route them through CDN networks.",
+      "hint": "If you use a VPN or a privacy service, turn it off and try again."
+     }
+    ],
+    "email": {
+     "valid": true,
+     "problem": null,
+     "address": "a@example.org",
+     "normalized": "a@example.org",
+     "local": "a",
+     "domain": "example.org",
+     "provider": null,
+     "changes": []
+    },
+    "disposable": {
+     "domain": "example.org",
+     "disposable": false,
+     "matchedDomain": null,
+     "source": null,
+     "allowedBy": null
+    },
+    "ip": {
+     "valid": true,
+     "ip": "2606:4700:110:8a36::1",
+     "version": 6,
+     "public": true,
+     "special": null,
+     "matches": [
+      {
+       "cidr": "2606:4700::/32",
+       "provider": "cloudflare",
+       "providerName": "Cloudflare",
+       "category": "cdn"
+      }
+     ],
+     "categories": [
+      "cdn"
+     ]
+    }
+   }
+  },
+  {
+   "name": "iCloud Private Relay",
+   "input": {
+    "email": "Kim.Lee+shop@iCloud.com",
+    "ip": "172.224.226.10"
+   },
+   "out": {
+    "score": 0,
+    "decision": "allow",
+    "reasons": [
+     {
+      "code": "ip_privacy_relay",
+      "points": 0,
+      "message": "172.224.226.10 is in a privacy relay range: iCloud Private Relay egress (privacy-relay, 172.224.226.0/26). Real users share these addresses; this alone says nothing about fraud.",
+      "hint": null
+     }
+    ],
+    "email": {
+     "valid": true,
+     "problem": null,
+     "address": "Kim.Lee+shop@iCloud.com",
+     "normalized": "kim.lee+shop@icloud.com",
+     "local": "kim.lee+shop",
+     "domain": "icloud.com",
+     "provider": "icloud",
+     "changes": [
+      "lowercased"
+     ]
+    },
+    "disposable": {
+     "domain": "icloud.com",
+     "disposable": false,
+     "matchedDomain": null,
+     "source": null,
+     "allowedBy": null
+    },
+    "ip": {
+     "valid": true,
+     "ip": "172.224.226.10",
+     "version": 4,
+     "public": true,
+     "special": null,
+     "matches": [
+      {
+       "cidr": "172.224.226.0/26",
+       "provider": "icloud-private-relay",
+       "providerName": "iCloud Private Relay egress",
+       "category": "privacy-relay"
+      }
+     ],
+     "categories": [
+      "privacy-relay"
+     ]
+    }
+   }
+  },
+  {
+   "name": "Gmail alias is information only",
+   "input": {
+    "email": "K.i.m+promo@googlemail.com"
+   },
+   "out": {
+    "score": 0,
+    "decision": "allow",
+    "reasons": [
+     {
+      "code": "email_normalized",
+      "points": 0,
+      "message": "Normalized to kim@gmail.com (lowercased, domain alias replaced, plus tag removed, dots removed). Check duplicates against this form.",
+      "hint": null
+     }
+    ],
+    "email": {
+     "valid": true,
+     "problem": null,
+     "address": "K.i.m+promo@googlemail.com",
+     "normalized": "kim@gmail.com",
+     "local": "kim",
+     "domain": "gmail.com",
+     "provider": "gmail",
+     "changes": [
+      "lowercased",
+      "domain-alias",
+      "tag-removed",
+      "dots-removed"
+     ]
+    },
+    "disposable": {
+     "domain": "gmail.com",
+     "disposable": false,
+     "matchedDomain": null,
+     "source": null,
+     "allowedBy": null
+    },
+    "ip": null
+   }
+  },
+  {
+   "name": "invalid email",
+   "input": {
+    "email": "kim@@example.org",
+    "ip": "8.8.8.8"
+   },
+   "out": {
+    "score": 100,
+    "decision": "block",
+    "reasons": [
+     {
+      "code": "email_invalid",
+      "points": 100,
+      "message": "Email address is not valid: there is more than one @ sign.",
+      "hint": "Check the email address for typos."
+     }
+    ],
+    "email": {
+     "valid": false,
+     "problem": "multiple-at",
+     "address": "kim@@example.org",
+     "normalized": null,
+     "local": null,
+     "domain": null,
+     "provider": null,
+     "changes": []
+    },
+    "disposable": null,
+    "ip": {
+     "valid": true,
+     "ip": "8.8.8.8",
+     "version": 4,
+     "public": true,
+     "special": null,
+     "matches": [],
+     "categories": []
+    }
+   }
+  },
+  {
+   "name": "private address behind a proxy",
+   "input": {
+    "email": "a@example.org",
+    "ip": "10.0.3.7"
+   },
+   "out": {
+    "score": 0,
+    "decision": "allow",
+    "reasons": [
+     {
+      "code": "ip_not_public",
+      "points": 0,
+      "message": "10.0.3.7 is a private network address (10.0.0.0/8), not a public address. If real users show up with it, your server is reading the address of a proxy or load balancer.",
+      "hint": null
+     }
+    ],
+    "email": {
+     "valid": true,
+     "problem": null,
+     "address": "a@example.org",
+     "normalized": "a@example.org",
+     "local": "a",
+     "domain": "example.org",
+     "provider": null,
+     "changes": []
+    },
+    "disposable": {
+     "domain": "example.org",
+     "disposable": false,
+     "matchedDomain": null,
+     "source": null,
+     "allowedBy": null
+    },
+    "ip": {
+     "valid": true,
+     "ip": "10.0.3.7",
+     "version": 4,
+     "public": false,
+     "special": {
+      "cidr": "10.0.0.0/8",
+      "kind": "private",
+      "description": "a private network address"
+     },
+     "matches": [],
+     "categories": []
+    }
+   }
+  },
+  {
+   "name": "CGNAT",
+   "input": {
+    "ip": "100.80.1.2"
+   },
+   "out": {
+    "score": 0,
+    "decision": "allow",
+    "reasons": [
+     {
+      "code": "ip_not_public",
+      "points": 0,
+      "message": "100.80.1.2 is a carrier-grade NAT address (100.64.0.0/10), not a public address. If real users show up with it, your server is reading the address of a proxy or load balancer.",
+      "hint": null
+     }
+    ],
+    "email": null,
+    "disposable": null,
+    "ip": {
+     "valid": true,
+     "ip": "100.80.1.2",
+     "version": 4,
+     "public": false,
+     "special": {
+      "cidr": "100.64.0.0/10",
+      "kind": "cgnat",
+      "description": "a carrier-grade NAT address"
+     },
+     "matches": [],
+     "categories": []
+    }
+   }
+  },
+  {
+   "name": "invalid IP",
+   "input": {
+    "ip": "999.1.1.1"
+   },
+   "out": {
+    "score": 0,
+    "decision": "allow",
+    "reasons": [
+     {
+      "code": "ip_invalid",
+      "points": 0,
+      "message": "\"999.1.1.1\" is not a valid IP address.",
+      "hint": null
+     }
+    ],
+    "email": null,
+    "disposable": null,
+    "ip": {
+     "valid": false,
+     "ip": "999.1.1.1",
+     "version": null,
+     "public": false,
+     "special": null,
+     "matches": [],
+     "categories": []
+    }
+   }
+  },
+  {
+   "name": "velocity on IP and email",
+   "input": {
+    "email": "a@example.org",
+    "ip": "8.8.8.8",
+    "velocity": {
+     "limited": true,
+     "exceeded": [
+      "ip-hour",
+      "ip-day"
+     ],
+     "results": [
+      {
+       "rule": "ip-hour",
+       "key": "ip",
+       "value": "8.8.8.8",
+       "count": 6,
+       "limit": 5,
+       "windowSeconds": 3600,
+       "resetAt": 1767229200,
+       "exceeded": true
+      },
+      {
+       "rule": "ip-day",
+       "key": "ip",
+       "value": "8.8.8.8",
+       "count": 21,
+       "limit": 20,
+       "windowSeconds": 86400,
+       "resetAt": 1767312000,
+       "exceeded": true
+      },
+      {
+       "rule": "email-day",
+       "key": "email",
+       "value": "a@example.org",
+       "count": 2,
+       "limit": 5,
+       "windowSeconds": 86400,
+       "resetAt": 1767312000,
+       "exceeded": false
+      }
+     ]
+    }
+   },
+   "out": {
+    "score": 30,
+    "decision": "review",
+    "reasons": [
+     {
+      "code": "velocity_ip",
+      "points": 30,
+      "message": "Too many attempts for this IP address (ip-hour: 6 of 5 in 1 hour; ip-day: 21 of 20 in 24 hours).",
+      "hint": "Too many attempts. Please try again later."
+     }
+    ],
+    "email": {
+     "valid": true,
+     "problem": null,
+     "address": "a@example.org",
+     "normalized": "a@example.org",
+     "local": "a",
+     "domain": "example.org",
+     "provider": null,
+     "changes": []
+    },
+    "disposable": {
+     "domain": "example.org",
+     "disposable": false,
+     "matchedDomain": null,
+     "source": null,
+     "allowedBy": null
+    },
+    "ip": {
+     "valid": true,
+     "ip": "8.8.8.8",
+     "version": 4,
+     "public": true,
+     "special": null,
+     "matches": [],
+     "categories": []
+    }
+   }
+  },
+  {
+   "name": "velocity on network only",
+   "input": {
+    "ip": "81.2.69.142",
+    "velocity": {
+     "limited": true,
+     "exceeded": [
+      "network-day"
+     ],
+     "results": [
+      {
+       "rule": "network-day",
+       "key": "network",
+       "value": "81.2.69.0/24",
+       "count": 51,
+       "limit": 50,
+       "windowSeconds": 86400,
+       "resetAt": 1767312000,
+       "exceeded": true
+      }
+     ]
+    }
+   },
+   "out": {
+    "score": 30,
+    "decision": "review",
+    "reasons": [
+     {
+      "code": "velocity_network",
+      "points": 30,
+      "message": "Too many attempts for this network (network-day: 51 of 50 in 24 hours).",
+      "hint": "Too many attempts. Please try again later."
+     }
+    ],
+    "email": null,
+    "disposable": null,
+    "ip": {
+     "valid": true,
+     "ip": "81.2.69.142",
+     "version": 4,
+     "public": true,
+     "special": null,
+     "matches": [],
+     "categories": []
+    }
+   }
+  },
+  {
+   "name": "custom velocity key uses velocity_other",
+   "input": {
+    "velocity": {
+     "limited": true,
+     "exceeded": [
+      "phone-day",
+      "burst"
+     ],
+     "results": [
+      {
+       "rule": "phone-day",
+       "key": "phone",
+       "value": "+15551230000",
+       "count": 2,
+       "limit": 1,
+       "windowSeconds": 86400,
+       "resetAt": 1767312000,
+       "exceeded": true
+      },
+      {
+       "rule": "burst",
+       "key": "device",
+       "value": "abc",
+       "count": 4,
+       "limit": 3,
+       "windowSeconds": 90,
+       "resetAt": 1767225690,
+       "exceeded": true
+      }
+     ]
+    }
+   },
+   "out": {
+    "score": 60,
+    "decision": "review",
+    "reasons": [
+     {
+      "code": "velocity_phone",
+      "points": 30,
+      "message": "Too many attempts for this phone (phone-day: 2 of 1 in 24 hours).",
+      "hint": "Too many attempts. Please try again later."
+     },
+     {
+      "code": "velocity_device",
+      "points": 30,
+      "message": "Too many attempts for this device (burst: 4 of 3 in 90 seconds).",
+      "hint": "Too many attempts. Please try again later."
+     }
+    ],
+    "email": null,
+    "disposable": null,
+    "ip": null
+   }
+  },
+  {
+   "name": "custom key with its own weight",
+   "input": {
+    "velocity": {
+     "limited": true,
+     "exceeded": [
+      "phone-day"
+     ],
+     "results": [
+      {
+       "rule": "phone-day",
+       "key": "phone",
+       "value": "+15551230000",
+       "count": 2,
+       "limit": 1,
+       "windowSeconds": 86400,
+       "resetAt": 1767312000,
+       "exceeded": true
+      }
+     ]
+    }
+   },
+   "options": {
+    "weights": {
+     "velocity_phone": 80
+    }
+   },
+   "out": {
+    "score": 80,
+    "decision": "block",
+    "reasons": [
+     {
+      "code": "velocity_phone",
+      "points": 80,
+      "message": "Too many attempts for this phone (phone-day: 2 of 1 in 24 hours).",
+      "hint": "Too many attempts. Please try again later."
+     }
+    ],
+    "email": null,
+    "disposable": null,
+    "ip": null
+   }
+  },
+  {
+   "name": "weights override",
+   "input": {
+    "email": "x@mailinator.com",
+    "ip": "172.224.226.10"
+   },
+   "options": {
+    "weights": {
+     "email_disposable": 25,
+     "ip_privacy_relay": 5
+    }
+   },
+   "out": {
+    "score": 30,
+    "decision": "review",
+    "reasons": [
+     {
+      "code": "email_disposable",
+      "points": 25,
+      "message": "mailinator.com is on the disposable domain list (matched mailinator.com).",
+      "hint": "Please use a permanent email address."
+     },
+     {
+      "code": "ip_privacy_relay",
+      "points": 5,
+      "message": "172.224.226.10 is in a privacy relay range: iCloud Private Relay egress (privacy-relay, 172.224.226.0/26). Real users share these addresses; this alone says nothing about fraud.",
+      "hint": null
+     }
+    ],
+    "email": {
+     "valid": true,
+     "problem": null,
+     "address": "x@mailinator.com",
+     "normalized": "x@mailinator.com",
+     "local": "x",
+     "domain": "mailinator.com",
+     "provider": null,
+     "changes": []
+    },
+    "disposable": {
+     "domain": "mailinator.com",
+     "disposable": true,
+     "matchedDomain": "mailinator.com",
+     "source": "list",
+     "allowedBy": null
+    },
+    "ip": {
+     "valid": true,
+     "ip": "172.224.226.10",
+     "version": 4,
+     "public": true,
+     "special": null,
+     "matches": [
+      {
+       "cidr": "172.224.226.0/26",
+       "provider": "icloud-private-relay",
+       "providerName": "iCloud Private Relay egress",
+       "category": "privacy-relay"
+      }
+     ],
+     "categories": [
+      "privacy-relay"
+     ]
+    }
+   }
+  },
+  {
+   "name": "thresholds override",
+   "input": {
+    "ip": "104.16.0.1"
+   },
+   "options": {
+    "thresholds": {
+     "review": 10,
+     "block": 15
+    }
+   },
+   "out": {
+    "score": 15,
+    "decision": "block",
+    "reasons": [
+     {
+      "code": "ip_cdn",
+      "points": 15,
+      "message": "104.16.0.1 is in a CDN range: Cloudflare (cdn, 104.16.0.0/13). People rarely browse from CDN edge addresses, but some privacy and VPN products route them through CDN networks.",
+      "hint": "If you use a VPN or a privacy service, turn it off and try again."
+     }
+    ],
+    "email": null,
+    "disposable": null,
+    "ip": {
+     "valid": true,
+     "ip": "104.16.0.1",
+     "version": 4,
+     "public": true,
+     "special": null,
+     "matches": [
+      {
+       "cidr": "104.16.0.0/13",
+       "provider": "cloudflare",
+       "providerName": "Cloudflare",
+       "category": "cdn"
+      }
+     ],
+     "categories": [
+      "cdn"
+     ]
+    }
+   }
+  },
+  {
+   "name": "allow list wins",
+   "input": {
+    "email": "x@mailinator.com"
+   },
+   "options": {
+    "allowDomains": [
+     "mailinator.com"
+    ]
+   },
+   "out": {
+    "score": 0,
+    "decision": "allow",
+    "reasons": [],
+    "email": {
+     "valid": true,
+     "problem": null,
+     "address": "x@mailinator.com",
+     "normalized": "x@mailinator.com",
+     "local": "x",
+     "domain": "mailinator.com",
+     "provider": null,
+     "changes": []
+    },
+    "disposable": {
+     "domain": "mailinator.com",
+     "disposable": false,
+     "matchedDomain": null,
+     "source": null,
+     "allowedBy": "mailinator.com"
+    },
+    "ip": null
+   }
+  },
+  {
+   "name": "own block list",
+   "input": {
+    "email": "x@partner-temp.io"
+   },
+   "options": {
+    "blockDomains": [
+     "partner-temp.io"
+    ]
+   },
+   "out": {
+    "score": 70,
+    "decision": "block",
+    "reasons": [
+     {
+      "code": "email_disposable",
+      "points": 70,
+      "message": "partner-temp.io is on your block list (matched partner-temp.io).",
+      "hint": "Please use a permanent email address."
+     }
+    ],
+    "email": {
+     "valid": true,
+     "problem": null,
+     "address": "x@partner-temp.io",
+     "normalized": "x@partner-temp.io",
+     "local": "x",
+     "domain": "partner-temp.io",
+     "provider": null,
+     "changes": []
+    },
+    "disposable": {
+     "domain": "partner-temp.io",
+     "disposable": true,
+     "matchedDomain": "partner-temp.io",
+     "source": "blockDomains",
+     "allowedBy": null
+    },
+    "ip": null
+   }
+  },
+  {
+   "name": "plusTagDomains option",
+   "input": {
+    "email": "erin+x@outlook.com"
+   },
+   "options": {
+    "plusTagDomains": [
+     "outlook.com"
+    ]
+   },
+   "out": {
+    "score": 0,
+    "decision": "allow",
+    "reasons": [
+     {
+      "code": "email_normalized",
+      "points": 0,
+      "message": "Normalized to erin@outlook.com (plus tag removed). Check duplicates against this form.",
+      "hint": null
+     }
+    ],
+    "email": {
+     "valid": true,
+     "problem": null,
+     "address": "erin+x@outlook.com",
+     "normalized": "erin@outlook.com",
+     "local": "erin",
+     "domain": "outlook.com",
+     "provider": "outlook",
+     "changes": [
+      "tag-removed"
+     ]
+    },
+    "disposable": {
+     "domain": "outlook.com",
+     "disposable": false,
+     "matchedDomain": null,
+     "source": null,
+     "allowedBy": null
+    },
+    "ip": null
+   }
+  },
+  {
+   "name": "empty input",
+   "input": {},
+   "out": {
+    "score": 0,
+    "decision": "allow",
+    "reasons": [],
+    "email": null,
+    "disposable": null,
+    "ip": null
+   }
+  },
+  {
+   "name": "unknown weight code",
+   "input": {},
+   "options": {
+    "weights": {
+     "ip_vpn": 10
+    }
+   },
+   "throws": "invalid_option"
+  },
+  {
+   "name": "negative weight",
+   "input": {},
+   "options": {
+    "weights": {
+     "ip_tor": -5
+    }
+   },
+   "throws": "invalid_option"
+  },
+  {
+   "name": "fractional weight",
+   "input": {},
+   "options": {
+    "weights": {
+     "ip_tor": 2.5
+    }
+   },
+   "throws": "invalid_option"
+  },
+  {
+   "name": "block below review",
+   "input": {},
+   "options": {
+    "thresholds": {
+     "review": 50,
+     "block": 40
+    }
+   },
+   "throws": "invalid_option"
+  },
+  {
+   "name": "review zero",
+   "input": {},
+   "options": {
+    "thresholds": {
+     "review": 0
+    }
+   },
+   "throws": "invalid_option"
+  },
+  {
+   "name": "velocity not a result",
+   "input": {
+    "velocity": {
+     "limited": true
+    }
+   },
+   "throws": "invalid_argument"
+  },
+  {
+   "name": "ip not a string",
+   "input": {
+    "ip": 1234
+   },
+   "throws": "invalid_argument"
+  }
+ ]
+}
