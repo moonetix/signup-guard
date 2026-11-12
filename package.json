@@ -1,0 +1,42 @@
+{
+  "name": "signup-guard",
+  "version": "1.0.0",
+  "description": "Explainable sign-up risk checks: email normalization, disposable domains, datacenter and Tor IPs, velocity limits.",
+  "type": "module",
+  "main": "./src/index.js",
+  "types": "./src/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "default": "./src/index.js"
+    }
+  },
+  "files": [
+    "src/",
+    "data/"
+  ],
+  "scripts": {
+    "test": "node --test",
+    "test:php": "php php/tests/run.php",
+    "update-data": "node scripts/update-data.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": [
+    "signup",
+    "fraud-prevention",
+    "disposable-email",
+    "email-normalization",
+    "datacenter-ip",
+    "rate-limiting",
+    "abuse-prevention"
+  ],
+  "homepage": "https://moonetix.com/academy/traffic-quality/stop-fake-signups-rewards-site",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moonetix/signup-guard.git"
+  },
+  "license": "MIT",
+  "author": "Moonetix (https://moonetix.com)"
+}
