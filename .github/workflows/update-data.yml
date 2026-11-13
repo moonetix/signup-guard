@@ -52,3 +52,19 @@ jobs:
           git add data
           git commit -m "Update data ($(date -u +%Y-%m-%d))"
           git push
+
+  # GitHub disables scheduled workflows after 60 days without repository activity.
+  keepalive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      actions: write
+    steps:
+      - name: Re-enable this workflow
+        run: |
+          curl -fsS -X PUT \
+            -H "Authorization: Bearer $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            "$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/actions/workflows/update-data.yml/enable"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
