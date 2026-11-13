@@ -10,14 +10,14 @@
   "ipRanges": {
     "repository": "https://github.com/moonetix/datacenter-ip-ranges",
     "license": "MIT for the repository; feed terms per provider in ip/providers.json",
-    "commit": "35c2997f0d8d027786da98dbd3c438f784756a93",
-    "updatedAt": "2026-11-12T20:53:46Z",
-    "ipv4": 12067,
-    "ipv6": 15743,
+    "commit": "5e7a7d83d92c2b4a1bb02f04eb531eecf737df1d",
+    "updatedAt": "2026-11-13T09:24:14Z",
+    "ipv4": 12058,
+    "ipv6": 15744,
     "providers": {
       "aws": {
         "ipv4": 1755,
-        "ipv6": 2364
+        "ipv6": 2365
       },
       "google-cloud": {
         "ipv4": 467,
@@ -52,7 +52,7 @@
         "ipv6": 3
       },
       "github": {
-        "ipv4": 4022,
+        "ipv4": 4025,
         "ipv6": 2547
       },
       "icloud-private-relay": {
@@ -60,7 +60,7 @@
         "ipv6": 10582
       },
       "tor": {
-        "ipv4": 695,
+        "ipv4": 683,
         "ipv6": 0
       }
     }

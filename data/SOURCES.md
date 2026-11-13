@@ -20,13 +20,13 @@ Entries are registrable domains (or the third level under a public suffix). A li
 | --- | --- |
 | Source | [moonetix/datacenter-ip-ranges](https://github.com/moonetix/datacenter-ip-ranges), `data/providers/*.txt` |
 | License | MIT for the repository; feed terms per provider in ip/providers.json |
-| Commit | [`35c2997f0d8d`](https://github.com/moonetix/datacenter-ip-ranges/commit/35c2997f0d8d027786da98dbd3c438f784756a93) |
-| Updated | 2026-11-12T20:53:46Z |
-| Ranges | 12067 IPv4, 15743 IPv6 |
+| Commit | [`5e7a7d83d92c`](https://github.com/moonetix/datacenter-ip-ranges/commit/5e7a7d83d92c2b4a1bb02f04eb531eecf737df1d) |
+| Updated | 2026-11-13T09:24:14Z |
+| Ranges | 12058 IPv4, 15744 IPv6 |
 
 | Provider | File | Category | IPv4 | IPv6 | Terms |
 | --- | --- | --- | ---: | ---: | --- |
-| Amazon Web Services | `aws` | cloud | 1755 | 2364 | Published by AWS for allow lists and filtering. No license is stated. |
+| Amazon Web Services | `aws` | cloud | 1755 | 2365 | Published by AWS for allow lists and filtering. No license is stated. |
 | Google Cloud | `google-cloud` | cloud | 467 | 28 | Published by Google for allow lists and filtering. No license is stated. |
 | Google services (excluding Google Cloud) | `google-services` | services | 297 | 98 | Published by Google for allow lists and filtering. No license is stated. |
 | Oracle Cloud Infrastructure | `oracle-cloud` | cloud | 809 | 0 | Published by Oracle in its public documentation. No license is stated. |
@@ -35,6 +35,6 @@ Entries are registrable domains (or the third level under a public suffix). A li
 | Vultr | `vultr` | cloud | 121 | 21 | Self-published RFC 8805 geofeed of AS20473, referenced in the Vultr network records at ARIN. No license is stated. |
 | Cloudflare | `cloudflare` | cdn | 15 | 7 | Published by Cloudflare for allow lists. No license is stated. |
 | Fastly | `fastly` | cdn | 21 | 3 | Public, unauthenticated Fastly API endpoint. No license is stated. |
-| GitHub (incl. Actions runners) | `github` | services | 4022 | 2547 | GitHub REST API, covered by the GitHub Terms of Service (API Terms). |
+| GitHub (incl. Actions runners) | `github` | services | 4025 | 2547 | GitHub REST API, covered by the GitHub Terms of Service (API Terms). |
 | iCloud Private Relay egress | `icloud-private-relay` | privacy-relay | 3438 | 10582 | Published by Apple for geolocation and server operators. No license is stated. |
-| Tor exit nodes | `tor` | tor | 695 | 0 | Tor Project data, CC0 1.0 (no copyright). |
+| Tor exit nodes | `tor` | tor | 683 | 0 | Tor Project data, CC0 1.0 (no copyright). |
