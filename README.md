@@ -8,6 +8,7 @@
 [![Zero dependencies](https://img.shields.io/badge/dependencies-zero-brightgreen)](package.json)
 [![Node 20+](https://img.shields.io/badge/node-20%2B-339933)](#quick-start)
 [![PHP 8.1+](https://img.shields.io/badge/php-8.1%2B-777BB4)](#quick-start)
+[![Packagist](https://img.shields.io/packagist/v/moonetix/signup-guard?color=004ABB)](https://packagist.org/packages/moonetix/signup-guard)
 [![Guide: stop fake sign-ups](https://img.shields.io/badge/guide-stop%20fake%20sign--ups-004ABB)](https://moonetix.com/academy/traffic-quality/stop-fake-signups-rewards-site)
 
 Maintained by [Moonetix](https://moonetix.com).
@@ -55,12 +56,11 @@ In PHP the same functions are static methods of `Moonetix\SignupGuard\SignupGuar
 
 ## Install
 
-The package is not on npm or Packagist yet. Copy it in or install from Git:
+The PHP package is on [Packagist](https://packagist.org/packages/moonetix/signup-guard). The JavaScript package is not on npm yet, so install it from Git:
 
 ```bash
+composer require moonetix/signup-guard
 npm install github:moonetix/signup-guard
-composer config repositories.signup-guard vcs https://github.com/moonetix/signup-guard
-composer require moonetix/signup-guard:^1.0
 ```
 
 Without Composer, `require 'php/autoload.php';` from a copy of the repository.
