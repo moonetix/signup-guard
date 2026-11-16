@@ -25,6 +25,8 @@ jobs:
           node examples/quickstart.mjs
           node examples/building-blocks.mjs
           node examples/decision.mjs
+      - name: The demo page builds and its examples hold on the bundled data
+        run: npm run site
 
   php:
     runs-on: ubuntu-latest
