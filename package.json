@@ -18,7 +18,8 @@
   "scripts": {
     "test": "node --test",
     "test:php": "php php/tests/run.php",
-    "update-data": "node scripts/update-data.mjs"
+    "update-data": "node scripts/update-data.mjs",
+    "site": "node scripts/build-site.mjs"
   },
   "engines": {
     "node": ">=20"
