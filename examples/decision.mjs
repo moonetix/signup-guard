@@ -1,4 +1,4 @@
-import { assessSignup } from 'signup-guard';
+import { assessSignup } from '@moonetix/signup-guard';
 
 const result = assessSignup({ email: 'temp123@mailinator.com', ip: '81.2.69.142' });
 

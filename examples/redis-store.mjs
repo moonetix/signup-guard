@@ -1,6 +1,6 @@
 // Needs the node-redis client: npm install redis@6.3.0
 import { createClient } from 'redis';
-import { VelocityLimiter } from 'signup-guard';
+import { VelocityLimiter } from '@moonetix/signup-guard';
 
 // INCR and EXPIRE in one script, so a counter can never be left without an expiry.
 const HIT = `local c = redis.call('INCR', KEYS[1])

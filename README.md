@@ -8,6 +8,7 @@
 [![Zero dependencies](https://img.shields.io/badge/dependencies-zero-brightgreen)](package.json)
 [![Node 20+](https://img.shields.io/badge/node-20%2B-339933)](#quick-start)
 [![PHP 8.1+](https://img.shields.io/badge/php-8.1%2B-777BB4)](#quick-start)
+[![npm](https://img.shields.io/npm/v/%40moonetix%2Fsignup-guard?color=004ABB)](https://www.npmjs.com/package/@moonetix/signup-guard)
 [![Packagist](https://img.shields.io/packagist/v/moonetix/signup-guard?color=004ABB)](https://packagist.org/packages/moonetix/signup-guard)
 
 Maintained by [Moonetix](https://moonetix.com).
@@ -57,12 +58,14 @@ In PHP the same functions are static methods of `Moonetix\SignupGuard\SignupGuar
 
 ## Install
 
-The PHP package is on [Packagist](https://packagist.org/packages/moonetix/signup-guard). The JavaScript package is not on npm yet, so install it from Git:
+The JavaScript package is on [npm](https://www.npmjs.com/package/@moonetix/signup-guard) and the PHP package is on [Packagist](https://packagist.org/packages/moonetix/signup-guard):
 
 ```bash
+npm install @moonetix/signup-guard
 composer require moonetix/signup-guard
-npm install github:moonetix/signup-guard
 ```
+
+Both packages bundle the data as of their release. The `data/` folder on GitHub is refreshed every week; to follow it between releases, point `loadData(dir)` at a current copy of that folder or install from Git.
 
 Without Composer, `require 'php/autoload.php';` from a copy of the repository.
 
@@ -71,7 +74,7 @@ Without Composer, `require 'php/autoload.php';` from a copy of the repository.
 **JavaScript** ([examples/quickstart.mjs](examples/quickstart.mjs))
 
 ```js
-import { assessSignup, VelocityLimiter } from 'signup-guard';
+import { assessSignup, VelocityLimiter } from '@moonetix/signup-guard';
 
 const limiter = new VelocityLimiter(); // in-memory: fine for one process, see "Velocity stores" otherwise
 
@@ -125,7 +128,7 @@ The output is the same as above. Store `email.normalized` in a column with a uni
 Each reason carries a `hint` that is safe to show the person signing up. It never names a limit or a list, so an attacker learns nothing they can tune against.
 
 ```js
-import { assessSignup } from 'signup-guard';
+import { assessSignup } from '@moonetix/signup-guard';
 
 const result = assessSignup({ email: 'temp123@mailinator.com', ip: '81.2.69.142' });
 
@@ -153,7 +156,7 @@ console.log(result.reasons.map((r) => r.code));
 ([examples/building-blocks.mjs](examples/building-blocks.mjs), [examples/building-blocks.php](examples/building-blocks.php))
 
 ```js
-import { normalizeEmail, checkDisposable, lookupIp, ipNetwork } from 'signup-guard';
+import { normalizeEmail, checkDisposable, lookupIp, ipNetwork } from '@moonetix/signup-guard';
 
 normalizeEmail('J.Smith+news@GoogleMail.com').normalized;            // 'jsmith@gmail.com'
 normalizeEmail('shop@carol.fastmail.com').normalized;                // 'carol@fastmail.com'
@@ -275,7 +278,7 @@ Zoho Mail, GMX, AOL and Tuta are not in the table: we found no provider document
 
 ```js
 import { createClient } from 'redis';
-import { VelocityLimiter } from 'signup-guard';
+import { VelocityLimiter } from '@moonetix/signup-guard';
 
 // INCR and EXPIRE in one script, so a counter can never be left without an expiry.
 const HIT = `local c = redis.call('INCR', KEYS[1])

@@ -1,4 +1,4 @@
-import { normalizeEmail, checkDisposable, lookupIp, ipNetwork, dataInfo } from 'signup-guard';
+import { normalizeEmail, checkDisposable, lookupIp, ipNetwork, dataInfo } from '@moonetix/signup-guard';
 
 console.log(normalizeEmail('J.Smith+news@GoogleMail.com').normalized);
 console.log(normalizeEmail('shop@carol.fastmail.com').normalized);

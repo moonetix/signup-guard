@@ -1,6 +1,6 @@
 {
-  "name": "signup-guard",
-  "version": "1.0.0",
+  "name": "@moonetix/signup-guard",
+  "version": "1.1.0",
   "description": "Explainable sign-up risk checks: email normalization, disposable domains, datacenter and Tor IPs, velocity limits.",
   "type": "module",
   "main": "./src/index.js",
@@ -39,5 +39,6 @@
     "url": "git+https://github.com/moonetix/signup-guard.git"
   },
   "license": "MIT",
+  "publishConfig": { "access": "public" },
   "author": "Moonetix (https://moonetix.com)"
 }

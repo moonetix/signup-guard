@@ -143,7 +143,7 @@ test('the examples of the page are vectors and cover what the page promises', ()
 test('the snippets of the page are the ones in the README, and its table of reasons matches the library', () => {
   const readme = readFileSync(join(root, 'README.md'), 'utf8');
   const parts = readmeParts(readme);
-  assert.equal(parts.installJs, 'npm install github:moonetix/signup-guard');
+  assert.equal(parts.installJs, 'npm install @moonetix/signup-guard');
   assert.equal(parts.installPhp, 'composer require moonetix/signup-guard');
   assert.equal(parts.quickJs.trim(), readFileSync(join(root, 'examples', 'quickstart.mjs'), 'utf8').trim());
   assert.match(parts.quickPhp, /SignupGuard::assessSignup\(/);

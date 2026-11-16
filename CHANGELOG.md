@@ -2,7 +2,11 @@
 
 All notable changes to this project are documented here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html). Weekly data refreshes in `data/` are not listed here; `data/SOURCES.md` records each one.
 
-## [Unreleased]
+## [1.1.0] - 2026-11-16
+
+### Changed
+
+- The JavaScript package is on npm as [`@moonetix/signup-guard`](https://www.npmjs.com/package/@moonetix/signup-guard); the unscoped name belongs to another project. Imports change from `signup-guard` to `@moonetix/signup-guard`. Both packages bundle the data as of their release; the README says how to follow the weekly data between releases.
 
 ### Added
 
@@ -24,4 +28,5 @@ All notable changes to this project are documented here. The format follows [Kee
 - Shared test vectors in `test-vectors/vectors.json`, run by both test suites against fixture data.
 - TypeScript declarations in `src/index.d.ts`.
 
+[1.1.0]: https://github.com/moonetix/signup-guard/releases/tag/v1.1.0
 [1.0.0]: https://github.com/moonetix/signup-guard/releases/tag/v1.0.0

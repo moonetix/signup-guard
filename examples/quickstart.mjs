@@ -1,4 +1,4 @@
-import { assessSignup, VelocityLimiter } from 'signup-guard';
+import { assessSignup, VelocityLimiter } from '@moonetix/signup-guard';
 
 const limiter = new VelocityLimiter(); // in-memory: fine for one process, see "Velocity stores" otherwise
 
