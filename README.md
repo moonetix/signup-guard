@@ -9,9 +9,10 @@
 [![Node 20+](https://img.shields.io/badge/node-20%2B-339933)](#quick-start)
 [![PHP 8.1+](https://img.shields.io/badge/php-8.1%2B-777BB4)](#quick-start)
 [![Packagist](https://img.shields.io/packagist/v/moonetix/signup-guard?color=004ABB)](https://packagist.org/packages/moonetix/signup-guard)
-[![Guide: stop fake sign-ups](https://img.shields.io/badge/guide-stop%20fake%20sign--ups-004ABB)](https://moonetix.com/academy/traffic-quality/stop-fake-signups-rewards-site)
 
 Maintained by [Moonetix](https://moonetix.com).
+
+**[Open the live demo](https://moonetix.github.io/signup-guard/)**: type an email and an IP address and get allow, review or block with every reason, its points and its hint. The library runs in your browser on the bundled data, and nothing is sent anywhere.
 
 Fake accounts are cheap to make, and the cheap ones look alike: a throwaway inbox, a rented server, ten attempts in a minute. signup-guard checks for exactly those traits with public data you can read yourself, and returns a decision together with the reasons behind it. A support agent can read the reasons, a user can be told what to fix, and nothing is decided by a model you cannot inspect.
 
@@ -394,6 +395,8 @@ php php/tests/run.php     # shared vectors, PHP-specific checks, the same snapsh
 
 `test-vectors/vectors.json` holds 204 cases: email syntax and provider rules, IPv4 and IPv6 parsing and RFC 5952 formatting, CIDR edges, nested ranges, special-use ranges, disposable matching with allow and block lists, velocity windows and their boundaries, and full assessments with every message string. They run against a small fixture data set inside the file, never the snapshot, so a weekly data update cannot break them. CI runs both suites on Node 20 and 22 and PHP 8.1 and 8.4, runs every example, and runs the Redis examples against a Redis service.
 
+`npm run site` builds the [demo page](https://moonetix.github.io/signup-guard/) into `_site/`: the files of `src/` for the browser and the snapshot as two static files. The examples on the page are test vectors, and the build stops with an error when one of them no longer returns its decision, score and reasons on the current snapshot.
+
 ## Further reading
 
 - Moonetix Academy: [How to stop fake signups](https://moonetix.com/academy/traffic-quality/stop-fake-signups-rewards-site), [Stop multi-accounting and VPN abuse](https://moonetix.com/academy/traffic-quality/stop-multi-accounting-vpn-abuse), [What is IP reputation?](https://moonetix.com/academy/glossary/what-is-ip-reputation), [What is a residential proxy?](https://moonetix.com/academy/glossary/what-is-a-residential-proxy), [VPN or proxy detected](https://moonetix.com/academy/traffic-quality/vpn-proxy-detected-offerwall), [How to prevent referral fraud](https://moonetix.com/academy/traffic-quality/prevent-referral-fraud)
@@ -401,7 +404,7 @@ php php/tests/run.php     # shared vectors, PHP-specific checks, the same snapsh
 
 ## About Moonetix
 
-Moonetix is an affiliate network. Publishers add its offerwall to an app, game, website, bot or community, and users earn the publisher's own currency by completing offers. Publisher accounts: [moonetix.com/register](https://moonetix.com/register?from=github-signup-guard).
+Moonetix is an affiliate network. Publishers add its offerwall to an app, game, website, bot or community, and users earn the publisher's own currency by completing offers.
 
 Other open source from Moonetix: [reward-economy-kit](https://github.com/moonetix/reward-economy-kit), [country-tiers](https://github.com/moonetix/country-tiers), [datacenter-ip-ranges](https://github.com/moonetix/datacenter-ip-ranges), [offerwall-fraud-playbook](https://github.com/moonetix/offerwall-fraud-playbook), [referral-engine](https://github.com/moonetix/referral-engine), [gamification-kit](https://github.com/moonetix/gamification-kit), [awesome-offerwalls](https://github.com/moonetix/awesome-offerwalls), [offerwall-postback-handlers](https://github.com/moonetix/offerwall-postback-handlers).
 

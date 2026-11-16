@@ -2,6 +2,13 @@
 
 All notable changes to this project are documented here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html). Weekly data refreshes in `data/` are not listed here; `data/SOURCES.md` records each one.
 
+## [Unreleased]
+
+### Added
+
+- A [demo page](https://moonetix.github.io/signup-guard/) that runs the JavaScript library in the browser: type an email and an IP address and read the decision, the score and every reason with its points, message and hint. The page uses the files of `src/` and the snapshot in `data/`, packed into two static files; nothing typed there is sent anywhere.
+- `npm run site` builds the page. It checks that the packed snapshot rebuilds the bundled data set entry for entry, and fails when an example on the page, each one a test vector, no longer returns its decision, score and reasons on the current snapshot.
+
 ## [1.0.0] - 2026-11-11
 
 ### Added
