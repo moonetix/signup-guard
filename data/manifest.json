@@ -3,21 +3,21 @@
     "repository": "https://github.com/disposable-email-domains/disposable-email-domains",
     "file": "disposable_email_blocklist.conf",
     "license": "CC0-1.0",
-    "commit": "ba992a0b4c867db3ff39605696bb7de9fbb2e11f",
-    "updatedAt": "2026-11-11T20:09:47Z",
-    "domains": 10181
+    "commit": "3cb930c9fdbbc271d8dd84709bb6bc9364f629d8",
+    "updatedAt": "2026-11-16T06:47:20Z",
+    "domains": 10274
   },
   "ipRanges": {
     "repository": "https://github.com/moonetix/datacenter-ip-ranges",
     "license": "MIT for the repository; feed terms per provider in ip/providers.json",
-    "commit": "5e7a7d83d92c2b4a1bb02f04eb531eecf737df1d",
-    "updatedAt": "2026-11-13T09:24:14Z",
-    "ipv4": 12058,
-    "ipv6": 15744,
+    "commit": "5da0eaab3cdf7dba0e5b9a7eb7dd0352e221d1f4",
+    "updatedAt": "2026-11-16T06:47:20Z",
+    "ipv4": 12034,
+    "ipv6": 15740,
     "providers": {
       "aws": {
-        "ipv4": 1755,
-        "ipv6": 2365
+        "ipv4": 1752,
+        "ipv6": 2363
       },
       "google-cloud": {
         "ipv4": 467,
@@ -56,11 +56,11 @@
         "ipv6": 2547
       },
       "icloud-private-relay": {
-        "ipv4": 3438,
-        "ipv6": 10582
+        "ipv4": 3414,
+        "ipv6": 10580
       },
       "tor": {
-        "ipv4": 683,
+        "ipv4": 686,
         "ipv6": 0
       }
     }
