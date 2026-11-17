@@ -29,7 +29,7 @@ flowchart TD
     A["Sign-up attempt<br/>email, IP, your own fields"] --> V["VelocityLimiter.check()<br/>one counter per rule: IP, /24 or /64, email"]
     A --> S["assessSignup({ email, ip, velocity })"]
     V -->|velocity result| S
-    S --> E["Email<br/>syntax, provider rules,<br/>disposable list"]
+    S --> E["Email<br/>syntax, provider rules, disposable list,<br/>typos, role and free mail"]
     S --> I["IP<br/>special-use, cloud, services,<br/>CDN, Tor, privacy relay"]
     S --> VR["Velocity<br/>rules over their limit"]
     E --> R["reasons: code, points, message, hint<br/>score = sum of points"]
@@ -44,17 +44,20 @@ flowchart TD
 | --- | --- |
 | `assessSignup(input, options)` | Runs every check and returns `score`, `decision`, `reasons` and the raw results |
 | `normalizeEmail(email, options)` | Validates an address and returns the form to check duplicates against |
+| `suggestEmail(email, options)` | The corrected address when the domain looks like a typo of a common mailbox (`gmial.com`, `hotmail.con`), else `null` |
+| `isRoleAddress(email)` | Whether the address is a shared mailbox such as `admin@`, `info@` or `no-reply@` |
+| `isFreeMail(emailOrDomain, options)` | Whether the domain belongs to a free consumer mailbox service |
 | `checkDisposable(emailOrDomain, options)` | Disposable list lookup on the domain and every parent domain, with allow and block lists |
 | `lookupIp(ip, options)` | Public or special-use, plus every listed range that contains the address |
 | `normalizeIp(ip)`, `ipNetwork(ip)` | Canonical address text, and the /24 or /64 it belongs to |
 | `new VelocityLimiter({ store, rules })` | Fixed-window attempt counters per IP, network, normalized email or your own field |
 | `MemoryStore` | In-process counters for tests and single-process apps |
 | `createData`, `loadData`, `dataInfo` | Use your own lists, load a snapshot folder, read snapshot dates and counts |
-| `PROVIDERS`, `DEFAULT_WEIGHTS`, `DEFAULT_THRESHOLDS`, `DEFAULT_VELOCITY_RULES` | The defaults, as data |
+| `PROVIDERS`, `FREE_MAIL_PROVIDERS`, `MAILBOX_DOMAINS`, `ROLE_LOCAL_PARTS`, `DEFAULT_WEIGHTS`, `DEFAULT_THRESHOLDS`, `DEFAULT_VELOCITY_RULES` | The defaults, as data |
 | `parseIp`, `formatIp`, `parseCidr`, `specialRange`, `SPECIAL_RANGES`, `IP_CATEGORIES`, `EMAIL_PROBLEMS` | Lower-level IP parsing, the special-use table, and the `problem` codes `normalizeEmail` can return (`empty`, `non-ascii`, `missing-at`, `multiple-at`, `too-long`, `local-too-long`, `local-invalid`, `domain-literal`, `domain-invalid`) |
 | `SignupGuardError` | Thrown for bad arguments, options, rules or data. `code` is one of `invalid_argument`, `invalid_option`, `invalid_rule`, `data_error` |
 
-In PHP the same functions are static methods of `Moonetix\SignupGuard\SignupGuard`, and the limiter is `Moonetix\SignupGuard\VelocityLimiter`. Options use the same names in both languages. PHP throws `SignupGuardException` (an `InvalidArgumentException`) with the same codes in `$e->errorCode`, and adds `exportData`, `loadExported` and `cachedData` for PHP-FPM. The defaults are `SignupGuard::DEFAULT_WEIGHTS`, `SignupGuard::DEFAULT_THRESHOLDS` and `VelocityLimiter::DEFAULT_RULES`; the lower-level helpers live in `Ip` (`parse`, `format`, `parseCidr`, `special`, `SPECIAL`) and `Email` (`PROVIDERS`, `PROBLEMS`).
+In PHP the same functions are static methods of `Moonetix\SignupGuard\SignupGuard`, and the limiter is `Moonetix\SignupGuard\VelocityLimiter`. Options use the same names in both languages. PHP throws `SignupGuardException` (an `InvalidArgumentException`) with the same codes in `$e->errorCode`, and adds `exportData`, `loadExported` and `cachedData` for PHP-FPM. The defaults are `SignupGuard::DEFAULT_WEIGHTS`, `SignupGuard::DEFAULT_THRESHOLDS` and `VelocityLimiter::DEFAULT_RULES`; the lower-level helpers live in `Ip` (`parse`, `format`, `parseCidr`, `special`, `SPECIAL`) and `Email` (`PROVIDERS`, `PROBLEMS`, `FREE_MAIL_PROVIDERS`, `MAILBOX_DOMAINS`, `ROLE_LOCAL_PARTS`).
 
 ## Install
 
@@ -151,18 +154,26 @@ console.log(result.reasons.map((r) => r.code));
 | `review` | Prefer soft steps: a bot challenge such as Turnstile, email verification, a hold on rewards or credits until the account has aged, a manual look before the first payout. |
 | `block` | Refuse with the hints. Log the reasons, and give people a way to reach a human. |
 
+Whatever the decision, check `result.suggestion` first. When it is not `null`, the domain looks like a typo of a common mailbox, and the `email_typo` reason carries a hint such as `Did you mean jane@gmail.com?`. Ask the person before you create the account, and keep what they typed if they say it is right.
+
 ### Building blocks
 
 ([examples/building-blocks.mjs](examples/building-blocks.mjs), [examples/building-blocks.php](examples/building-blocks.php))
 
 ```js
-import { normalizeEmail, checkDisposable, lookupIp, ipNetwork } from '@moonetix/signup-guard';
+import { normalizeEmail, suggestEmail, isRoleAddress, isFreeMail, checkDisposable, lookupIp, ipNetwork } from '@moonetix/signup-guard';
 
 normalizeEmail('J.Smith+news@GoogleMail.com').normalized;            // 'jsmith@gmail.com'
 normalizeEmail('shop@carol.fastmail.com').normalized;                // 'carol@fastmail.com'
 normalizeEmail('erin+tag@outlook.com').normalized;                   // 'erin+tag@outlook.com'
 normalizeEmail('erin+tag@outlook.com', { plusTagDomains: ['outlook.com'] }).normalized; // 'erin@outlook.com'
 normalizeEmail('kim@@example.org').problem;                          // 'multiple-at'
+
+suggestEmail('jane@gmial.com');                                      // 'jane@gmail.com'
+suggestEmail('jane@hotmail.con');                                    // 'jane@hotmail.com'
+suggestEmail('jane@example.org');                                    // null
+isRoleAddress('No-Reply@example.org');                               // true
+isFreeMail('jane@yahoo.co.uk');                                      // true
 
 checkDisposable('x@inbox.mailinator.com');
 // { domain: 'inbox.mailinator.com', disposable: true, matchedDomain: 'mailinator.com', source: 'list', allowedBy: null }
@@ -177,6 +188,9 @@ ipNetwork('2001:db8:abcd:12:ff::1');                                 // '2001:db
 use Moonetix\SignupGuard\SignupGuard as Guard;
 
 Guard::normalizeEmail('J.Smith+news@GoogleMail.com')['normalized'];  // 'jsmith@gmail.com'
+Guard::suggestEmail('jane@gmial.com');                              // 'jane@gmail.com'
+Guard::isRoleAddress('No-Reply@example.org');                       // true
+Guard::isFreeMail('jane@yahoo.co.uk');                              // true
 Guard::checkDisposable('x@inbox.mailinator.com')['matchedDomain'];  // 'mailinator.com'
 Guard::lookupIp('::ffff:3.219.87.128')['categories'];               // ['cloud', 'services']
 Guard::ipNetwork('2001:db8:abcd:12:ff::1');                         // '2001:db8:abcd:12::/64'
@@ -192,6 +206,9 @@ The score is the sum of the points of the reasons. Nothing else goes into it. A 
 | --- | ---: | --- | --- |
 | `email_invalid` | 100 | The address fails the syntax check (one `@`, dot-atom local part up to 64 characters, host name with at least two labels, ASCII) | Check the email address for typos. |
 | `email_disposable` | 70 | The domain or a parent domain is on the disposable list or your `blockDomains` | Please use a permanent email address. |
+| `email_typo` | 0 | `suggestEmail` finds a likely typo of a common mailbox domain; `suggestion` holds the corrected address | Did you mean (the corrected address)? |
+| `email_role` | 10 | The part before `@` is a shared mailbox such as `admin`, `info`, `support` or `no-reply` | Please use an email address of your own, not a shared team address. |
+| `email_free_mail` | 30 | Only with `freeMail: true`: the domain belongs to a free consumer mailbox service, or is on your `freeMailDomains` | Please use your work email address. |
 | `email_normalized` | 0 | Normalization removed a tag or dots or replaced a domain alias | none |
 | `ip_datacenter` | 40 | The address is in a `cloud` or `services` range | Turn off your VPN or proxy, or switch to your home or mobile connection, and try again. |
 | `ip_tor` | 40 | The address is a Tor exit | Please sign up without Tor. |
@@ -206,6 +223,12 @@ The score is the sum of the points of the reasons. Nothing else goes into it. A 
 
 Several tripped rules on the same key add one reason, not one per rule. An address that is both a Tor exit and inside a cloud range gets both reasons.
 
+Why these points for the three mailbox reasons:
+
+- **`email_typo`, 0.** A typo is a slip by a real person, not a sign of fraud, so it adds nothing to the score. The reason is there to carry the hint. Some typo domains are registered and receive mail, and a few (`gmial.com`, `hotmial.com`) are on the disposable list, so a typo can come together with `email_disposable`; the typo hint then tells the person what to fix.
+- **`email_role`, 10.** A shared mailbox is a common way to open accounts with someone else's work address, and the confirmation email is read by whoever runs that inbox. Ten points never reach `review` alone, but they add up with a CDN hit or a velocity reason.
+- **`email_free_mail`, 30.** The check is off unless you pass `freeMail: true`, for products that want a work address. Then a consumer address alone lands in `review`, where you can ask for a work address or look at the account. Set the weight lower to keep it as a label, or 0 for information only.
+
 ### `assessSignup` options
 
 | Option | Default | Meaning |
@@ -216,9 +239,12 @@ Several tripped rules on the same key add one reason, not one per rule. An addre
 | `blockDomains` | `[]` | Extra disposable domains, with their subdomains. |
 | `plusTagDomains` | `[]` | Extra domains where `+tag` is removed during normalization. |
 | `lowercaseLocal` | `true` | Lowercase the part before `@` for every domain. |
+| `mailboxDomains` | `[]` | Extra domains for typo suggestions. They are suggested, and never changed themselves. |
+| `freeMail` | `false` | Add `email_free_mail` for addresses at free consumer mailbox services. |
+| `freeMailDomains` | `[]` | Extra domains treated as free mail when `freeMail` is on. Exact domains, no subdomains. |
 | `data` | bundled snapshot | A data set from `createData()`, `loadData()` or, in PHP, `cachedData()`. |
 
-Input: `{ email, ip, velocity }`, all optional. `velocity` is the result of `VelocityLimiter.check()`. The result also contains `email` (the `normalizeEmail` result), `disposable` and `ip` (the `lookupIp` result), so you can log one object per attempt.
+Input: `{ email, ip, velocity }`, all optional. `velocity` is the result of `VelocityLimiter.check()`. The result also contains `email` (the `normalizeEmail` result), `suggestion` (the `suggestEmail` result), `disposable` and `ip` (the `lookupIp` result), so you can log one object per attempt.
 
 ### Velocity rules
 
@@ -248,6 +274,49 @@ A rule is applied only where the provider documents it. Checked on 2026-11-11.
 | Yahoo Mail | yahoo.com, ymail.com, rocketmail.com | no | no | Disposable addresses are `basename-keyword`, and the base name is chosen apart from the account name, so cutting the keyword does not recover the account | [Yahoo](https://help.yahoo.com/kb/SLN28815.html) |
 
 Zoho Mail, GMX, AOL and Tuta are not in the table: we found no provider documentation either way, so their addresses are only lowercased. Google Workspace and every other custom domain get no provider rules; for Workspace, Google states that dots do change the address. The table is exported as `PROVIDERS`, and a test fails if the two ports drift apart.
+
+### Typos, role addresses and free mail
+
+**Typo suggestions.** `suggestEmail` works offline, on the domain only, and keeps the part before `@` as typed. It returns the first of these that applies, or `null`:
+
+1. The domain is on `MAILBOX_DOMAINS` or your `mailboxDomains`: nothing to fix.
+2. The top-level domain is a misspelling that is not a real one (`con`, `cmo`, `ocm`, `vom`, `xom`, `cpm`, `comm`, `coom`, `nte`, `ner`, `nett`, `ogr`, `orgg`): it is fixed on any domain, so `jane@acme.con` becomes `jane@acme.com`. A near miss of a listed domain is then fixed as in step 4, so `gmial.con` becomes `gmail.com`.
+3. The top-level domain is a real one that is easy to hit by mistake (`co`, `cm`, `om`, `ne`): it is fixed only when the result is on the list, so `icloud.co` becomes `icloud.com` and `acme.co` stays as it is.
+4. Otherwise the first label is compared with the listed domains that have the same rest (`gmial.com` only with `*.com` entries) and the same first letter. The distance is Damerau-Levenshtein (optimal string alignment): a missing, extra or swapped letter counts 1, a wrong letter counts 1 when the two keys sit next to each other on a QWERTY keyboard and 2 otherwise. Names of up to 4 letters are never matched, names of 5 to 7 letters allow 1, longer names 2. When two domains are equally near, there is no suggestion.
+5. A domain without a dot gets `.com` or its missing dot back only when that gives a listed domain: `jane@gmail` and `jane@gmailcom` become `jane@gmail.com`.
+
+These rules keep real domains that look like mailbox names alone: `wahoo.com`, `email.com`, `cloud.com` and `libera.it` get no suggestion. Add the domains your own users have, such as a company domain, to `mailboxDomains`: they are suggested for near misses and never changed.
+
+**Role addresses.** `isRoleAddress` and `email_role` look at the part before `@` after normalization, ignore case and a `+tag`, and remove dots, hyphens and underscores, so `No-Reply+alerts@example.org` matches `noreply`. `ROLE_LOCAL_PARTS` holds the mailbox names of [RFC 2142](https://www.rfc-editor.org/rfc/rfc2142) (`info`, `marketing`, `sales`, `support`, `abuse`, `noc`, `security`, `postmaster`, `hostmaster`, `usenet`, `news`, `webmaster`, `www`, `uucp`, `ftp`) and other common shared mailboxes: `accounting`, `accounts`, `admin`, `administrator`, `billing`, `careers`, `contact`, `customerservice`, `donotreply`, `enquiries`, `feedback`, `finance`, `hello`, `help`, `helpdesk`, `hr`, `inquiries`, `jobs`, `legal`, `mailerdaemon`, `media`, `newsletter`, `noreply`, `office`, `orders`, `press`, `privacy`, `root`, `service`, `team`.
+
+**Free mail.** `FREE_MAIL_PROVIDERS` lists consumer webmail services where anyone can open a personal address at no cost, without owning a domain. The check matches exact domains only; `mail.gmail.com` does not match.
+
+| Provider | Domains | Why it is consumer mail |
+| --- | --- | --- |
+| Gmail | gmail.com, googlemail.com | Free personal Google accounts |
+| Outlook.com | outlook.com, hotmail.com, live.com, msn.com, hotmail.co.uk, hotmail.fr, hotmail.de, hotmail.it, hotmail.es, live.co.uk, live.fr, outlook.fr, outlook.de | Microsoft's free personal mail; the country domains belong to personal accounts opened in those countries |
+| Yahoo Mail | yahoo.com, ymail.com, rocketmail.com, yahoo.co.uk, yahoo.fr, yahoo.de, yahoo.it, yahoo.es, yahoo.ca, yahoo.co.in, yahoo.com.br | Free personal mail; ymail.com and rocketmail.com are older Yahoo domains |
+| iCloud Mail | icloud.com, me.com, mac.com | Comes free with every Apple Account; me.com and mac.com are older addresses of the same service |
+| AOL Mail | aol.com | Free personal mail |
+| Proton Mail | proton.me, protonmail.com, protonmail.ch, pm.me | Free plan for personal accounts |
+| Tuta | tuta.com, tutanota.com, tutanota.de, tutamail.com, tuta.io | Free plan for personal accounts |
+| Zoho Mail | zohomail.com, zoho.com | Free personal accounts; business accounts use their own domain |
+| GMX | gmx.com, gmx.net, gmx.de, gmx.at, gmx.ch | Free personal mail |
+| mail.com | mail.com | Free personal mail |
+| WEB.DE | web.de | Free personal mail in Germany |
+| Yandex Mail | yandex.com, yandex.ru, ya.ru | Free personal mail of Yandex accounts |
+| Mail.ru | mail.ru, bk.ru, list.ru, inbox.ru | Free personal mail; the four domains are offered at sign-up |
+| QQ Mail | qq.com | Free mail of Tencent QQ accounts |
+| NetEase Mail | 163.com, 126.com | Free personal mail |
+| Naver Mail | naver.com | Free mail of Naver accounts |
+| Daum Mail | daum.net, hanmail.net | Free mail of Daum accounts; hanmail.net is the older domain |
+| Libero Mail | libero.it | Free personal mail in Italy |
+| La Poste Mail | laposte.net | Free personal mail of the French postal service |
+| Rediffmail | rediffmail.com | Free personal mail in India |
+| Seznam Email | seznam.cz | Free personal mail in the Czech Republic |
+| Poczta WP | wp.pl | Free personal mail of Wirtualna Polska |
+
+Left out on purpose: Fastmail, which has no free plan; mailboxes that come with an internet or phone subscription, such as comcast.net or orange.fr; and disposable services, which `email_disposable` covers. Add others with `freeMailDomains`. `MAILBOX_DOMAINS` holds every domain above, the `PROVIDERS` domains and the mailboxes of large internet providers. The three lists are exported, and the shared vectors fail if the two ports drift apart.
 
 ## The data
 
@@ -320,6 +389,18 @@ $limiter = new VelocityLimiter(store: new RedisVelocityStore($redis));
 
 A SQL table works too: a primary key on `key`, an upsert that increments `count`, and a periodic delete of expired rows.
 
+## Framework examples
+
+Each example names in its first lines what to install; none of it is a dependency of the package.
+
+| Example | What it shows |
+| --- | --- |
+| [examples/express-middleware.mjs](examples/express-middleware.mjs) | Express 5 middleware on a sign-up route: `block` answers 422 with the hints, a likely typo answers 409 with the suggestion, `review` creates the account on hold (202), `allow` creates it (201). `trust proxy` is set to the number of proxies in front of the app, so `req.ip` is the client address. |
+| [examples/nextjs-route.mjs](examples/nextjs-route.mjs) | A Next.js App Router route handler with the same mapping. It runs on the Node.js runtime, because the library reads its data from disk, and takes the client address from the `X-Forwarded-For` entry your own proxy added. |
+| [examples/laravel/](examples/laravel) | A validation rule for the email field of a `FormRequest`, velocity counters in the Laravel cache, and a [README](examples/laravel/README.md) with the request and controller code. |
+
+All three count the attempt before they judge it, and all three depend on reading the right client address: see [False positives and other pitfalls](#false-positives-and-other-pitfalls). An in-memory `VelocityLimiter` is per process; on serverless platforms or with several servers, give it a shared store.
+
 ## PHP-FPM: load the data once
 
 Parsing the snapshot takes about 190 ms and 32 MB in PHP. That is fine for a CLI job and wasteful on every web request. `cachedData()` writes the parsed tables as a PHP file that holds only literals, which OPcache keeps in shared memory, and rebuilds it when the snapshot changes ([examples/fpm-cache.php](examples/fpm-cache.php)):
@@ -359,6 +440,9 @@ Every signal here also fires for honest people sometimes. The defaults are set s
 - **Corporate and school networks.** Company VPN gateways and secure web proxies often run in cloud regions, and Google's service ranges cover some Google-operated proxies and fetchers. A datacenter match alone lands in `review`, not `block`, for that reason.
 - **Residential proxies are invisible here.** They route through home connections and are in no provider list. Range checks stop the cheapest automation; slow attacks spread over residential addresses need behavior signals and checks at payout. See [What is a residential proxy?](https://moonetix.com/academy/glossary/what-is-a-residential-proxy).
 - **The disposable list is not perfect.** The maintainers say they cannot guarantee every entry is still disposable. Keep `allowDomains` for the ones your users prove wrong, and `blockDomains` for new ones you find.
+- **Role addresses belong to people too.** Some people really do use `info@` of their one-person business, and old Gmail accounts named `admin` exist. That is why `email_role` has 10 points and no block.
+- **Typo suggestions are guesses.** `suggestEmail` only knows the domains on its list and your `mailboxDomains`. Offer the suggestion and let the person keep what they typed.
+- **Free mail is not a fraud signal.** Most honest people sign up with a consumer address. Turn on `freeMail` only when your product needs a work address.
 - **Normalize for duplicates, not for mail.** Send to the address the user typed. Gmail rules apply only to gmail.com and googlemail.com; a Workspace domain on Google's servers keeps its dots.
 - **Fixed windows allow bursts at the edge.** A client can use a full limit at 00:59 and another at 01:00. Pair a short window with a longer one, as the defaults do.
 - **Tell people what to fix.** Show the `hint`, not the score or the rule. Keep an appeal path to a person, and look at what appeals overturn: a rule that keeps losing appeals needs a lower weight.
@@ -396,7 +480,7 @@ npm test                  # node --test: shared vectors, API tests, checks on th
 php php/tests/run.php     # shared vectors, PHP-specific checks, the same snapshot checks
 ```
 
-`test-vectors/vectors.json` holds 204 cases: email syntax and provider rules, IPv4 and IPv6 parsing and RFC 5952 formatting, CIDR edges, nested ranges, special-use ranges, disposable matching with allow and block lists, velocity windows and their boundaries, and full assessments with every message string. They run against a small fixture data set inside the file, never the snapshot, so a weekly data update cannot break them. CI runs both suites on Node 20 and 22 and PHP 8.1 and 8.4, runs every example, and runs the Redis examples against a Redis service.
+`test-vectors/vectors.json` holds 294 cases: email syntax and provider rules, typo suggestions, role addresses and free mail with the exported lists, IPv4 and IPv6 parsing and RFC 5952 formatting, CIDR edges, nested ranges, special-use ranges, disposable matching with allow and block lists, velocity windows and their boundaries, and full assessments with every message string. They run against a small fixture data set inside the file, never the snapshot, so a weekly data update cannot break them. CI runs both suites on Node 20 and 22 and PHP 8.1 and 8.4, runs every example, and runs the Redis examples against a Redis service.
 
 `npm run site` builds the [demo page](https://moonetix.github.io/signup-guard/) into `_site/`: the files of `src/` for the browser and the snapshot as two static files. The examples on the page are test vectors, and the build stops with an error when one of them no longer returns its decision, score and reasons on the current snapshot.
 
