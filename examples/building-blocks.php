@@ -12,6 +12,11 @@ echo Guard::normalizeEmail('erin+tag@outlook.com')['normalized'], "\n";
 echo Guard::normalizeEmail('erin+tag@outlook.com', ['plusTagDomains' => ['outlook.com']])['normalized'], "\n";
 echo Guard::normalizeEmail('kim@@example.org')['problem'], "\n";
 
+echo Guard::suggestEmail('jane@gmial.com'), "\n";
+echo Guard::suggestEmail('jane@hotmail.con'), "\n";
+var_dump(Guard::suggestEmail('jane@example.org'));
+var_dump(Guard::isRoleAddress('No-Reply@example.org'), Guard::isFreeMail('jane@yahoo.co.uk'));
+
 echo json_encode(Guard::checkDisposable('x@inbox.mailinator.com')), "\n";
 var_dump(Guard::checkDisposable('x@mailinator.com', ['allowDomains' => ['mailinator.com']])['disposable']);
 

@@ -25,6 +25,8 @@ jobs:
           node examples/quickstart.mjs
           node examples/building-blocks.mjs
           node examples/decision.mjs
+          node --check examples/express-middleware.mjs
+          node --check examples/nextjs-route.mjs
       - name: The demo page builds and its examples hold on the bundled data
         run: npm run site
 
@@ -46,6 +48,7 @@ jobs:
           php examples/quickstart.php
           php examples/building-blocks.php
           php examples/fpm-cache.php
+          for f in examples/laravel/*.php; do php -l "$f"; done
 
   redis-examples:
     runs-on: ubuntu-latest

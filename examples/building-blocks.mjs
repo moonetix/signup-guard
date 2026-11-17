@@ -1,10 +1,15 @@
-import { normalizeEmail, checkDisposable, lookupIp, ipNetwork, dataInfo } from '@moonetix/signup-guard';
+import { normalizeEmail, suggestEmail, isRoleAddress, isFreeMail, checkDisposable, lookupIp, ipNetwork, dataInfo } from '@moonetix/signup-guard';
 
 console.log(normalizeEmail('J.Smith+news@GoogleMail.com').normalized);
 console.log(normalizeEmail('shop@carol.fastmail.com').normalized);
 console.log(normalizeEmail('erin+tag@outlook.com').normalized);
 console.log(normalizeEmail('erin+tag@outlook.com', { plusTagDomains: ['outlook.com'] }).normalized);
 console.log(normalizeEmail('kim@@example.org').problem);
+
+console.log(suggestEmail('jane@gmial.com'));
+console.log(suggestEmail('jane@hotmail.con'));
+console.log(suggestEmail('jane@example.org'));
+console.log(isRoleAddress('No-Reply@example.org'), isFreeMail('jane@yahoo.co.uk'));
 
 console.log(checkDisposable('x@inbox.mailinator.com'));
 console.log(checkDisposable('x@mailinator.com', { allowDomains: ['mailinator.com'] }).disposable);
