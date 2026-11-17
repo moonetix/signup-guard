@@ -1,0 +1,48 @@
+name: Wrong result
+description: An email or IP address got a reason, score or decision you think is wrong, or the JavaScript and PHP versions disagree.
+title: "Wrong result: "
+labels: ["wrong-result"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please replace real user data with an address that shows the same problem. Do not paste personal email addresses.
+  - type: dropdown
+    id: language
+    attributes:
+      label: Language
+      options:
+        - JavaScript
+        - PHP
+        - Both (they disagree)
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: signup-guard version
+      placeholder: 1.1.0
+    validations:
+      required: true
+  - type: textarea
+    id: input
+    attributes:
+      label: Input
+      description: The call you made, with the options you passed.
+      render: js
+      placeholder: "assessSignup({ email: 'someone@example.com', ip: '203.0.113.7' })"
+    validations:
+      required: true
+  - type: textarea
+    id: got
+    attributes:
+      label: What you got
+      description: The decision, score and reasons, as printed.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected, and why
+    validations:
+      required: true

@@ -1,0 +1,11 @@
+blank_issues_enabled: true
+contact_links:
+  - name: A disposable domain is missing or listed by mistake
+    url: https://github.com/disposable-email-domains/disposable-email-domains
+    about: signup-guard vendors this list every week. Changes to it belong upstream; you can also pass your own allow and block lists.
+  - name: Try an email and IP in the browser
+    url: https://moonetix.github.io/signup-guard/
+    about: The demo runs the library on the bundled data and shows every reason.
+  - name: Report a vulnerability in this repository
+    url: https://github.com/moonetix/signup-guard/security/advisories/new
+    about: Private report, not a public issue.

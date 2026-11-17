@@ -1,0 +1,42 @@
+name: Bug report
+description: An error, a crash or a type problem in the library, the examples or the demo.
+title: "Bug: "
+labels: ["bug"]
+body:
+  - type: dropdown
+    id: language
+    attributes:
+      label: Where
+      options:
+        - JavaScript
+        - TypeScript declarations
+        - PHP
+        - Demo page
+        - Examples or docs
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: signup-guard version and runtime
+      placeholder: 1.1.0 on Node 22, or 1.1.0 on PHP 8.3
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: The smallest code that shows the problem.
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: What happened
+      description: Error message and stack trace, if any.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
