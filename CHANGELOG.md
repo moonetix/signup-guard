@@ -2,6 +2,21 @@
 
 All notable changes to this project are documented here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html). Weekly data refreshes in `data/` are not listed here; `data/SOURCES.md` records each one.
 
+## [1.2.0] - 2026-11-17
+
+### Added
+
+- `suggestEmail(email, options)` (PHP `SignupGuard::suggestEmail`): an offline suggestion for likely typos of common mailbox domains and top-level domains, such as `gmial.com`, `hotmail.con` or `icloud.co`. It returns the corrected address or `null`, never changes a domain on its list, and leaves short names alone. The `mailboxDomains` option adds your own domains.
+- `isRoleAddress(email)` and `isFreeMail(emailOrDomain, options)`, with the lists behind them exported as `ROLE_LOCAL_PARTS`, `FREE_MAIL_PROVIDERS` and `MAILBOX_DOMAINS` (PHP: `Email::ROLE_LOCAL_PARTS`, `Email::FREE_MAIL_PROVIDERS`, `Email::MAILBOX_DOMAINS`).
+- Three reasons in `assessSignup`: `email_typo` (0 points, the hint holds the suggested address), `email_role` (10 points, shared mailboxes such as `admin@`, `info@` and `no-reply@`) and `email_free_mail` (30 points, only with the new `freeMail: true` option, for products that want a work address). `freeMailDomains` adds domains to the free mail check.
+- Framework examples: an Express middleware, a Next.js App Router route handler, and a Laravel validation rule with a cache-backed velocity store. They add no dependencies to the packages.
+- Test vectors for typo suggestions, role addresses, free mail and the three lists; the shared vectors now hold 294 cases. The demo page shows the typo suggestion, has a role address and a typo example, and can turn on `freeMail`.
+
+### Changed
+
+- The result of `assessSignup` has a `suggestion` field: the corrected address when the domain looks like a typo, otherwise `null`.
+- `DEFAULT_WEIGHTS` lists the three new codes. A role address now adds 10 points by default; set `weights: { email_role: 0 }` to keep the scores of 1.1.0.
+
 ## [1.1.0] - 2026-11-16
 
 ### Changed
@@ -28,5 +43,7 @@ All notable changes to this project are documented here. The format follows [Kee
 - Shared test vectors in `test-vectors/vectors.json`, run by both test suites against fixture data.
 - TypeScript declarations in `src/index.d.ts`.
 
+[Unreleased]: https://github.com/moonetix/signup-guard/compare/v1.1.0...HEAD
+[1.2.0]: https://github.com/moonetix/signup-guard/releases/tag/v1.2.0
 [1.1.0]: https://github.com/moonetix/signup-guard/releases/tag/v1.1.0
 [1.0.0]: https://github.com/moonetix/signup-guard/releases/tag/v1.0.0
