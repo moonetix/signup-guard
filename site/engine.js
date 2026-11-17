@@ -31,13 +31,14 @@ export async function load(read = fetchText) {
 
 // Scores one attempt the way the quick start in the README does: with `count`, the
 // attempt is recorded by the limiter first and the velocity result goes into the
-// assessment. An input may also bring its own velocity result.
-export async function score(input, { count = false, now = Math.floor(Date.now() / 1000) } = {}) {
+// assessment. An input may also bring its own velocity result. `freeMail` is the option of the
+// same name.
+export async function score(input, { count = false, now = Math.floor(Date.now() / 1000), freeMail = false } = {}) {
   if (data === null) throw new Error('The data snapshot is not loaded yet.');
   const attempt = { ...input };
   if (count) attempt.velocity = await limiter.check({ now, ip: attempt.ip, email: attempt.email });
   const started = performance.now();
-  const result = assessSignup(attempt, { data });
+  const result = assessSignup(attempt, { data, freeMail });
   return { result, velocity: attempt.velocity ?? null, ms: performance.now() - started };
 }
 

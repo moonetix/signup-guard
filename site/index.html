@@ -39,7 +39,7 @@
 <main class="wrap">
   <section class="intro" aria-labelledby="intro-h">
     <h1 id="intro-h">Score a sign-up in your browser</h1>
-    <p class="lede">signup-guard checks the email and the IP address of a sign-up for throwaway inboxes, datacenter, Tor and relay addresses and too many attempts, and answers allow, review or block with the reasons behind it. This page runs the JavaScript library on the data snapshot of the package. Nothing you type leaves the tab.</p>
+    <p class="lede">signup-guard checks the email and the IP address of a sign-up for throwaway inboxes, typos in common mailbox domains, shared role addresses, datacenter, Tor and relay addresses and too many attempts, and answers allow, review or block with the reasons behind it. This page runs the JavaScript library on the data snapshot of the package. Nothing you type leaves the tab.</p>
     <dl class="facts">
       <div><dt>Disposable domains</dt><dd>{{DOMAINS}}</dd></div>
       <div><dt>IP ranges</dt><dd>{{RANGES}} from {{PROVIDERS}} providers, {{V4}} IPv4 and {{V6}} IPv6</dd></div>
@@ -82,6 +82,13 @@
             <div>
               <label for="count">Count attempts with the velocity limiter</label>
               <p class="hint" id="count-note">Each press records one attempt, as a sign-up form would. Press the button a few times with the same input to trip a limit. The counters live in this tab.</p>
+            </div>
+          </div>
+          <div class="check-row">
+            <input id="free-mail" type="checkbox" aria-describedby="free-mail-note">
+            <div>
+              <label for="free-mail">Ask for a work address (<code>freeMail: true</code>)</label>
+              <p class="hint" id="free-mail-note">Adds <code>email_free_mail</code> for addresses at Gmail, Outlook.com, Yahoo Mail and other free consumer mailboxes. Off by default.</p>
             </div>
           </div>
           <div class="tool-actions">

@@ -159,6 +159,7 @@ function facts(result) {
   if (result.email) {
     rows.push(['Email', result.email.valid ? `valid, check duplicates against ${result.email.normalized}` : 'not valid']);
   }
+  if (result.suggestion) rows.push(['Suggestion', `did you mean ${result.suggestion}?`]);
   if (result.ip) {
     let text = 'not an IP address';
     if (result.ip.valid && !result.ip.public) text = `${result.ip.ip}, ${result.ip.special.description}`;
@@ -231,9 +232,10 @@ async function score(reveal = false) {
   if (email !== '') input.email = email;
   if (ip !== '') input.ip = ip;
   const counting = $('count').checked;
+  const freeMail = $('free-mail').checked;
   try {
     await begin();
-    const out = await engine('score', { input, options: { count: counting } });
+    const out = await engine('score', { input, options: { count: counting, freeMail } });
     if (mine !== turn) return;
     status.textContent = readyText;
     show(out);
@@ -283,6 +285,7 @@ form.addEventListener('input', (event) => {
     $('reset').hidden = !$('count').checked;
     return;
   }
+  if (event.target === $('free-mail')) return;
   preset = null;
   for (const b of buttons) b.setAttribute('aria-pressed', 'false');
   select.value = '';

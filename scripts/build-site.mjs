@@ -38,9 +38,11 @@ const EXAMPLES = [
   ['Cloudflare edge address', 'CDN edge address'],
   ['private address behind a proxy', 'Private address'],
   ['velocity on network only', 'Too many attempts from one network'],
+  ['typo in a mailbox domain', 'Typo in the email domain'],
+  ['role address', 'Shared role address'],
 ];
 const FIRST_EXAMPLE = 'disposable subdomain on a datacenter IP';
-const MUST_COVER = ['email_disposable', 'email_normalized', 'ip_datacenter', 'ip_tor', 'ip_privacy_relay'];
+const MUST_COVER = ['email_disposable', 'email_typo', 'email_role', 'email_normalized', 'ip_datacenter', 'ip_tor', 'ip_privacy_relay'];
 
 function check(condition, message) {
   if (!condition) throw new Error(message);
