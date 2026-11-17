@@ -61,7 +61,13 @@ function expected(array $c): array
 
 $runners = [
     'providers' => fn(array $c) => ['out' => Email::PROVIDERS],
+    'freeMailProviders' => fn(array $c) => ['out' => Email::FREE_MAIL_PROVIDERS],
+    'mailboxDomains' => fn(array $c) => ['out' => Email::MAILBOX_DOMAINS],
+    'roleLocalParts' => fn(array $c) => ['out' => Email::ROLE_LOCAL_PARTS],
     'normalizeEmail' => fn(array $c) => outcome(fn() => G::normalizeEmail($c['in'], $c['options'] ?? [])),
+    'suggestEmail' => fn(array $c) => outcome(fn() => G::suggestEmail($c['in'], $c['options'] ?? [])),
+    'isRoleAddress' => fn(array $c) => outcome(fn() => G::isRoleAddress($c['in'])),
+    'isFreeMail' => fn(array $c) => outcome(fn() => G::isFreeMail($c['in'], $c['options'] ?? [])),
     'normalizeIp' => fn(array $c) => outcome(fn() => G::normalizeIp($c['in'])),
     'ipNetwork' => fn(array $c) => outcome(fn() => G::ipNetwork($c['in'])),
     'parseCidr' => fn(array $c) => outcome(fn() => \Moonetix\SignupGuard\Ip::parseCidr($c['in'])['cidr']),

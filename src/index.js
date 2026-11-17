@@ -4,7 +4,17 @@
 import { defaultData } from './data.js';
 
 export { SignupGuardError } from './errors.js';
-export { PROVIDERS, EMAIL_PROBLEMS, normalizeEmail } from './email.js';
+export {
+  PROVIDERS,
+  EMAIL_PROBLEMS,
+  FREE_MAIL_PROVIDERS,
+  MAILBOX_DOMAINS,
+  ROLE_LOCAL_PARTS,
+  normalizeEmail,
+  suggestEmail,
+  isRoleAddress,
+  isFreeMail,
+} from './email.js';
 export { parseIp, formatIp, normalizeIp, parseCidr, ipNetwork, specialRange, SPECIAL_RANGES } from './ip.js';
 export { IP_CATEGORIES, GuardData, createData, loadData, defaultData, lookupIp, checkDisposable } from './data.js';
 export { DEFAULT_VELOCITY_RULES, MemoryStore, VelocityLimiter } from './velocity.js';

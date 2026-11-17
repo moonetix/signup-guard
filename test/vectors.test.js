@@ -37,7 +37,13 @@ async function velocityScenario(s) {
 
 const runners = {
   providers: () => ({ out: guard.PROVIDERS.map((p) => ({ ...p, domains: [...p.domains], sources: [...p.sources] })) }),
+  freeMailProviders: () => ({ out: guard.FREE_MAIL_PROVIDERS.map((p) => ({ ...p, domains: [...p.domains] })) }),
+  mailboxDomains: () => ({ out: [...guard.MAILBOX_DOMAINS] }),
+  roleLocalParts: () => ({ out: [...guard.ROLE_LOCAL_PARTS] }),
   normalizeEmail: (c) => outcome(() => guard.normalizeEmail(c.in, c.options)),
+  suggestEmail: (c) => outcome(() => guard.suggestEmail(c.in, c.options)),
+  isRoleAddress: (c) => outcome(() => guard.isRoleAddress(c.in)),
+  isFreeMail: (c) => outcome(() => guard.isFreeMail(c.in, c.options)),
   normalizeIp: (c) => outcome(() => guard.normalizeIp(c.in)),
   ipNetwork: (c) => outcome(() => guard.ipNetwork(c.in)),
   parseCidr: (c) => outcome(() => guard.parseCidr(c.in).cidr),

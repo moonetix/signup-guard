@@ -127,7 +127,7 @@ test('browser build: counting attempts gives what the quick start of the README 
 test('the examples of the page are vectors and cover what the page promises', () => {
   const examples = pickExamples(vectors);
   const codes = new Set(examples.flatMap((e) => e.reasons.map((r) => r.code)));
-  for (const code of ['email_disposable', 'email_normalized', 'ip_datacenter', 'ip_tor', 'ip_privacy_relay']) assert.ok(codes.has(code), code);
+  for (const code of ['email_disposable', 'email_typo', 'email_role', 'email_normalized', 'ip_datacenter', 'ip_tor', 'ip_privacy_relay']) assert.ok(codes.has(code), code);
   assert.ok(examples.some((e) => e.decision === 'allow' && e.reasons.length === 0), 'a clean sign-up');
   for (const decision of ['allow', 'review', 'block']) assert.ok(examples.some((e) => e.decision === decision), decision);
   const fixture = guard.createData(vectors.fixture);

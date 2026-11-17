@@ -73,6 +73,38 @@ export type NormalizedEmail =
 
 export function normalizeEmail(email: string, options?: NormalizeEmailOptions): NormalizedEmail;
 
+export interface FreeMailProvider {
+  readonly id: string;
+  readonly name: string;
+  readonly domains: readonly string[];
+}
+
+/** Free consumer mailbox services, checked by isFreeMail() and the email_free_mail reason. */
+export const FREE_MAIL_PROVIDERS: readonly FreeMailProvider[];
+/** The domains suggestEmail() suggests. A typed domain on this list is never changed. */
+export const MAILBOX_DOMAINS: readonly string[];
+/** Local parts of shared mailboxes, lowercase, with dots, hyphens and underscores removed. */
+export const ROLE_LOCAL_PARTS: readonly string[];
+
+export interface SuggestEmailOptions {
+  /** Extra domains to suggest, for example ['posteo.de']. They are never changed themselves. */
+  mailboxDomains?: string[];
+}
+
+/** The corrected address for a likely typo in a common mailbox domain, or null. */
+export function suggestEmail(email: string, options?: SuggestEmailOptions): string | null;
+
+/** True when the address is a shared mailbox such as admin@, info@ or no-reply@. Invalid addresses return false. */
+export function isRoleAddress(email: string): boolean;
+
+export interface FreeMailOptions {
+  /** Extra domains to treat as free mail, matched exactly. */
+  freeMailDomains?: string[];
+}
+
+/** True when the domain is in FREE_MAIL_PROVIDERS or freeMailDomains. Subdomains do not match. */
+export function isFreeMail(emailOrDomain: string, options?: FreeMailOptions): boolean;
+
 export interface ParsedIp {
   version: 4 | 6;
   value: bigint;
@@ -223,6 +255,9 @@ export class VelocityLimiter {
 export type ReasonCode =
   | 'email_invalid'
   | 'email_disposable'
+  | 'email_typo'
+  | 'email_role'
+  | 'email_free_mail'
   | 'email_normalized'
   | 'ip_invalid'
   | 'ip_not_public'
@@ -247,7 +282,9 @@ export interface Reason {
   hint: string | null;
 }
 
-export interface AssessOptions extends NormalizeEmailOptions, DisposableOptions {
+export interface AssessOptions extends NormalizeEmailOptions, DisposableOptions, SuggestEmailOptions, FreeMailOptions {
+  /** Add email_free_mail for addresses at free consumer mailbox services. Default false. */
+  freeMail?: boolean;
   /** Points per reason code. Unlisted custom velocity keys use velocity_other. */
   weights?: Partial<Record<ReasonCode | 'velocity_other', number>>;
   thresholds?: { review?: number; block?: number };
@@ -258,6 +295,8 @@ export interface Assessment {
   decision: 'allow' | 'review' | 'block';
   reasons: Reason[];
   email: NormalizedEmail | null;
+  /** The corrected address when the domain looks like a typo of a common mailbox, else null. */
+  suggestion: string | null;
   disposable: DisposableResult | null;
   ip: IpLookup | null;
 }

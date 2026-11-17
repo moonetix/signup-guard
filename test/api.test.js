@@ -28,6 +28,9 @@ test('SignupGuardError carries a stable code', () => {
     (err) => err instanceof guard.SignupGuardError && err instanceof Error && err.code === 'invalid_cidr',
   );
   assert.throws(() => guard.normalizeEmail(42), (err) => err.code === 'invalid_argument');
+  assert.throws(() => guard.suggestEmail(42), (err) => err.code === 'invalid_argument');
+  assert.throws(() => guard.isRoleAddress(42), (err) => err.code === 'invalid_argument');
+  assert.throws(() => guard.isFreeMail(42), (err) => err.code === 'invalid_argument');
   assert.throws(() => guard.assessSignup({}, { data: {} }), (err) => err.code === 'invalid_option');
 });
 
@@ -78,4 +81,30 @@ test('defaults are frozen', () => {
   assert.ok(Object.isFrozen(guard.DEFAULT_WEIGHTS));
   assert.ok(Object.isFrozen(guard.DEFAULT_VELOCITY_RULES));
   assert.ok(Object.isFrozen(guard.PROVIDERS) && Object.isFrozen(guard.PROVIDERS[0].domains));
+  assert.ok(Object.isFrozen(guard.FREE_MAIL_PROVIDERS) && Object.isFrozen(guard.FREE_MAIL_PROVIDERS[0]) && Object.isFrozen(guard.FREE_MAIL_PROVIDERS[0].domains));
+  assert.ok(Object.isFrozen(guard.MAILBOX_DOMAINS) && Object.isFrozen(guard.ROLE_LOCAL_PARTS));
+});
+
+test('mailbox lists are consistent', () => {
+  const mailbox = new Set(guard.MAILBOX_DOMAINS);
+  assert.equal(mailbox.size, guard.MAILBOX_DOMAINS.length, 'no duplicates in MAILBOX_DOMAINS');
+  for (const p of [...guard.PROVIDERS, ...guard.FREE_MAIL_PROVIDERS]) {
+    for (const d of p.domains) assert.ok(mailbox.has(d), `${d} of ${p.id} is not in MAILBOX_DOMAINS, so suggestEmail could change it`);
+  }
+  const free = guard.FREE_MAIL_PROVIDERS.flatMap((p) => p.domains);
+  assert.equal(new Set(free).size, free.length, 'no domain under two free mail providers');
+  assert.equal(new Set(guard.FREE_MAIL_PROVIDERS.map((p) => p.id)).size, guard.FREE_MAIL_PROVIDERS.length);
+  for (const d of guard.MAILBOX_DOMAINS) {
+    assert.equal(guard.suggestEmail(`a@${d}`), null, d);
+    assert.equal(guard.normalizeEmail(`a@${d}`).valid, true, d);
+  }
+  assert.deepEqual([...guard.ROLE_LOCAL_PARTS], [...new Set(guard.ROLE_LOCAL_PARTS)].sort());
+  for (const r of guard.ROLE_LOCAL_PARTS) assert.match(r, /^[a-z0-9]+$/, 'stored without separators');
+});
+
+test('the result of assessSignup carries the typo suggestion', () => {
+  const data = guard.createData({ disposableDomains: [], ipRanges: [] });
+  assert.equal(guard.assessSignup({ email: 'kim@hotmial.com' }, { data }).suggestion, 'kim@hotmail.com');
+  assert.equal(guard.assessSignup({ email: 'kim@hotmail.com' }, { data }).suggestion, null);
+  assert.equal(guard.assessSignup({}, { data }).suggestion, null);
 });

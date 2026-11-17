@@ -216,6 +216,351 @@
    ]
   }
  ],
+ "freeMailProviders": [
+  {
+   "out": [
+    {
+     "id": "gmail",
+     "name": "Gmail",
+     "domains": [
+      "gmail.com",
+      "googlemail.com"
+     ]
+    },
+    {
+     "id": "outlook",
+     "name": "Outlook.com",
+     "domains": [
+      "outlook.com",
+      "hotmail.com",
+      "live.com",
+      "msn.com",
+      "hotmail.co.uk",
+      "hotmail.fr",
+      "hotmail.de",
+      "hotmail.it",
+      "hotmail.es",
+      "live.co.uk",
+      "live.fr",
+      "outlook.fr",
+      "outlook.de"
+     ]
+    },
+    {
+     "id": "yahoo",
+     "name": "Yahoo Mail",
+     "domains": [
+      "yahoo.com",
+      "ymail.com",
+      "rocketmail.com",
+      "yahoo.co.uk",
+      "yahoo.fr",
+      "yahoo.de",
+      "yahoo.it",
+      "yahoo.es",
+      "yahoo.ca",
+      "yahoo.co.in",
+      "yahoo.com.br"
+     ]
+    },
+    {
+     "id": "icloud",
+     "name": "iCloud Mail",
+     "domains": [
+      "icloud.com",
+      "me.com",
+      "mac.com"
+     ]
+    },
+    {
+     "id": "aol",
+     "name": "AOL Mail",
+     "domains": [
+      "aol.com"
+     ]
+    },
+    {
+     "id": "proton",
+     "name": "Proton Mail",
+     "domains": [
+      "proton.me",
+      "protonmail.com",
+      "protonmail.ch",
+      "pm.me"
+     ]
+    },
+    {
+     "id": "tuta",
+     "name": "Tuta",
+     "domains": [
+      "tuta.com",
+      "tutanota.com",
+      "tutanota.de",
+      "tutamail.com",
+      "tuta.io"
+     ]
+    },
+    {
+     "id": "zoho",
+     "name": "Zoho Mail",
+     "domains": [
+      "zohomail.com",
+      "zoho.com"
+     ]
+    },
+    {
+     "id": "gmx",
+     "name": "GMX",
+     "domains": [
+      "gmx.com",
+      "gmx.net",
+      "gmx.de",
+      "gmx.at",
+      "gmx.ch"
+     ]
+    },
+    {
+     "id": "mailcom",
+     "name": "mail.com",
+     "domains": [
+      "mail.com"
+     ]
+    },
+    {
+     "id": "webde",
+     "name": "WEB.DE",
+     "domains": [
+      "web.de"
+     ]
+    },
+    {
+     "id": "yandex",
+     "name": "Yandex Mail",
+     "domains": [
+      "yandex.com",
+      "yandex.ru",
+      "ya.ru"
+     ]
+    },
+    {
+     "id": "mailru",
+     "name": "Mail.ru",
+     "domains": [
+      "mail.ru",
+      "bk.ru",
+      "list.ru",
+      "inbox.ru"
+     ]
+    },
+    {
+     "id": "qq",
+     "name": "QQ Mail",
+     "domains": [
+      "qq.com"
+     ]
+    },
+    {
+     "id": "netease",
+     "name": "NetEase Mail",
+     "domains": [
+      "163.com",
+      "126.com"
+     ]
+    },
+    {
+     "id": "naver",
+     "name": "Naver Mail",
+     "domains": [
+      "naver.com"
+     ]
+    },
+    {
+     "id": "daum",
+     "name": "Daum Mail",
+     "domains": [
+      "daum.net",
+      "hanmail.net"
+     ]
+    },
+    {
+     "id": "libero",
+     "name": "Libero Mail",
+     "domains": [
+      "libero.it"
+     ]
+    },
+    {
+     "id": "laposte",
+     "name": "La Poste Mail",
+     "domains": [
+      "laposte.net"
+     ]
+    },
+    {
+     "id": "rediff",
+     "name": "Rediffmail",
+     "domains": [
+      "rediffmail.com"
+     ]
+    },
+    {
+     "id": "seznam",
+     "name": "Seznam Email",
+     "domains": [
+      "seznam.cz"
+     ]
+    },
+    {
+     "id": "wp",
+     "name": "Poczta WP",
+     "domains": [
+      "wp.pl"
+     ]
+    }
+   ]
+  }
+ ],
+ "mailboxDomains": [
+  {
+   "out": [
+    "gmail.com",
+    "googlemail.com",
+    "outlook.com",
+    "hotmail.com",
+    "live.com",
+    "msn.com",
+    "hotmail.co.uk",
+    "hotmail.fr",
+    "hotmail.de",
+    "hotmail.it",
+    "hotmail.es",
+    "live.co.uk",
+    "live.fr",
+    "outlook.fr",
+    "outlook.de",
+    "yahoo.com",
+    "ymail.com",
+    "rocketmail.com",
+    "yahoo.co.uk",
+    "yahoo.fr",
+    "yahoo.de",
+    "yahoo.it",
+    "yahoo.es",
+    "yahoo.ca",
+    "yahoo.co.in",
+    "yahoo.com.br",
+    "icloud.com",
+    "me.com",
+    "mac.com",
+    "aol.com",
+    "proton.me",
+    "protonmail.com",
+    "protonmail.ch",
+    "pm.me",
+    "fastmail.com",
+    "fastmail.fm",
+    "tuta.com",
+    "tutanota.com",
+    "tutanota.de",
+    "tutamail.com",
+    "tuta.io",
+    "zohomail.com",
+    "zoho.com",
+    "gmx.com",
+    "gmx.net",
+    "gmx.de",
+    "gmx.at",
+    "gmx.ch",
+    "mail.com",
+    "web.de",
+    "yandex.com",
+    "yandex.ru",
+    "ya.ru",
+    "mail.ru",
+    "bk.ru",
+    "list.ru",
+    "inbox.ru",
+    "qq.com",
+    "163.com",
+    "126.com",
+    "naver.com",
+    "daum.net",
+    "hanmail.net",
+    "libero.it",
+    "laposte.net",
+    "rediffmail.com",
+    "seznam.cz",
+    "wp.pl",
+    "comcast.net",
+    "att.net",
+    "verizon.net",
+    "sbcglobal.net",
+    "bellsouth.net",
+    "cox.net",
+    "btinternet.com",
+    "virginmedia.com",
+    "sky.com",
+    "t-online.de",
+    "orange.fr",
+    "wanadoo.fr",
+    "free.fr",
+    "sfr.fr",
+    "bigpond.com",
+    "shaw.ca"
+   ]
+  }
+ ],
+ "roleLocalParts": [
+  {
+   "out": [
+    "abuse",
+    "accounting",
+    "accounts",
+    "admin",
+    "administrator",
+    "billing",
+    "careers",
+    "contact",
+    "customerservice",
+    "donotreply",
+    "enquiries",
+    "feedback",
+    "finance",
+    "ftp",
+    "hello",
+    "help",
+    "helpdesk",
+    "hostmaster",
+    "hr",
+    "info",
+    "inquiries",
+    "jobs",
+    "legal",
+    "mailerdaemon",
+    "marketing",
+    "media",
+    "news",
+    "newsletter",
+    "noc",
+    "noreply",
+    "office",
+    "orders",
+    "postmaster",
+    "press",
+    "privacy",
+    "root",
+    "sales",
+    "security",
+    "service",
+    "support",
+    "team",
+    "usenet",
+    "uucp",
+    "webmaster",
+    "www"
+   ]
+  }
+ ],
  "normalizeEmail": [
   {
    "in": "john.smith@gmail.com",
@@ -972,6 +1317,331 @@
    "in": "a@b.com",
    "options": {
     "plusTagDomains": "outlook.com"
+   },
+   "throws": "invalid_option"
+  }
+ ],
+ "suggestEmail": [
+  {
+   "in": "jane@gmial.com",
+   "out": "jane@gmail.com"
+  },
+  {
+   "in": "jane@gnail.com",
+   "out": "jane@gmail.com"
+  },
+  {
+   "in": "jane@gmail.con",
+   "out": "jane@gmail.com"
+  },
+  {
+   "in": "Jane.Doe@hotmial.com",
+   "out": "Jane.Doe@hotmail.com"
+  },
+  {
+   "in": "sam@yahooo.com",
+   "out": "sam@yahoo.com"
+  },
+  {
+   "in": "sam@yshoo.com",
+   "out": "sam@yahoo.com"
+  },
+  {
+   "in": "sam@outlok.com",
+   "out": "sam@outlook.com"
+  },
+  {
+   "in": "sam@icloud.co",
+   "out": "sam@icloud.com"
+  },
+  {
+   "in": "sam@gmail.cm",
+   "out": "sam@gmail.com"
+  },
+  {
+   "in": "sam@att.ne",
+   "out": "sam@att.net"
+  },
+  {
+   "in": "sam@gmial.con",
+   "out": "sam@gmail.com"
+  },
+  {
+   "in": "sam@gogglemail.com",
+   "out": "sam@googlemail.com"
+  },
+  {
+   "in": "sam@protonmial.com",
+   "out": "sam@protonmail.com"
+  },
+  {
+   "in": "sam@comcats.net",
+   "out": "sam@comcast.net"
+  },
+  {
+   "in": "sam@acme.con",
+   "out": "sam@acme.com"
+  },
+  {
+   "in": "sam@acme.ogr",
+   "out": "sam@acme.org"
+  },
+  {
+   "in": "  sam@GMIAL.COM.  ",
+   "out": "sam@gmail.com"
+  },
+  {
+   "in": "sam@gmail",
+   "out": "sam@gmail.com"
+  },
+  {
+   "in": "sam@gmailcom",
+   "out": "sam@gmail.com"
+  },
+  {
+   "in": "sam@gmail.com",
+   "out": null
+  },
+  {
+   "in": "sam@yahoo.fr",
+   "out": null
+  },
+  {
+   "in": "sam@yahoo.co.uk",
+   "out": null
+  },
+  {
+   "in": "sam@mail.com",
+   "out": null
+  },
+  {
+   "in": "sam@googlemail.com",
+   "out": null
+  },
+  {
+   "in": "sam@wahoo.com",
+   "out": null
+  },
+  {
+   "in": "sam@email.com",
+   "out": null
+  },
+  {
+   "in": "sam@libera.it",
+   "out": null
+  },
+  {
+   "in": "sam@photon.me",
+   "out": null
+  },
+  {
+   "in": "sam@cloud.com",
+   "out": null
+  },
+  {
+   "in": "sam@xmail.com",
+   "out": null
+  },
+  {
+   "in": "sam@me.co",
+   "out": null
+  },
+  {
+   "in": "sam@foo.co",
+   "out": null
+  },
+  {
+   "in": "sam@hotmial.co",
+   "out": null
+  },
+  {
+   "in": "sam@sub.gmail.com",
+   "out": null
+  },
+  {
+   "in": "sam@example.org",
+   "out": null
+  },
+  {
+   "in": "sam@localhost",
+   "out": null
+  },
+  {
+   "in": "a..b@gmial.com",
+   "out": null
+  },
+  {
+   "in": "@gmial.com",
+   "out": null
+  },
+  {
+   "in": "sam@@gmial.com",
+   "out": null
+  },
+  {
+   "in": "sam@gmäil.com",
+   "out": null
+  },
+  {
+   "in": "sam@gmail..com",
+   "out": null
+  },
+  {
+   "in": "",
+   "out": null
+  },
+  {
+   "in": "sam@postoe.de",
+   "options": {
+    "mailboxDomains": [
+     "posteo.de"
+    ]
+   },
+   "out": "sam@posteo.de"
+  },
+  {
+   "in": "sam@posteo.de",
+   "options": {
+    "mailboxDomains": [
+     "Posteo.de"
+    ]
+   },
+   "out": null
+  },
+  {
+   "in": "sam@acme.co",
+   "options": {
+    "mailboxDomains": [
+     "acme.com"
+    ]
+   },
+   "out": "sam@acme.com"
+  },
+  {
+   "in": "sam@gmial.com",
+   "options": {
+    "mailboxDomains": "gmail.com"
+   },
+   "throws": "invalid_option"
+  }
+ ],
+ "isRoleAddress": [
+  {
+   "in": "admin@example.org",
+   "out": true
+  },
+  {
+   "in": "No-Reply@example.org",
+   "out": true
+  },
+  {
+   "in": "no_reply@example.org",
+   "out": true
+  },
+  {
+   "in": "do.not.reply@example.org",
+   "out": true
+  },
+  {
+   "in": "Info+news@example.org",
+   "out": true
+  },
+  {
+   "in": "support@gmail.com",
+   "out": true
+  },
+  {
+   "in": "post.master@gmail.com",
+   "out": true
+  },
+  {
+   "in": "mailer-daemon@example.org",
+   "out": true
+  },
+  {
+   "in": "administrator@example.org",
+   "out": true
+  },
+  {
+   "in": "maria@example.org",
+   "out": false
+  },
+  {
+   "in": "admin1@example.org",
+   "out": false
+  },
+  {
+   "in": "infos@example.org",
+   "out": false
+  },
+  {
+   "in": "info@@example.org",
+   "out": false
+  }
+ ],
+ "isFreeMail": [
+  {
+   "in": "maria@gmail.com",
+   "out": true
+  },
+  {
+   "in": "maria@GoogleMail.com",
+   "out": true
+  },
+  {
+   "in": "gmail.com",
+   "out": true
+  },
+  {
+   "in": "yahoo.co.uk",
+   "out": true
+  },
+  {
+   "in": "maria@gmail.com.",
+   "out": true
+  },
+  {
+   "in": "maria@mail.gmail.com",
+   "out": false
+  },
+  {
+   "in": "maria@example.org",
+   "out": false
+  },
+  {
+   "in": "maria@fastmail.com",
+   "out": false
+  },
+  {
+   "in": "maria@comcast.net",
+   "out": false
+  },
+  {
+   "in": "maria@gmial.com",
+   "out": false
+  },
+  {
+   "in": "maria@corp-mail.example",
+   "options": {
+    "freeMailDomains": [
+     "Corp-Mail.example"
+    ]
+   },
+   "out": true
+  },
+  {
+   "in": "maria@gmail.com",
+   "options": {
+    "freeMailDomains": [
+     "corp-mail.example"
+    ]
+   },
+   "out": true
+  },
+  {
+   "in": "maria@gmail.com",
+   "options": {
+    "freeMailDomains": "corp-mail.example"
    },
    "throws": "invalid_option"
   }
@@ -2847,6 +3517,7 @@
      "provider": null,
      "changes": []
     },
+    "suggestion": null,
     "disposable": {
      "domain": "example.org",
      "disposable": false,
@@ -2885,6 +3556,7 @@
      "provider": null,
      "changes": []
     },
+    "suggestion": null,
     "disposable": {
      "domain": "example.org",
      "disposable": false,
@@ -2930,6 +3602,7 @@
      "provider": null,
      "changes": []
     },
+    "suggestion": null,
     "disposable": {
      "domain": "mailinator.com",
      "disposable": true,
@@ -2981,6 +3654,7 @@
      "provider": null,
      "changes": []
     },
+    "suggestion": null,
     "disposable": {
      "domain": "inbox.guerrillamail.com",
      "disposable": true,
@@ -3035,6 +3709,7 @@
      "provider": null,
      "changes": []
     },
+    "suggestion": null,
     "disposable": {
      "domain": "example.org",
      "disposable": false,
@@ -3092,6 +3767,7 @@
      }
     ],
     "email": null,
+    "suggestion": null,
     "disposable": null,
     "ip": {
      "valid": true,
@@ -3147,6 +3823,7 @@
      "provider": null,
      "changes": []
     },
+    "suggestion": null,
     "disposable": {
      "domain": "example.org",
      "disposable": false,
@@ -3201,6 +3878,7 @@
      "provider": null,
      "changes": []
     },
+    "suggestion": null,
     "disposable": {
      "domain": "example.org",
      "disposable": false,
@@ -3257,6 +3935,7 @@
       "lowercased"
      ]
     },
+    "suggestion": null,
     "disposable": {
      "domain": "icloud.com",
      "disposable": false,
@@ -3315,6 +3994,7 @@
       "dots-removed"
      ]
     },
+    "suggestion": null,
     "disposable": {
      "domain": "gmail.com",
      "disposable": false,
@@ -3352,6 +4032,7 @@
      "provider": null,
      "changes": []
     },
+    "suggestion": null,
     "disposable": null,
     "ip": {
      "valid": true,
@@ -3391,6 +4072,7 @@
      "provider": null,
      "changes": []
     },
+    "suggestion": null,
     "disposable": {
      "domain": "example.org",
      "disposable": false,
@@ -3430,6 +4112,7 @@
      }
     ],
     "email": null,
+    "suggestion": null,
     "disposable": null,
     "ip": {
      "valid": true,
@@ -3463,6 +4146,7 @@
      }
     ],
     "email": null,
+    "suggestion": null,
     "disposable": null,
     "ip": {
      "valid": false,
@@ -3541,6 +4225,7 @@
      "provider": null,
      "changes": []
     },
+    "suggestion": null,
     "disposable": {
      "domain": "example.org",
      "disposable": false,
@@ -3594,6 +4279,7 @@
      }
     ],
     "email": null,
+    "suggestion": null,
     "disposable": null,
     "ip": {
      "valid": true,
@@ -3657,6 +4343,7 @@
      }
     ],
     "email": null,
+    "suggestion": null,
     "disposable": null,
     "ip": null
    }
@@ -3700,6 +4387,7 @@
      }
     ],
     "email": null,
+    "suggestion": null,
     "disposable": null,
     "ip": null
    }
@@ -3743,6 +4431,7 @@
      "provider": null,
      "changes": []
     },
+    "suggestion": null,
     "disposable": {
      "domain": "mailinator.com",
      "disposable": true,
@@ -3793,6 +4482,7 @@
      }
     ],
     "email": null,
+    "suggestion": null,
     "disposable": null,
     "ip": {
      "valid": true,
@@ -3838,6 +4528,7 @@
      "provider": null,
      "changes": []
     },
+    "suggestion": null,
     "disposable": {
      "domain": "mailinator.com",
      "disposable": false,
@@ -3879,6 +4570,7 @@
      "provider": null,
      "changes": []
     },
+    "suggestion": null,
     "disposable": {
      "domain": "partner-temp.io",
      "disposable": true,
@@ -3922,8 +4614,546 @@
       "tag-removed"
      ]
     },
+    "suggestion": null,
     "disposable": {
      "domain": "outlook.com",
+     "disposable": false,
+     "matchedDomain": null,
+     "source": null,
+     "allowedBy": null
+    },
+    "ip": null
+   }
+  },
+  {
+   "name": "typo in a mailbox domain",
+   "input": {
+    "email": "maria.lopez@gmail.con",
+    "ip": "81.2.69.142"
+   },
+   "out": {
+    "score": 0,
+    "decision": "allow",
+    "reasons": [
+     {
+      "code": "email_typo",
+      "points": 0,
+      "message": "gmail.con looks like a typo of gmail.com. Suggested address: maria.lopez@gmail.com.",
+      "hint": "Did you mean maria.lopez@gmail.com?"
+     }
+    ],
+    "email": {
+     "valid": true,
+     "problem": null,
+     "address": "maria.lopez@gmail.con",
+     "normalized": "maria.lopez@gmail.con",
+     "local": "maria.lopez",
+     "domain": "gmail.con",
+     "provider": null,
+     "changes": []
+    },
+    "suggestion": "maria.lopez@gmail.com",
+    "disposable": {
+     "domain": "gmail.con",
+     "disposable": false,
+     "matchedDomain": null,
+     "source": null,
+     "allowedBy": null
+    },
+    "ip": {
+     "valid": true,
+     "ip": "81.2.69.142",
+     "version": 4,
+     "public": true,
+     "special": null,
+     "matches": [],
+     "categories": []
+    }
+   }
+  },
+  {
+   "name": "typo next to a disposable match",
+   "input": {
+    "email": "maria@gmial.com",
+    "ip": "81.2.69.142"
+   },
+   "options": {
+    "blockDomains": [
+     "gmial.com"
+    ]
+   },
+   "out": {
+    "score": 70,
+    "decision": "block",
+    "reasons": [
+     {
+      "code": "email_disposable",
+      "points": 70,
+      "message": "gmial.com is on your block list (matched gmial.com).",
+      "hint": "Please use a permanent email address."
+     },
+     {
+      "code": "email_typo",
+      "points": 0,
+      "message": "gmial.com looks like a typo of gmail.com. Suggested address: maria@gmail.com.",
+      "hint": "Did you mean maria@gmail.com?"
+     }
+    ],
+    "email": {
+     "valid": true,
+     "problem": null,
+     "address": "maria@gmial.com",
+     "normalized": "maria@gmial.com",
+     "local": "maria",
+     "domain": "gmial.com",
+     "provider": null,
+     "changes": []
+    },
+    "suggestion": "maria@gmail.com",
+    "disposable": {
+     "domain": "gmial.com",
+     "disposable": true,
+     "matchedDomain": "gmial.com",
+     "source": "blockDomains",
+     "allowedBy": null
+    },
+    "ip": {
+     "valid": true,
+     "ip": "81.2.69.142",
+     "version": 4,
+     "public": true,
+     "special": null,
+     "matches": [],
+     "categories": []
+    }
+   }
+  },
+  {
+   "name": "typo on an address that is not valid",
+   "input": {
+    "email": "maria@gmailcom"
+   },
+   "out": {
+    "score": 100,
+    "decision": "block",
+    "reasons": [
+     {
+      "code": "email_invalid",
+      "points": 100,
+      "message": "Email address is not valid: the domain is not a valid host name.",
+      "hint": "Check the email address for typos."
+     },
+     {
+      "code": "email_typo",
+      "points": 0,
+      "message": "gmailcom looks like a typo of gmail.com. Suggested address: maria@gmail.com.",
+      "hint": "Did you mean maria@gmail.com?"
+     }
+    ],
+    "email": {
+     "valid": false,
+     "problem": "domain-invalid",
+     "address": "maria@gmailcom",
+     "normalized": null,
+     "local": null,
+     "domain": null,
+     "provider": null,
+     "changes": []
+    },
+    "suggestion": "maria@gmail.com",
+    "disposable": null,
+    "ip": null
+   }
+  },
+  {
+   "name": "typo suggestion with your own mailbox domain",
+   "input": {
+    "email": "maria@postoe.de"
+   },
+   "options": {
+    "mailboxDomains": [
+     "posteo.de"
+    ]
+   },
+   "out": {
+    "score": 0,
+    "decision": "allow",
+    "reasons": [
+     {
+      "code": "email_typo",
+      "points": 0,
+      "message": "postoe.de looks like a typo of posteo.de. Suggested address: maria@posteo.de.",
+      "hint": "Did you mean maria@posteo.de?"
+     }
+    ],
+    "email": {
+     "valid": true,
+     "problem": null,
+     "address": "maria@postoe.de",
+     "normalized": "maria@postoe.de",
+     "local": "maria",
+     "domain": "postoe.de",
+     "provider": null,
+     "changes": []
+    },
+    "suggestion": "maria@posteo.de",
+    "disposable": {
+     "domain": "postoe.de",
+     "disposable": false,
+     "matchedDomain": null,
+     "source": null,
+     "allowedBy": null
+    },
+    "ip": null
+   }
+  },
+  {
+   "name": "typo weight override",
+   "input": {
+    "email": "maria@yahooo.com"
+   },
+   "options": {
+    "weights": {
+     "email_typo": 5
+    }
+   },
+   "out": {
+    "score": 5,
+    "decision": "allow",
+    "reasons": [
+     {
+      "code": "email_typo",
+      "points": 5,
+      "message": "yahooo.com looks like a typo of yahoo.com. Suggested address: maria@yahoo.com.",
+      "hint": "Did you mean maria@yahoo.com?"
+     }
+    ],
+    "email": {
+     "valid": true,
+     "problem": null,
+     "address": "maria@yahooo.com",
+     "normalized": "maria@yahooo.com",
+     "local": "maria",
+     "domain": "yahooo.com",
+     "provider": null,
+     "changes": []
+    },
+    "suggestion": "maria@yahoo.com",
+    "disposable": {
+     "domain": "yahooo.com",
+     "disposable": false,
+     "matchedDomain": null,
+     "source": null,
+     "allowedBy": null
+    },
+    "ip": null
+   }
+  },
+  {
+   "name": "role address",
+   "input": {
+    "email": "info@example.org",
+    "ip": "81.2.69.142"
+   },
+   "out": {
+    "score": 10,
+    "decision": "allow",
+    "reasons": [
+     {
+      "code": "email_role",
+      "points": 10,
+      "message": "info@example.org is a role address (info): it usually reaches a team or a system, not one person.",
+      "hint": "Please use an email address of your own, not a shared team address."
+     }
+    ],
+    "email": {
+     "valid": true,
+     "problem": null,
+     "address": "info@example.org",
+     "normalized": "info@example.org",
+     "local": "info",
+     "domain": "example.org",
+     "provider": null,
+     "changes": []
+    },
+    "suggestion": null,
+    "disposable": {
+     "domain": "example.org",
+     "disposable": false,
+     "matchedDomain": null,
+     "source": null,
+     "allowedBy": null
+    },
+    "ip": {
+     "valid": true,
+     "ip": "81.2.69.142",
+     "version": 4,
+     "public": true,
+     "special": null,
+     "matches": [],
+     "categories": []
+    }
+   }
+  },
+  {
+   "name": "role address after normalization",
+   "input": {
+    "email": "No.Reply+alerts@googlemail.com"
+   },
+   "out": {
+    "score": 10,
+    "decision": "allow",
+    "reasons": [
+     {
+      "code": "email_role",
+      "points": 10,
+      "message": "noreply@gmail.com is a role address (noreply): it usually reaches a team or a system, not one person.",
+      "hint": "Please use an email address of your own, not a shared team address."
+     },
+     {
+      "code": "email_normalized",
+      "points": 0,
+      "message": "Normalized to noreply@gmail.com (lowercased, domain alias replaced, plus tag removed, dots removed). Check duplicates against this form.",
+      "hint": null
+     }
+    ],
+    "email": {
+     "valid": true,
+     "problem": null,
+     "address": "No.Reply+alerts@googlemail.com",
+     "normalized": "noreply@gmail.com",
+     "local": "noreply",
+     "domain": "gmail.com",
+     "provider": "gmail",
+     "changes": [
+      "lowercased",
+      "domain-alias",
+      "tag-removed",
+      "dots-removed"
+     ]
+    },
+    "suggestion": null,
+    "disposable": {
+     "domain": "gmail.com",
+     "disposable": false,
+     "matchedDomain": null,
+     "source": null,
+     "allowedBy": null
+    },
+    "ip": null
+   }
+  },
+  {
+   "name": "free mail is off by default",
+   "input": {
+    "email": "maria@gmail.com",
+    "ip": "81.2.69.142"
+   },
+   "out": {
+    "score": 0,
+    "decision": "allow",
+    "reasons": [],
+    "email": {
+     "valid": true,
+     "problem": null,
+     "address": "maria@gmail.com",
+     "normalized": "maria@gmail.com",
+     "local": "maria",
+     "domain": "gmail.com",
+     "provider": "gmail",
+     "changes": []
+    },
+    "suggestion": null,
+    "disposable": {
+     "domain": "gmail.com",
+     "disposable": false,
+     "matchedDomain": null,
+     "source": null,
+     "allowedBy": null
+    },
+    "ip": {
+     "valid": true,
+     "ip": "81.2.69.142",
+     "version": 4,
+     "public": true,
+     "special": null,
+     "matches": [],
+     "categories": []
+    }
+   }
+  },
+  {
+   "name": "free mail on",
+   "input": {
+    "email": "maria@gmail.com",
+    "ip": "81.2.69.142"
+   },
+   "options": {
+    "freeMail": true
+   },
+   "out": {
+    "score": 30,
+    "decision": "review",
+    "reasons": [
+     {
+      "code": "email_free_mail",
+      "points": 30,
+      "message": "gmail.com is a free consumer mailbox domain (Gmail).",
+      "hint": "Please use your work email address."
+     }
+    ],
+    "email": {
+     "valid": true,
+     "problem": null,
+     "address": "maria@gmail.com",
+     "normalized": "maria@gmail.com",
+     "local": "maria",
+     "domain": "gmail.com",
+     "provider": "gmail",
+     "changes": []
+    },
+    "suggestion": null,
+    "disposable": {
+     "domain": "gmail.com",
+     "disposable": false,
+     "matchedDomain": null,
+     "source": null,
+     "allowedBy": null
+    },
+    "ip": {
+     "valid": true,
+     "ip": "81.2.69.142",
+     "version": 4,
+     "public": true,
+     "special": null,
+     "matches": [],
+     "categories": []
+    }
+   }
+  },
+  {
+   "name": "free mail on, work address",
+   "input": {
+    "email": "maria@example.org",
+    "ip": "81.2.69.142"
+   },
+   "options": {
+    "freeMail": true
+   },
+   "out": {
+    "score": 0,
+    "decision": "allow",
+    "reasons": [],
+    "email": {
+     "valid": true,
+     "problem": null,
+     "address": "maria@example.org",
+     "normalized": "maria@example.org",
+     "local": "maria",
+     "domain": "example.org",
+     "provider": null,
+     "changes": []
+    },
+    "suggestion": null,
+    "disposable": {
+     "domain": "example.org",
+     "disposable": false,
+     "matchedDomain": null,
+     "source": null,
+     "allowedBy": null
+    },
+    "ip": {
+     "valid": true,
+     "ip": "81.2.69.142",
+     "version": 4,
+     "public": true,
+     "special": null,
+     "matches": [],
+     "categories": []
+    }
+   }
+  },
+  {
+   "name": "free mail with your own domains",
+   "input": {
+    "email": "maria@corp-mail.example"
+   },
+   "options": {
+    "freeMail": true,
+    "freeMailDomains": [
+     "corp-mail.example"
+    ]
+   },
+   "out": {
+    "score": 30,
+    "decision": "review",
+    "reasons": [
+     {
+      "code": "email_free_mail",
+      "points": 30,
+      "message": "corp-mail.example is on your freeMailDomains list.",
+      "hint": "Please use your work email address."
+     }
+    ],
+    "email": {
+     "valid": true,
+     "problem": null,
+     "address": "maria@corp-mail.example",
+     "normalized": "maria@corp-mail.example",
+     "local": "maria",
+     "domain": "corp-mail.example",
+     "provider": null,
+     "changes": []
+    },
+    "suggestion": null,
+    "disposable": {
+     "domain": "corp-mail.example",
+     "disposable": false,
+     "matchedDomain": null,
+     "source": null,
+     "allowedBy": null
+    },
+    "ip": null
+   }
+  },
+  {
+   "name": "role address at a free mail provider",
+   "input": {
+    "email": "support@yahoo.com"
+   },
+   "options": {
+    "freeMail": true
+   },
+   "out": {
+    "score": 40,
+    "decision": "review",
+    "reasons": [
+     {
+      "code": "email_role",
+      "points": 10,
+      "message": "support@yahoo.com is a role address (support): it usually reaches a team or a system, not one person.",
+      "hint": "Please use an email address of your own, not a shared team address."
+     },
+     {
+      "code": "email_free_mail",
+      "points": 30,
+      "message": "yahoo.com is a free consumer mailbox domain (Yahoo Mail).",
+      "hint": "Please use your work email address."
+     }
+    ],
+    "email": {
+     "valid": true,
+     "problem": null,
+     "address": "support@yahoo.com",
+     "normalized": "support@yahoo.com",
+     "local": "support",
+     "domain": "yahoo.com",
+     "provider": "yahoo",
+     "changes": []
+    },
+    "suggestion": null,
+    "disposable": {
+     "domain": "yahoo.com",
      "disposable": false,
      "matchedDomain": null,
      "source": null,
@@ -3940,6 +5170,7 @@
     "decision": "allow",
     "reasons": [],
     "email": null,
+    "suggestion": null,
     "disposable": null,
     "ip": null
    }
@@ -4010,6 +5241,32 @@
     "ip": 1234
    },
    "throws": "invalid_argument"
+  },
+  {
+   "name": "freeMail not a boolean",
+   "input": {},
+   "options": {
+    "freeMail": "yes"
+   },
+   "throws": "invalid_option"
+  },
+  {
+   "name": "freeMailDomains not a list",
+   "input": {},
+   "options": {
+    "freeMailDomains": "gmail.com"
+   },
+   "throws": "invalid_option"
+  },
+  {
+   "name": "mailboxDomains not a list",
+   "input": {
+    "email": "maria@gmial.com"
+   },
+   "options": {
+    "mailboxDomains": "posteo.de"
+   },
+   "throws": "invalid_option"
   }
  ]
 }

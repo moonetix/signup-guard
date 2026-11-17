@@ -14,6 +14,9 @@ final class SignupGuard
     public const DEFAULT_WEIGHTS = [
         'email_invalid' => 100,
         'email_disposable' => 70,
+        'email_typo' => 0,
+        'email_role' => 10,
+        'email_free_mail' => 30,
         'email_normalized' => 0,
         'ip_invalid' => 0,
         'ip_not_public' => 0,
@@ -32,6 +35,8 @@ final class SignupGuard
     private const HINTS = [
         'email_invalid' => 'Check the email address for typos.',
         'email_disposable' => 'Please use a permanent email address.',
+        'email_role' => 'Please use an email address of your own, not a shared team address.',
+        'email_free_mail' => 'Please use your work email address.',
         'ip_datacenter' => 'Turn off your VPN or proxy, or switch to your home or mobile connection, and try again.',
         'ip_tor' => 'Please sign up without Tor.',
         'ip_cdn' => 'If you use a VPN or a privacy service, turn it off and try again.',
@@ -63,6 +68,35 @@ final class SignupGuard
     public static function normalizeEmail(string $email, array $options = []): array
     {
         return Email::normalize($email, $options);
+    }
+
+    /**
+     * Suggest a correction for a likely typo in the domain of a common mailbox, such as
+     * gmial.com or hotmail.con. Returns the corrected address, or null when there is nothing to fix.
+     * @param array{mailboxDomains?: list<string>|null} $options
+     */
+    public static function suggestEmail(string $email, array $options = []): ?string
+    {
+        return Email::suggest($email, $options);
+    }
+
+    /**
+     * True when the address goes to a shared mailbox (admin@, info@, no-reply@ and the rest of
+     * Email::ROLE_LOCAL_PARTS) rather than to one person. Invalid addresses return false.
+     */
+    public static function isRoleAddress(string $email): bool
+    {
+        return Email::isRole($email);
+    }
+
+    /**
+     * True when the domain belongs to a free consumer mailbox service in Email::FREE_MAIL_PROVIDERS
+     * or to your own freeMailDomains. Exact domains only; subdomains do not match.
+     * @param array{freeMailDomains?: list<string>|null} $options
+     */
+    public static function isFreeMail(string $emailOrDomain, array $options = []): bool
+    {
+        return Email::isFreeMail($emailOrDomain, $options);
     }
 
     public static function normalizeIp(string $ip): ?string
@@ -301,7 +335,14 @@ final class SignupGuard
             $reasons[] = ['code' => $code, 'points' => $weights[$weightKey ?? $code], 'message' => $message, 'hint' => $hint];
         };
 
+        $freeMail = $options['freeMail'] ?? false;
+        if (!is_bool($freeMail)) {
+            SignupGuardException::raise('invalid_option', 'freeMail must be a boolean');
+        }
+        $freeMailDomains = array_map('strtolower', Email::stringList($options['freeMailDomains'] ?? null, 'freeMailDomains'));
+
         $email = null;
+        $suggestion = null;
         $disposable = null;
         if (isset($input['email'])) {
             if (!is_string($input['email'])) {
@@ -311,8 +352,16 @@ final class SignupGuard
                 'lowercaseLocal' => $options['lowercaseLocal'] ?? null,
                 'plusTagDomains' => $options['plusTagDomains'] ?? null,
             ]);
+            $typo = Email::typo($input['email'], $options['mailboxDomains'] ?? null);
+            $suggestion = $typo['suggestion'] ?? null;
+            $addTypo = static function () use ($typo, $add): void {
+                if ($typo !== null) {
+                    $add('email_typo', sprintf('%s looks like a typo of %s. Suggested address: %s.', $typo['domain'], $typo['fixed'], $typo['suggestion']), 'Did you mean ' . $typo['suggestion'] . '?');
+                }
+            };
             if (!$email['valid']) {
                 $add('email_invalid', 'Email address is not valid: ' . Email::PROBLEMS[$email['problem']] . '.', self::HINTS['email_invalid']);
+                $addTypo();
             } else {
                 $disposable = self::checkDisposable($email['domain'], [
                     'data' => $data,
@@ -322,6 +371,16 @@ final class SignupGuard
                 if ($disposable['disposable']) {
                     $where = $disposable['source'] === 'list' ? 'the disposable domain list' : 'your block list';
                     $add('email_disposable', sprintf('%s is on %s (matched %s).', $email['domain'], $where, $disposable['matchedDomain']), self::HINTS['email_disposable']);
+                }
+                $addTypo();
+                $role = Email::roleLocalPart($email['local']);
+                if ($role !== null) {
+                    $add('email_role', sprintf('%s is a role address (%s): it usually reaches a team or a system, not one person.', $email['normalized'], $role), self::HINTS['email_role']);
+                }
+                $free = $freeMail ? Email::freeMailMatch($email['domain'], $freeMailDomains) : null;
+                if ($free !== null) {
+                    $where = $free['source'] === 'list' ? sprintf('a free consumer mailbox domain (%s)', $free['provider']) : 'on your freeMailDomains list';
+                    $add('email_free_mail', sprintf('%s is %s.', $email['domain'], $where), self::HINTS['email_free_mail']);
                 }
                 if (array_intersect($email['changes'], self::SIGNIFICANT_CHANGES) !== []) {
                     $labels = array_map(static fn(string $c): string => self::CHANGE_LABELS[$c], $email['changes']);
@@ -379,6 +438,6 @@ final class SignupGuard
 
         $score = array_sum(array_column($reasons, 'points'));
         $decision = $score >= $thresholds['block'] ? 'block' : ($score >= $thresholds['review'] ? 'review' : 'allow');
-        return ['score' => $score, 'decision' => $decision, 'reasons' => $reasons, 'email' => $email, 'disposable' => $disposable, 'ip' => $ip];
+        return ['score' => $score, 'decision' => $decision, 'reasons' => $reasons, 'email' => $email, 'suggestion' => $suggestion, 'disposable' => $disposable, 'ip' => $ip];
     }
 }

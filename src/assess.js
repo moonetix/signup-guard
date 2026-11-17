@@ -1,11 +1,14 @@
 import { fail } from './errors.js';
-import { normalizeEmail, EMAIL_PROBLEMS } from './email.js';
+import { normalizeEmail, emailTypo, roleLocalPart, freeMailMatch, stringList, EMAIL_PROBLEMS } from './email.js';
 import { checkDisposable, lookupIp, resolveData } from './data.js';
 
 /** Points per reason. A weight of 0 keeps the reason in the output as information only. */
 export const DEFAULT_WEIGHTS = Object.freeze({
   email_invalid: 100,
   email_disposable: 70,
+  email_typo: 0,
+  email_role: 10,
+  email_free_mail: 30,
   email_normalized: 0,
   ip_invalid: 0,
   ip_not_public: 0,
@@ -24,6 +27,8 @@ export const DEFAULT_THRESHOLDS = Object.freeze({ review: 30, block: 70 });
 const HINTS = {
   email_invalid: 'Check the email address for typos.',
   email_disposable: 'Please use a permanent email address.',
+  email_role: 'Please use an email address of your own, not a shared team address.',
+  email_free_mail: 'Please use your work email address.',
   ip_datacenter: 'Turn off your VPN or proxy, or switch to your home or mobile connection, and try again.',
   ip_tor: 'Please sign up without Tor.',
   ip_cdn: 'If you use a VPN or a privacy service, turn it off and try again.',
@@ -93,17 +98,39 @@ export function assessSignup(input, options = {}) {
     reasons.push({ code, points: weights[weightKey] ?? weights.velocity_other, message, hint: hint ?? null });
   };
 
+  const freeMail = options.freeMail ?? false;
+  if (typeof freeMail !== 'boolean') fail('invalid_option', 'freeMail must be a boolean');
+  const freeMailDomains = stringList(options.freeMailDomains, 'freeMailDomains');
+
   let email = null;
+  let suggestion = null;
   let disposable = null;
   if (input.email !== undefined && input.email !== null) {
     email = normalizeEmail(input.email, { lowercaseLocal: options.lowercaseLocal, plusTagDomains: options.plusTagDomains });
+    const typo = emailTypo(input.email, options.mailboxDomains);
+    suggestion = typo === null ? null : typo.suggestion;
+    const addTypo = () => {
+      if (typo === null) return;
+      add('email_typo', `${typo.domain} looks like a typo of ${typo.fixed}. Suggested address: ${typo.suggestion}.`, `Did you mean ${typo.suggestion}?`);
+    };
     if (!email.valid) {
       add('email_invalid', `Email address is not valid: ${EMAIL_PROBLEMS[email.problem]}.`, HINTS.email_invalid);
+      addTypo();
     } else {
       disposable = checkDisposable(email.domain, { data, allowDomains: options.allowDomains, blockDomains: options.blockDomains });
       if (disposable.disposable) {
         const where = disposable.source === 'list' ? 'the disposable domain list' : 'your block list';
         add('email_disposable', `${email.domain} is on ${where} (matched ${disposable.matchedDomain}).`, HINTS.email_disposable);
+      }
+      addTypo();
+      const role = roleLocalPart(email.local);
+      if (role !== null) {
+        add('email_role', `${email.normalized} is a role address (${role}): it usually reaches a team or a system, not one person.`, HINTS.email_role);
+      }
+      const free = freeMail ? freeMailMatch(email.domain, freeMailDomains) : null;
+      if (free !== null) {
+        const where = free.source === 'list' ? `a free consumer mailbox domain (${free.provider})` : 'on your freeMailDomains list';
+        add('email_free_mail', `${email.domain} is ${where}.`, HINTS.email_free_mail);
       }
       const significant = email.changes.filter((c) => SIGNIFICANT_CHANGES.includes(c));
       if (significant.length > 0) {
@@ -149,5 +176,5 @@ export function assessSignup(input, options = {}) {
 
   const score = reasons.reduce((sum, r) => sum + r.points, 0);
   const decision = score >= thresholds.block ? 'block' : score >= thresholds.review ? 'review' : 'allow';
-  return { score, decision, reasons, email, disposable, ip };
+  return { score, decision, reasons, email, suggestion, disposable, ip };
 }
